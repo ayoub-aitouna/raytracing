@@ -18,6 +18,8 @@ typedef struct vector2{
 	float x,y;
 } vector2_t;
 
+typedef vector_t point_t;
+
 float vector_lenght(vector_t v);
 float vector_lenght2(vector_t v);
 vector_t *normalized(vector_t *v);
