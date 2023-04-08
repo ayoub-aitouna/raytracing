@@ -1,16 +1,16 @@
 NAME			:= RayTracer
 LIB				:= -lSDL2
 OBJ_DIR			:= OBJECT_FILES
-CFLAGS			:= -std=c++17
+CFLAGS			:= -std=c++17 -Ofast
 CC				:= g++
-SRC_FILES		:= $(wildcard *.cpp) $(wildcard **/*.cpp)
+SRC_FILES		:= $(wildcard ./*.cpp) $(wildcard ./**/*.cpp)
 OBJECTS_FILES	:= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
 
 $(OBJ_DIR)/%.o : %.cpp
-	@ echo "compiling cpp files ..."
+	@ echo "compiling cpp file $< ..."
 	@ mkdir -p $(dir $@)
-	@ ${CC} $(CFLAGS) -c $< -o $@ 
+	${CC} $(CFLAGS) -c $< -o $@ 
 
 all: $(NAME)
 
@@ -20,10 +20,10 @@ $(NAME) : $(OBJECTS_FILES)
 	@$(CC) $(CFLAGS) $(OBJECTS_FILES) -o $@ ${LIB}
 
 clean :
-	rm $(OBJECTS_FILES)
+	rm -rf $(OBJECTS_FILES)
 
 fclean : clean
-	rm $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 
