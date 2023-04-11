@@ -1,4 +1,4 @@
-#include "pointlight.hpp"
+#include "includes/pointlight.hpp"
 #include <vector>
 RT::PointLight::PointLight()
 {

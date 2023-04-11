@@ -1,6 +1,4 @@
 #include "includes/App.h"
-#include "raytracer/camera.hpp"
-#include "raytracer/image.hpp"
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>

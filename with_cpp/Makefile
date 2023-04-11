@@ -1,7 +1,7 @@
 NAME			:= RayTracer
 LIB				:= -lSDL2
 OBJ_DIR			:= OBJECT_FILES
-CFLAGS			:= -std=c++17 -Ofast
+CFLAGS			:= -std=c++17 -Ofast -g
 CC				:= g++
 SRC_FILES		:= $(wildcard *.cpp) $(wildcard **/*.cpp)
 OBJECTS_FILES	:= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))

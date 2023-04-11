@@ -1,5 +1,5 @@
-#include "camera.hpp"
-#include "ray.h"
+#include "includes/camera.hpp"
+#include "includes/ray.h"
 #include <math.h>
 #include <string>
 #include <vector>

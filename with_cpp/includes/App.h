@@ -1,9 +1,9 @@
 #ifndef APP_H
 #define app_h
 #include <SDL2/SDL.h>
-#include "../raytracer/image.hpp"
-#include "../raytracer/scene.hpp"
-#include "../raytracer/camera.hpp"
+#include "../raytracer/includes/image.hpp"
+#include "../raytracer/includes/scene.hpp"
+#include "../raytracer/includes/camera.hpp"
 
 class App
 {

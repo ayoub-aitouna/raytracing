@@ -1,11 +1,10 @@
-#include "scene.hpp"
-#include "camera.hpp"
-#include "objectbase.hpp"
-#include "objsphere.hpp"
-#include "pointlight.hpp"
-#include "ray.h"
+#include "includes/scene.hpp"
+#include "includes/camera.hpp"
+#include "includes/objectbase.hpp"
+#include "includes/objsphere.hpp"
+#include "includes/pointlight.hpp"
+#include "includes/ray.h"
 #include <memory>
-#include "../qbLinAlg/qbVector.h"
 #include <vector>
 
 RT::Scene::Scene()

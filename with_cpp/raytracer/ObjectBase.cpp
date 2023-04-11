@@ -1,4 +1,4 @@
-#include "objectbase.hpp"
+#include "includes/objectbase.hpp"
 #include <cmath>
 #include <math.h>
 
@@ -26,4 +26,9 @@ bool RT::ObjectBase::TestIntersectioons(const Ray &castRay, qbVector<double> &in
 bool RT::ObjectBase::CloseEnough(const double f1, const double f2)
 {
 	return  std::fabs(f1-f2) < EPSILON;
+}
+
+void RT::ObjectBase::SetTransformMatrix(const RT::Gtform &transformMatrix)
+{
+	m_trasformMatrix = transformMatrix;
 }

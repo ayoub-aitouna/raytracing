@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "*.h": "c",
-        "*.c": "c",
-        "vector": "cpp",
-        "iterator": "cpp",
-        "cstdio": "cpp"
-    }
-}
