@@ -65,7 +65,6 @@ bool RT::Scene::Render(Image &image)
 					for(auto currentlight : m_lightList)
 					{
 						valideIlum = currentlight->ComputeIllumination(intPoint, localNormal, m_objectList, currentObject, color, intensity);
-
 					}
 					// Comput the distance between camera ana point of interstaction
 

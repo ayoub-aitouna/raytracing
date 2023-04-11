@@ -1,0 +1,399 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+App	App.cpp	/^App::App()$/;"	f	class:App
+App	includes/App.h	/^class App$/;"	c
+Apply	raytracer/gtfm.cpp	/^RT::Ray RT::Gtform::Apply(const RT::Ray &inputRay, bool dirFlag)$/;"	f	class:RT::Gtform
+Apply	raytracer/gtfm.cpp	/^qbVector<double> RT::Gtform::Apply(const qbVector<double> &inputVector, bool dirFlag)$/;"	f	class:RT::Gtform
+BCKTFORM	raytracer/includes/gtfm.hpp	/^	constexpr bool BCKTFORM = false;$/;"	m	namespace:RT
+CAMERA_H	raytracer/includes/camera.hpp	/^#define CAMERA_H$/;"	d
+CC	Makefile	/^CC				:= g++$/;"	m
+CFLAGS	Makefile	/^CFLAGS			:= -std=c++17 -Ofast -g$/;"	m
+Camera	raytracer/camera.cpp	/^RT::Camera::Camera()$/;"	f	class:RT::Camera
+Camera	raytracer/includes/camera.hpp	/^	class Camera{$/;"	c	namespace:RT
+CloseEnough	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::CloseEnough(T f1, T f2)$/;"	f	class:qbMatrix2
+CloseEnough	qbLinAlg/qbMatrix33.hpp	/^bool qbMatrix33<T>::CloseEnough(T f1, T f2)$/;"	f	class:qbMatrix33
+CloseEnough	qbLinAlg/qbMatrix44.hpp	/^bool qbMatrix44<T>::CloseEnough(T f1, T f2)$/;"	f	class:qbMatrix44
+CloseEnough	raytracer/ObjectBase.cpp	/^bool RT::ObjectBase::CloseEnough(const double f1, const double f2)$/;"	f	class:RT::ObjectBase
+Compare	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::Compare(const qbMatrix2<T>& matrix1, double tolerance)$/;"	f	class:qbMatrix2
+Compare	qbLinAlg/qbMatrix33.hpp	/^bool qbMatrix33<T>::Compare(const qbMatrix33<T>& matrix1, double tolerance)$/;"	f	class:qbMatrix33
+Compare	qbLinAlg/qbMatrix44.hpp	/^bool qbMatrix44<T>::Compare(const qbMatrix44<T>& matrix1, double tolerance)$/;"	f	class:qbMatrix44
+ComputeColumnMeans	qbLinAlg/qbPCA.h	/^std::vector<T> ComputeColumnMeans(const qbMatrix2<T> &inputData)$/;"	f	namespace:qbPCA
+ComputeCovariance	qbLinAlg/qbPCA.h	/^qbMatrix2<T> ComputeCovariance(const qbMatrix2<T> &X)$/;"	f	namespace:qbPCA
+ComputeEigenvectors	qbLinAlg/qbPCA.h	/^int ComputeEigenvectors(const qbMatrix2<T> &covarianceMatrix, qbMatrix2<T> &eigenvectors)$/;"	f	namespace:qbPCA
+ComputeIllumination	raytracer/lightbase.cpp	/^bool RT::LightBase::ComputeIllumination(const qbVector<double> &intPoint, const qbVector<double> &localNormal, const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList, const std::shared_ptr<RT::ObjectBase> &currentObject, qbVector<double> Color, double &intensity)$/;"	f	class:RT::LightBase
+ComputeIllumination	raytracer/pointlight.cpp	/^bool RT::PointLight::ComputeIllumination(const qbVector<double> &intPoint, const qbVector<double> &localNormal, const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList, const std::shared_ptr<RT::ObjectBase> &currentObject, qbVector<double> Color, double &intensity)$/;"	f	class:RT::PointLight
+ConvertColor	raytracer/image.cpp	/^Uint32 Image::ConvertColor(const double red, const double green , const double blue)$/;"	f	class:Image
+Determinant	qbLinAlg/qbMatrix.h	/^T qbMatrix2<T>::Determinant()$/;"	f	class:qbMatrix2
+Determinant	qbLinAlg/qbMatrix33.hpp	/^T qbMatrix33<T>::Determinant()$/;"	f	class:qbMatrix33
+Determinant	qbLinAlg/qbMatrix44.hpp	/^T qbMatrix44<T>::Determinant()$/;"	f	class:qbMatrix44
+Display	raytracer/image.cpp	/^void Image::Display()$/;"	f	class:Image
+EPSILON	raytracer/ObjectBase.cpp	/^#define EPSILON /;"	d	file:
+FWDTFORM	raytracer/includes/gtfm.hpp	/^	constexpr bool FWDTFORM = true;$/;"	m	namespace:RT
+FindRowWithMaxElement	qbLinAlg/qbMatrix.h	/^int qbMatrix2<T>::FindRowWithMaxElement(int colNumber, int startingRow)$/;"	f	class:qbMatrix2
+FindSubMatrix	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> qbMatrix2<T>::FindSubMatrix(int rowNum, int colNum)$/;"	f	class:qbMatrix2
+FindSubMatrix	qbLinAlg/qbMatrix44.hpp	/^qbMatrix33<T> qbMatrix44<T>::FindSubMatrix(int rowNum, int colNum)$/;"	f	class:qbMatrix44
+GTFM_H	raytracer/includes/gtfm.hpp	/^#define GTFM_H$/;"	d
+GenerateRay	raytracer/camera.cpp	/^bool RT::Camera::GenerateRay(float proScreenX, float proScreenY, RT::Ray &cameraRay)$/;"	f	class:RT::Camera
+GetAspect	raytracer/camera.cpp	/^double RT::Camera::GetAspect()$/;"	f	class:RT::Camera
+GetBackward	raytracer/gtfm.cpp	/^qbMatrix2<double> RT::Gtform::GetBackward()$/;"	f	class:RT::Gtform
+GetElement	qbLinAlg/qbMatrix.h	/^T qbMatrix2<T>::GetElement(int row, int col) const$/;"	f	class:qbMatrix2
+GetElement	qbLinAlg/qbMatrix33.hpp	/^T qbMatrix33<T>::GetElement(int row, int col) const$/;"	f	class:qbMatrix33
+GetElement	qbLinAlg/qbMatrix44.hpp	/^T qbMatrix44<T>::GetElement(int row, int col) const$/;"	f	class:qbMatrix44
+GetElement	qbLinAlg/qbVector.h	/^T qbVector<T>::GetElement(int index) const$/;"	f	class:qbVector
+GetElement	qbLinAlg/qbVector2.hpp	/^T qbVector2<T>::GetElement(int index) const$/;"	f	class:qbVector2
+GetElement	qbLinAlg/qbVector3.hpp	/^T qbVector3<T>::GetElement(int index) const$/;"	f	class:qbVector3
+GetElement	qbLinAlg/qbVector4.hpp	/^T qbVector4<T>::GetElement(int index) const$/;"	f	class:qbVector4
+GetForwardd	raytracer/gtfm.cpp	/^qbMatrix2<double> RT::Gtform::GetForwardd()$/;"	f	class:RT::Gtform
+GetHorzSize	raytracer/camera.cpp	/^double RT::Camera::GetHorzSize()$/;"	f	class:RT::Camera
+GetLenght	raytracer/camera.cpp	/^double RT::Camera::GetLenght()$/;"	f	class:RT::Camera
+GetLookAt	raytracer/camera.cpp	/^qbVector<double> RT::Camera::GetLookAt()$/;"	f	class:RT::Camera
+GetNumCols	qbLinAlg/qbMatrix.h	/^int qbMatrix2<T>::GetNumCols() const$/;"	f	class:qbMatrix2
+GetNumCols	qbLinAlg/qbMatrix33.hpp	/^int qbMatrix33<T>::GetNumCols() const$/;"	f	class:qbMatrix33
+GetNumCols	qbLinAlg/qbMatrix44.hpp	/^int qbMatrix44<T>::GetNumCols() const$/;"	f	class:qbMatrix44
+GetNumDims	qbLinAlg/qbVector.h	/^int qbVector<T>::GetNumDims() const$/;"	f	class:qbVector
+GetNumDims	qbLinAlg/qbVector2.hpp	/^int qbVector2<T>::GetNumDims() const$/;"	f	class:qbVector2
+GetNumDims	qbLinAlg/qbVector3.hpp	/^int qbVector3<T>::GetNumDims() const$/;"	f	class:qbVector3
+GetNumDims	qbLinAlg/qbVector4.hpp	/^int qbVector4<T>::GetNumDims() const$/;"	f	class:qbVector4
+GetNumRows	qbLinAlg/qbMatrix.h	/^int qbMatrix2<T>::GetNumRows() const$/;"	f	class:qbMatrix2
+GetNumRows	qbLinAlg/qbMatrix33.hpp	/^int qbMatrix33<T>::GetNumRows() const$/;"	f	class:qbMatrix33
+GetNumRows	qbLinAlg/qbMatrix44.hpp	/^int qbMatrix44<T>::GetNumRows() const$/;"	f	class:qbMatrix44
+GetPoint1	raytracer/ray.cpp	/^qbVector<double> RT::Ray::GetPoint1() const $/;"	f	class:RT::Ray
+GetPoint2	raytracer/ray.cpp	/^qbVector<double> RT::Ray::GetPoint2() const $/;"	f	class:RT::Ray
+GetPosition	raytracer/camera.cpp	/^qbVector<double> RT::Camera::GetPosition()$/;"	f	class:RT::Camera
+GetScreenCenter	raytracer/camera.cpp	/^qbVector<double> RT::Camera::GetScreenCenter()$/;"	f	class:RT::Camera
+GetU	raytracer/camera.cpp	/^qbVector<double> RT::Camera::GetU()$/;"	f	class:RT::Camera
+GetUp	raytracer/camera.cpp	/^qbVector<double> RT::Camera::GetUp()$/;"	f	class:RT::Camera
+GetV	raytracer/camera.cpp	/^qbVector<double> RT::Camera::GetV()$/;"	f	class:RT::Camera
+GetXSize	raytracer/image.cpp	/^int Image::GetXSize()$/;"	f	class:Image
+GetYSize	raytracer/image.cpp	/^int Image::GetYSize()$/;"	f	class:Image
+Gtform	raytracer/gtfm.cpp	/^RT::Gtform::Gtform()$/;"	f	class:RT::Gtform
+Gtform	raytracer/gtfm.cpp	/^RT::Gtform::Gtform(const qbMatrix2<double> &fwd, const qbMatrix2<double> &bck)$/;"	f	class:RT::Gtform
+Gtform	raytracer/includes/gtfm.hpp	/^	class Gtform$/;"	c	namespace:RT
+IMAGE_H	raytracer/includes/image.hpp	/^#define IMAGE_H$/;"	d
+INCLUDES	Makefile	/^INCLUDES		:= $(shell brew --prefix)\/include$/;"	m
+Image	raytracer/image.cpp	/^Image::Image()$/;"	f	class:Image
+Image	raytracer/includes/image.hpp	/^class Image$/;"	c
+InitTexture	raytracer/image.cpp	/^void Image::InitTexture()$/;"	f	class:Image
+Initialize	raytracer/image.cpp	/^void Image::Initialize(const int xSize, const int ySize, SDL_Renderer *pRenderer)$/;"	f	class:Image
+Inverse	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::Inverse()$/;"	f	class:qbMatrix2
+Inverse	qbLinAlg/qbMatrix33.hpp	/^bool qbMatrix33<T>::Inverse()$/;"	f	class:qbMatrix33
+Inverse	qbLinAlg/qbMatrix44.hpp	/^bool qbMatrix44<T>::Inverse()$/;"	f	class:qbMatrix44
+IsNonZero	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::IsNonZero()$/;"	f	class:qbMatrix2
+IsRowEchelon	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::IsRowEchelon()$/;"	f	class:qbMatrix2
+IsSquare	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::IsSquare()$/;"	f	class:qbMatrix2
+IsSymmetric	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::IsSymmetric()$/;"	f	class:qbMatrix2
+Join	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::Join (const qbMatrix2<T>& matrix2)$/;"	f	class:qbMatrix2
+LIB	Makefile	/^LIB				:= -lSDL2$/;"	m
+LIB_SDL	Makefile	/^LIB_SDL			:= $(shell brew --prefix sdl2)\/lib$/;"	m
+LIGHTBASE_H	raytracer/includes/lightbase.hpp	/^#define LIGHTBASE_H$/;"	d
+LightBase	raytracer/includes/lightbase.hpp	/^	class LightBase$/;"	c	namespace:RT
+LightBase	raytracer/lightbase.cpp	/^RT::LightBase::LightBase()$/;"	f	class:RT::LightBase
+Math_lib	Makefile	/^Math_lib		:=	qbLinAlg $/;"	m
+MultAdd	qbLinAlg/qbMatrix.h	/^void qbMatrix2<T>::MultAdd(int i, int j, T multFactor)$/;"	f	class:qbMatrix2
+MultRow	qbLinAlg/qbMatrix.h	/^void qbMatrix2<T>::MultRow(int i, T multFactor)$/;"	f	class:qbMatrix2
+NAME	Makefile	/^NAME			:= App$/;"	m
+Normalize	qbLinAlg/qbVector.h	/^void qbVector<T>::Normalize()$/;"	f	class:qbVector
+Normalize	qbLinAlg/qbVector2.hpp	/^void qbVector2<T>::Normalize()$/;"	f	class:qbVector2
+Normalize	qbLinAlg/qbVector3.hpp	/^void qbVector3<T>::Normalize()$/;"	f	class:qbVector3
+Normalize	qbLinAlg/qbVector4.hpp	/^void qbVector4<T>::Normalize()$/;"	f	class:qbVector4
+Normalized	qbLinAlg/qbVector.h	/^qbVector<T> qbVector<T>::Normalized()$/;"	f	class:qbVector
+Normalized	qbLinAlg/qbVector2.hpp	/^qbVector2<T> qbVector2<T>::Normalized()$/;"	f	class:qbVector2
+Normalized	qbLinAlg/qbVector3.hpp	/^qbVector3<T> qbVector3<T>::Normalized()$/;"	f	class:qbVector3
+Normalized	qbLinAlg/qbVector4.hpp	/^qbVector4<T> qbVector4<T>::Normalized()$/;"	f	class:qbVector4
+OBJECTBASE_H	raytracer/includes/objectbase.hpp	/^#define OBJECTBASE_H$/;"	d
+OBJECTS_FILES	Makefile	/^OBJECTS_FILES	:= $(patsubst %.cpp, $(OBJ_DIR)\/%.o, $(SRC_FILES))$/;"	m
+OBJSPHERE_H	raytracer/includes/objsphere.hpp	/^#define OBJSPHERE_H$/;"	d
+OBJ_DIR	Makefile	/^OBJ_DIR			:= OBJECT_FILES$/;"	m
+ObjSphere	raytracer/Objsphere.cpp	/^RT::ObjSphere::ObjSphere()$/;"	f	class:RT::ObjSphere
+ObjSphere	raytracer/includes/objsphere.hpp	/^class ObjSphere : public ObjectBase$/;"	c	namespace:RT
+ObjectBase	raytracer/ObjectBase.cpp	/^RT::ObjectBase::ObjectBase()$/;"	f	class:RT::ObjectBase
+ObjectBase	raytracer/includes/objectbase.hpp	/^	class ObjectBase$/;"	c	namespace:RT
+OnEvent	App.cpp	/^void App::OnEvent(SDL_Event *event)$/;"	f	class:App
+OnExecute	App.cpp	/^int App::OnExecute()$/;"	f	class:App
+OnExit	App.cpp	/^void App::OnExit()$/;"	f	class:App
+OnLoop	App.cpp	/^void App::OnLoop()$/;"	f	class:App
+OnRender	App.cpp	/^void App::OnRender()$/;"	f	class:App
+Oninit	App.cpp	/^bool App::Oninit()$/;"	f	class:App
+POINTLIGHT_H	raytracer/includes/pointlight.hpp	/^#define POINTLIGHT_H$/;"	d
+PointLight	raytracer/includes/pointlight.hpp	/^class PointLight : public LightBase$/;"	c	namespace:RT
+PointLight	raytracer/pointlight.cpp	/^RT::PointLight::PointLight()$/;"	f	class:RT::PointLight
+Print	raytracer/gtfm.cpp	/^void RT::Gtform::Print(const qbMatrix2<double> &matrix)$/;"	f	class:RT::Gtform
+PrintMatrix	qbLinAlg/TestCode/TestCode_qbEIG.cpp	/^void PrintMatrix(qbMatrix2<T> matrix)$/;"	f
+PrintMatrix	qbLinAlg/TestCode/TestCode_qbLSQ.cpp	/^void PrintMatrix(qbMatrix2<T> matrix)$/;"	f
+PrintMatrix	qbLinAlg/TestCode/TestCode_qbLinearSolve.cpp	/^void PrintMatrix(qbMatrix2<T> matrix)$/;"	f
+PrintMatrix	qbLinAlg/TestCode/qbMatrixTest.cpp	/^void PrintMatrix(qbMatrix2<T> matrix)$/;"	f
+PrintMatrix	qbLinAlg/TestCode/qbMatrix_DeterminantTest.cpp	/^void PrintMatrix(qbMatrix2<T> matrix)$/;"	f
+PrintMatrix	qbLinAlg/qbMatrix.h	/^void qbMatrix2<T>::PrintMatrix()$/;"	f	class:qbMatrix2
+PrintMatrix	qbLinAlg/qbMatrix.h	/^void qbMatrix2<T>::PrintMatrix(int precision)$/;"	f	class:qbMatrix2
+PrintMatrix	raytracer/gtfm.cpp	/^void RT::Gtform::PrintMatrix(bool dirFlag) $/;"	f	class:RT::Gtform
+PrintVector	qbLinAlg/TestCode/TestCode_qbEIG.cpp	/^void PrintVector(qbVector<T> inputVector)$/;"	f
+PrintVector	qbLinAlg/TestCode/TestCode_qbLSQ.cpp	/^void PrintVector(qbVector<T> inputVector)$/;"	f
+PrintVector	qbLinAlg/TestCode/TestCode_qbLinearSolve.cpp	/^void PrintVector(qbVector<T> inputVector)$/;"	f
+PrintVector	raytracer/gtfm.cpp	/^void RT::Gtform::PrintVector(const qbVector<double> &vector)$/;"	f	class:RT::Gtform
+QBEIG_H	qbLinAlg/qbEIG.h	/^#define QBEIG_H$/;"	d
+QBEIG_MATRIXNOTSQUARE	qbLinAlg/qbEIG.h	/^constexpr int QBEIG_MATRIXNOTSQUARE = -1;$/;"	v
+QBEIG_MATRIXNOTSYMMETRIC	qbLinAlg/qbEIG.h	/^constexpr int QBEIG_MATRIXNOTSYMMETRIC = -3;$/;"	v
+QBEIG_MAXITERATIONSEXCEEDED	qbLinAlg/qbEIG.h	/^constexpr int QBEIG_MAXITERATIONSEXCEEDED = -2;$/;"	v
+QBLINESOLVE_H	qbLinAlg/qbLinSolve.h	/^#define QBLINESOLVE_H$/;"	d
+QBLINSOLVE_NOSOLUTIONS	qbLinAlg/qbLinSolve.h	/^constexpr int QBLINSOLVE_NOSOLUTIONS = -2;$/;"	v
+QBLINSOLVE_NOUNIQUESOLUTION	qbLinAlg/qbLinSolve.h	/^constexpr int QBLINSOLVE_NOUNIQUESOLUTION = -1;$/;"	v
+QBLSQ_H	qbLinAlg/qbLSQ.h	/^#define QBLSQ_H$/;"	d
+QBLSQ_NOINVERSE	qbLinAlg/qbLSQ.h	/^constexpr int QBLSQ_NOINVERSE = -1;$/;"	v
+QBMATRIX2_H	qbLinAlg/qbMatrix.h	/^#define QBMATRIX2_H$/;"	d
+QBPCA_H	qbLinAlg/qbPCA.h	/^#define QBPCA_H$/;"	d
+QBPCA_MATRIXNOTSQUARE	qbLinAlg/qbPCA.h	/^constexpr int QBPCA_MATRIXNOTSQUARE = -1;$/;"	v
+QBPCA_MATRIXNOTSYMMETRIC	qbLinAlg/qbPCA.h	/^constexpr int QBPCA_MATRIXNOTSYMMETRIC = -2;$/;"	v
+QBQR_H	qbLinAlg/qbQR.h	/^#define QBQR_H$/;"	d
+QBQR_MATRIXNOTSQUARE	qbLinAlg/qbQR.h	/^constexpr int QBQR_MATRIXNOTSQUARE = -1;$/;"	v
+QBVECTOR2_H	qbLinAlg/qbVector2.hpp	/^#define QBVECTOR2_H$/;"	d
+QBVECTOR3_H	qbLinAlg/qbVector3.hpp	/^#define QBVECTOR3_H$/;"	d
+QBVECTOR_H	qbLinAlg/qbVector.h	/^#define QBVECTOR_H$/;"	d
+RAY_H	raytracer/includes/ray.h	/^#define RAY_H$/;"	d
+RT	raytracer/gtfm.cpp	/^namespace RT {$/;"	n	file:
+RT	raytracer/includes/camera.hpp	/^namespace RT {$/;"	n
+RT	raytracer/includes/gtfm.hpp	/^namespace RT {$/;"	n
+RT	raytracer/includes/lightbase.hpp	/^namespace RT $/;"	n
+RT	raytracer/includes/objectbase.hpp	/^namespace RT {$/;"	n
+RT	raytracer/includes/objsphere.hpp	/^namespace RT {$/;"	n
+RT	raytracer/includes/pointlight.hpp	/^namespace RT {$/;"	n
+RT	raytracer/includes/ray.h	/^namespace RT {$/;"	n
+RT	raytracer/includes/scene.hpp	/^namespace RT {$/;"	n
+Rank	qbLinAlg/qbMatrix.h	/^int qbMatrix2<T>::Rank()$/;"	f	class:qbMatrix2
+Ray	raytracer/includes/ray.h	/^	class Ray{$/;"	c	namespace:RT
+Ray	raytracer/ray.cpp	/^RT::Ray::Ray()$/;"	f	class:RT::Ray
+Ray	raytracer/ray.cpp	/^RT::Ray::Ray(const qbVector<double> &point1, const qbVector<double> &point2)$/;"	f	class:RT::Ray
+Render	raytracer/scene.cpp	/^bool RT::Scene::Render(Image &image)$/;"	f	class:RT::Scene
+Resize	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::Resize(int numRows, int numCols)$/;"	f	class:qbMatrix2
+RowEchelon	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> qbMatrix2<T>::RowEchelon()$/;"	f	class:qbMatrix2
+SCENE_H	raytracer/includes/scene.hpp	/^#define SCENE_H$/;"	d
+SRC_FILES	Makefile	/^SRC_FILES		:= $(wildcard *.cpp) $(wildcard **\/*.cpp)$/;"	m
+Scene	raytracer/includes/scene.hpp	/^	class Scene$/;"	c	namespace:RT
+Scene	raytracer/scene.cpp	/^RT::Scene::Scene()$/;"	f	class:RT::Scene
+Separate	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::Separate(qbMatrix2<T> &matrix1, qbMatrix2<T> &matrix2, int colNum)$/;"	f	class:qbMatrix2
+SetAspect	raytracer/camera.cpp	/^void RT::Camera::SetAspect(double newAspect)$/;"	f	class:RT::Camera
+SetElement	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::SetElement(int row, int col, T elementValue)$/;"	f	class:qbMatrix2
+SetElement	qbLinAlg/qbMatrix33.hpp	/^bool qbMatrix33<T>::SetElement(int row, int col, T elementValue)$/;"	f	class:qbMatrix33
+SetElement	qbLinAlg/qbMatrix44.hpp	/^bool qbMatrix44<T>::SetElement(int row, int col, T elementValue)$/;"	f	class:qbMatrix44
+SetElement	qbLinAlg/qbVector.h	/^void qbVector<T>::SetElement(int index, T value)$/;"	f	class:qbVector
+SetElement	qbLinAlg/qbVector2.hpp	/^void qbVector2<T>::SetElement(int index, T value)$/;"	f	class:qbVector2
+SetElement	qbLinAlg/qbVector3.hpp	/^void qbVector3<T>::SetElement(int index, T value)$/;"	f	class:qbVector3
+SetElement	qbLinAlg/qbVector4.hpp	/^void qbVector4<T>::SetElement(int index, T value)$/;"	f	class:qbVector4
+SetHorzSize	raytracer/camera.cpp	/^void RT::Camera::SetHorzSize(double newHorzSize)$/;"	f	class:RT::Camera
+SetLenght	raytracer/camera.cpp	/^void RT::Camera::SetLenght(double lenght)$/;"	f	class:RT::Camera
+SetLookAt	raytracer/camera.cpp	/^void RT::Camera::SetLookAt(const qbVector<double> &newLookAt)$/;"	f	class:RT::Camera
+SetPixel	raytracer/image.cpp	/^void Image::SetPixel(const int x, const int y, double red, double green, double blue)$/;"	f	class:Image
+SetPosition	raytracer/camera.cpp	/^void RT::Camera::SetPosition(const qbVector<double> &newPosition)$/;"	f	class:RT::Camera
+SetToIdentity	qbLinAlg/qbMatrix.h	/^void qbMatrix2<T>::SetToIdentity()$/;"	f	class:qbMatrix2
+SetToIdentity	qbLinAlg/qbMatrix33.hpp	/^void qbMatrix33<T>::SetToIdentity()$/;"	f	class:qbMatrix33
+SetToIdentity	qbLinAlg/qbMatrix44.hpp	/^void qbMatrix44<T>::SetToIdentity()$/;"	f	class:qbMatrix44
+SetTransform	raytracer/gtfm.cpp	/^void RT::Gtform::SetTransform(const qbVector<double> &translation, const qbVector<double> &rotation, const qbVector<double> &scal)$/;"	f	class:RT::Gtform
+SetTransformMatrix	raytracer/ObjectBase.cpp	/^void RT::ObjectBase::SetTransformMatrix(const RT::Gtform &transformMatrix)$/;"	f	class:RT::ObjectBase
+SetUp	raytracer/camera.cpp	/^void RT::Camera::SetUp(const qbVector<double> &upVector)$/;"	f	class:RT::Camera
+Sub2Ind	qbLinAlg/qbMatrix.h	/^int qbMatrix2<T>::Sub2Ind(int row, int col) const$/;"	f	class:qbMatrix2
+Sub2Ind	qbLinAlg/qbMatrix33.hpp	/^int qbMatrix33<T>::Sub2Ind(int row, int col) const$/;"	f	class:qbMatrix33
+Sub2Ind	qbLinAlg/qbMatrix44.hpp	/^int qbMatrix44<T>::Sub2Ind(int row, int col) const$/;"	f	class:qbMatrix44
+SubtractColumnMeans	qbLinAlg/qbPCA.h	/^void SubtractColumnMeans(qbMatrix2<T> &inputData, std::vector<T> &columnMeans)$/;"	f	namespace:qbPCA
+SwapRow	qbLinAlg/qbMatrix.h	/^void qbMatrix2<T>::SwapRow(int i, int j)$/;"	f	class:qbMatrix2
+TestIntersectioons	raytracer/ObjectBase.cpp	/^bool RT::ObjectBase::TestIntersectioons(const Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)$/;"	f	class:RT::ObjectBase
+TestIntersectioons	raytracer/Objsphere.cpp	/^bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)$/;"	f	class:RT::ObjSphere
+Transpose	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> qbMatrix2<T>::Transpose() const$/;"	f	class:qbMatrix2
+Transpose	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> qbMatrix33<T>::Transpose() const$/;"	f	class:qbMatrix33
+Transpose	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> qbMatrix44<T>::Transpose() const$/;"	f	class:qbMatrix44
+UpdateCameraGeometry	raytracer/camera.cpp	/^void RT::Camera::UpdateCameraGeometry()$/;"	f	class:RT::Camera
+app_h	includes/App.h	/^#define app_h$/;"	d
+cofactorDeterminant	qbLinAlg/qbMatrix33.hpp	/^T qbMatrix33<T>::cofactorDeterminant(T e1, T e2, T e3, T e4)$/;"	f	class:qbMatrix33
+cross	qbLinAlg/qbVector.h	/^qbVector<T> qbVector<T>::cross(const qbVector<T> &a, const qbVector<T> &b)$/;"	f	class:qbVector
+cross	qbLinAlg/qbVector3.hpp	/^qbVector3<T> qbVector3<T>::cross(const qbVector3<T> &a, const qbVector3<T> &b)$/;"	f	class:qbVector3
+dot	qbLinAlg/qbVector.h	/^T qbVector<T>::dot(const qbVector<T> &a, const qbVector<T> &b)$/;"	f	class:qbVector
+dot	qbLinAlg/qbVector2.hpp	/^T qbVector2<T>::dot(const qbVector2<T> &a, const qbVector2<T> &b)$/;"	f	class:qbVector2
+dot	qbLinAlg/qbVector3.hpp	/^T qbVector3<T>::dot(const qbVector3<T> &a, const qbVector3<T> &b)$/;"	f	class:qbVector3
+dot	qbLinAlg/qbVector4.hpp	/^T qbVector4<T>::dot(const qbVector4<T> &a, const qbVector4<T> &b)$/;"	f	class:qbVector4
+isRunning	includes/App.h	/^		bool isRunning;$/;"	m	class:App
+m_bChannel	raytracer/includes/image.hpp	/^		std::vector<std::vector<double>> m_bChannel;$/;"	m	class:Image
+m_camera	raytracer/includes/scene.hpp	/^			RT::Camera m_camera;$/;"	m	class:RT::Scene
+m_cameraAspectRation	raytracer/includes/camera.hpp	/^			double				m_cameraAspectRation;$/;"	m	class:RT::Camera
+m_cameraHorSize	raytracer/includes/camera.hpp	/^			double				m_cameraHorSize;$/;"	m	class:RT::Camera
+m_cameraLenght	raytracer/includes/camera.hpp	/^			double				m_cameraLenght;$/;"	m	class:RT::Camera
+m_gChannel	raytracer/includes/image.hpp	/^		std::vector<std::vector<double>> m_gChannel;$/;"	m	class:Image
+m_image	includes/App.h	/^		Image m_image;$/;"	m	class:App
+m_intensity	raytracer/includes/lightbase.hpp	/^			double				m_intensity;$/;"	m	class:RT::LightBase
+m_lightList	raytracer/includes/scene.hpp	/^			std::vector<std::shared_ptr<RT::LightBase>> m_lightList;$/;"	m	class:RT::Scene
+m_matrixData	qbLinAlg/qbMatrix.h	/^		T *m_matrixData;$/;"	m	class:qbMatrix2
+m_matrixData	qbLinAlg/qbMatrix33.hpp	/^		T m_matrixData[9];$/;"	m	class:qbMatrix33
+m_matrixData	qbLinAlg/qbMatrix44.hpp	/^		T m_matrixData[16];$/;"	m	class:qbMatrix44
+m_nCols	qbLinAlg/qbMatrix.h	/^    int m_nRows, m_nCols, m_nElements;$/;"	m	class:qbMatrix2
+m_nCols	qbLinAlg/qbMatrix33.hpp	/^    int m_nCols = 3;$/;"	m	class:qbMatrix33
+m_nCols	qbLinAlg/qbMatrix44.hpp	/^    int m_nCols = 4;$/;"	m	class:qbMatrix44
+m_nDims	qbLinAlg/qbVector.h	/^		int m_nDims;$/;"	m	class:qbVector
+m_nElements	qbLinAlg/qbMatrix.h	/^    int m_nRows, m_nCols, m_nElements;$/;"	m	class:qbMatrix2
+m_nElements	qbLinAlg/qbMatrix33.hpp	/^    int m_nElements = 9;$/;"	m	class:qbMatrix33
+m_nElements	qbLinAlg/qbMatrix44.hpp	/^    int m_nElements = 16;$/;"	m	class:qbMatrix44
+m_nRows	qbLinAlg/qbMatrix.h	/^    int m_nRows, m_nCols, m_nElements;$/;"	m	class:qbMatrix2
+m_nRows	qbLinAlg/qbMatrix33.hpp	/^    int m_nRows = 3;$/;"	m	class:qbMatrix33
+m_nRows	qbLinAlg/qbMatrix44.hpp	/^    int m_nRows = 4;$/;"	m	class:qbMatrix44
+m_objectList	raytracer/includes/scene.hpp	/^			std::vector<std::shared_ptr<RT::ObjectBase>> m_objectList;$/;"	m	class:RT::Scene
+m_pRenderer	raytracer/includes/image.hpp	/^		SDL_Renderer *m_pRenderer;$/;"	m	class:Image
+m_pTexture	raytracer/includes/image.hpp	/^		SDL_Texture *m_pTexture;$/;"	m	class:Image
+m_rChannel	raytracer/includes/image.hpp	/^		std::vector<std::vector<double>> m_rChannel;$/;"	m	class:Image
+m_scene	includes/App.h	/^		RT::Scene m_scene;$/;"	m	class:App
+m_trasformMatrix	raytracer/includes/objectbase.hpp	/^			RT::Gtform m_trasformMatrix;$/;"	m	class:RT::ObjectBase
+m_v1	qbLinAlg/qbVector4.hpp	/^		T m_v1;$/;"	m	class:qbVector4
+m_v2	qbLinAlg/qbVector4.hpp	/^		T m_v2;$/;"	m	class:qbVector4
+m_v3	qbLinAlg/qbVector4.hpp	/^		T m_v3;$/;"	m	class:qbVector4
+m_v4	qbLinAlg/qbVector4.hpp	/^		T m_v4;$/;"	m	class:qbVector4
+m_vectorData	qbLinAlg/qbVector.h	/^		std::vector<T> m_vectorData;$/;"	m	class:qbVector
+m_x	qbLinAlg/qbVector2.hpp	/^		T m_x;$/;"	m	class:qbVector2
+m_x	qbLinAlg/qbVector3.hpp	/^		T m_x;$/;"	m	class:qbVector3
+m_xSize	raytracer/includes/image.hpp	/^		int m_xSize;$/;"	m	class:Image
+m_y	qbLinAlg/qbVector2.hpp	/^		T m_y;$/;"	m	class:qbVector2
+m_y	qbLinAlg/qbVector3.hpp	/^		T m_y;$/;"	m	class:qbVector3
+m_ySize	raytracer/includes/image.hpp	/^		int m_ySize;$/;"	m	class:Image
+m_z	qbLinAlg/qbVector3.hpp	/^		T m_z;$/;"	m	class:qbVector3
+main	main.cpp	/^int main(int ac, char **av)$/;"	f
+main	qbLinAlg/TestCode/TestCode_qbEIG.cpp	/^int main()$/;"	f
+main	qbLinAlg/TestCode/TestCode_qbLSQ.cpp	/^int main()$/;"	f
+main	qbLinAlg/TestCode/TestCode_qbLinearSolve.cpp	/^int main()$/;"	f
+main	qbLinAlg/TestCode/TestCode_qbPCA.cpp	/^int main()$/;"	f
+main	qbLinAlg/TestCode/TestCode_qbQR.cpp	/^int main()$/;"	f
+main	qbLinAlg/TestCode/qbMatrixTest.cpp	/^int main()$/;"	f
+main	qbLinAlg/TestCode/qbMatrix_DeterminantTest.cpp	/^int main()$/;"	f
+norm	qbLinAlg/qbVector.h	/^T qbVector<T>::norm()$/;"	f	class:qbVector
+norm	qbLinAlg/qbVector2.hpp	/^T qbVector2<T>::norm()$/;"	f	class:qbVector2
+norm	qbLinAlg/qbVector3.hpp	/^T qbVector3<T>::norm()$/;"	f	class:qbVector3
+norm	qbLinAlg/qbVector4.hpp	/^T qbVector4<T>::norm()$/;"	f	class:qbVector4
+operator *	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator* (const T& lhs, const qbMatrix2<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator* (const qbMatrix2<T>& lhs, const T& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator* (const qbMatrix2<T>& lhs, const qbMatrix2<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix.h	/^qbVector3<T> operator* (const qbMatrix2<T>& lhs, const qbVector3<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix.h	/^qbVector4<T> operator* (const qbMatrix2<T>& lhs, const qbVector4<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix.h	/^qbVector<T> operator* (const qbMatrix2<T>& lhs, const qbVector<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> operator* (const T& lhs, const qbMatrix33<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> operator* (const qbMatrix33<T>& lhs, const T& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> operator* (const qbMatrix33<T>& lhs, const qbMatrix33<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix33.hpp	/^qbVector3<T> operator* (const qbMatrix33<T>& lhs, const qbVector3<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> operator* (const T& lhs, const qbMatrix44<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> operator* (const qbMatrix44<T>& lhs, const T& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> operator* (const qbMatrix44<T>& lhs, const qbMatrix44<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbMatrix44.hpp	/^qbVector4<T> operator* (const qbMatrix44<T>& lhs, const qbVector4<T>& rhs)$/;"	f
+operator *	qbLinAlg/qbVector.h	/^qbVector<T> operator* (const T &lhs, const qbVector<T> &rhs)$/;"	f
+operator *	qbLinAlg/qbVector.h	/^qbVector<T> qbVector<T>::operator* (const T &rhs) const$/;"	f	class:qbVector
+operator *	qbLinAlg/qbVector2.hpp	/^qbVector2<T> operator* (const T &lhs, const qbVector2<T> &rhs)$/;"	f
+operator *	qbLinAlg/qbVector2.hpp	/^qbVector2<T> qbVector2<T>::operator* (const T &rhs) const$/;"	f	class:qbVector2
+operator *	qbLinAlg/qbVector3.hpp	/^qbVector3<T> operator* (const T &lhs, const qbVector3<T> &rhs)$/;"	f
+operator *	qbLinAlg/qbVector3.hpp	/^qbVector3<T> qbVector3<T>::operator* (const T &rhs) const$/;"	f	class:qbVector3
+operator *	qbLinAlg/qbVector4.hpp	/^qbVector4<T> operator* (const T &lhs, const qbVector4<T> &rhs)$/;"	f
+operator *	qbLinAlg/qbVector4.hpp	/^qbVector4<T> qbVector4<T>::operator* (const T &rhs) const$/;"	f	class:qbVector4
+operator *	raytracer/gtfm.cpp	/^	RT::Gtform operator*(const RT::Gtform &lhs, const Gtform &rhs)$/;"	f	namespace:RT
+operator +	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator+ (const T& lhs, const qbMatrix2<T>& rhs)$/;"	f
+operator +	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator+ (const qbMatrix2<T>& lhs, const T& rhs)$/;"	f
+operator +	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator+ (const qbMatrix2<T>& lhs, const qbMatrix2<T>& rhs)$/;"	f
+operator +	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> operator+ (const T& lhs, const qbMatrix33<T>& rhs)$/;"	f
+operator +	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> operator+ (const qbMatrix33<T>& lhs, const T& rhs)$/;"	f
+operator +	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> operator+ (const qbMatrix33<T>& lhs, const qbMatrix33<T>& rhs)$/;"	f
+operator +	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> operator+ (const T& lhs, const qbMatrix44<T>& rhs)$/;"	f
+operator +	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> operator+ (const qbMatrix44<T>& lhs, const T& rhs)$/;"	f
+operator +	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> operator+ (const qbMatrix44<T>& lhs, const qbMatrix44<T>& rhs)$/;"	f
+operator +	qbLinAlg/qbVector.h	/^qbVector<T> qbVector<T>::operator+ (const qbVector<T> &rhs) const$/;"	f	class:qbVector
+operator +	qbLinAlg/qbVector2.hpp	/^qbVector2<T> qbVector2<T>::operator+ (const qbVector2<T> &rhs) const$/;"	f	class:qbVector2
+operator +	qbLinAlg/qbVector3.hpp	/^qbVector3<T> qbVector3<T>::operator+ (const qbVector3<T> &rhs) const$/;"	f	class:qbVector3
+operator +	qbLinAlg/qbVector4.hpp	/^qbVector4<T> qbVector4<T>::operator+ (const qbVector4<T> &rhs) const$/;"	f	class:qbVector4
+operator -	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator- (const T& lhs, const qbMatrix2<T>& rhs)$/;"	f
+operator -	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator- (const qbMatrix2<T>& lhs, const T& rhs)$/;"	f
+operator -	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator- (const qbMatrix2<T>& lhs, const qbMatrix2<T>& rhs)$/;"	f
+operator -	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> operator- (const T& lhs, const qbMatrix33<T>& rhs)$/;"	f
+operator -	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> operator- (const qbMatrix33<T>& lhs, const T& rhs)$/;"	f
+operator -	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> operator- (const qbMatrix33<T>& lhs, const qbMatrix33<T>& rhs)$/;"	f
+operator -	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> operator- (const T& lhs, const qbMatrix44<T>& rhs)$/;"	f
+operator -	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> operator- (const qbMatrix44<T>& lhs, const T& rhs)$/;"	f
+operator -	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> operator- (const qbMatrix44<T>& lhs, const qbMatrix44<T>& rhs)$/;"	f
+operator -	qbLinAlg/qbVector.h	/^qbVector<T> qbVector<T>::operator- (const qbVector<T> &rhs) const$/;"	f	class:qbVector
+operator -	qbLinAlg/qbVector2.hpp	/^qbVector2<T> qbVector2<T>::operator- (const qbVector2<T> &rhs) const$/;"	f	class:qbVector2
+operator -	qbLinAlg/qbVector3.hpp	/^qbVector3<T> qbVector3<T>::operator- (const qbVector3<T> &rhs) const$/;"	f	class:qbVector3
+operator -	qbLinAlg/qbVector4.hpp	/^qbVector4<T> qbVector4<T>::operator- (const qbVector4<T> &rhs) const$/;"	f	class:qbVector4
+operator =	qbLinAlg/qbMatrix.h	/^qbMatrix2<T> qbMatrix2<T>::operator= (const qbMatrix2<T> &rhs)$/;"	f	class:qbMatrix2
+operator =	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T> qbMatrix33<T>::operator= (const qbMatrix33<T> &rhs)$/;"	f	class:qbMatrix33
+operator =	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T> qbMatrix44<T>::operator= (const qbMatrix44<T> &rhs)$/;"	f	class:qbMatrix44
+operator =	qbLinAlg/qbVector2.hpp	/^qbVector2<T> qbVector2<T>::operator= (const qbVector2<T> &rhs)$/;"	f	class:qbVector2
+operator =	qbLinAlg/qbVector2.hpp	/^qbVector2<T> qbVector2<T>::operator= (const qbVector<T> &rhs)$/;"	f	class:qbVector2
+operator =	qbLinAlg/qbVector2.hpp	/^qbVector2<T> qbVector2<T>::operator= (const std::vector<T> &rhs)$/;"	f	class:qbVector2
+operator =	qbLinAlg/qbVector3.hpp	/^qbVector3<T> qbVector3<T>::operator= (const qbVector3<T> &rhs)$/;"	f	class:qbVector3
+operator =	qbLinAlg/qbVector3.hpp	/^qbVector3<T> qbVector3<T>::operator= (const qbVector<T> &rhs)$/;"	f	class:qbVector3
+operator =	qbLinAlg/qbVector3.hpp	/^qbVector3<T> qbVector3<T>::operator= (const std::vector<T> &rhs)$/;"	f	class:qbVector3
+operator =	qbLinAlg/qbVector4.hpp	/^qbVector4<T> qbVector4<T>::operator= (const qbVector4<T> &rhs)$/;"	f	class:qbVector4
+operator =	qbLinAlg/qbVector4.hpp	/^qbVector4<T> qbVector4<T>::operator= (const qbVector<T> &rhs)$/;"	f	class:qbVector4
+operator =	qbLinAlg/qbVector4.hpp	/^qbVector4<T> qbVector4<T>::operator= (const std::vector<T> &rhs)$/;"	f	class:qbVector4
+operator =	raytracer/gtfm.cpp	/^RT::Gtform RT::Gtform::operator=(const Gtform &rhs)$/;"	f	class:RT::Gtform
+operator ==	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::operator== (const qbMatrix2<T>& rhs)$/;"	f	class:qbMatrix2
+operator ==	qbLinAlg/qbMatrix33.hpp	/^bool qbMatrix33<T>::operator== (const qbMatrix33<T>& rhs)$/;"	f	class:qbMatrix33
+operator ==	qbLinAlg/qbMatrix44.hpp	/^bool qbMatrix44<T>::operator== (const qbMatrix44<T>& rhs)$/;"	f	class:qbMatrix44
+override	raytracer/includes/objsphere.hpp	/^			 virtual bool TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint , qbVector<double> &localNormal, qbVector<double> &localColor) override;$/;"	m	class:RT::ObjSphere
+override	raytracer/includes/objsphere.hpp	/^			 virtual ~ObjSphere() override;$/;"	m	class:RT::ObjSphere
+override	raytracer/includes/pointlight.hpp	/^					qbVector<double> Color, double &intensity) override;$/;"	m	class:RT::PointLight
+override	raytracer/includes/pointlight.hpp	/^			virtual ~PointLight() override;$/;"	m	class:RT::PointLight
+pRenderer	includes/App.h	/^		SDL_Renderer *pRenderer;$/;"	m	class:App
+pWindow	includes/App.h	/^		SDL_Window *pWindow;$/;"	m	class:App
+print_vector	raytracer/camera.cpp	/^void print_vector(qbVector<double> &inputVector, std::string msg)$/;"	f
+qbEIG_PIt	qbLinAlg/qbEIG.h	/^int qbEIG_PIt(const qbMatrix2<T> &X, T &eigenValue, qbVector<T> &eigenVector)$/;"	f
+qbEigQR	qbLinAlg/qbEIG.h	/^int qbEigQR(const qbMatrix2<T> &inputMatrix, std::vector<T> &eigenValues)$/;"	f
+qbInvPIt	qbLinAlg/qbEIG.h	/^int qbInvPIt(const qbMatrix2<T> &inputMatrix, const T &eigenValue, qbVector<T> &eigenVector)$/;"	f
+qbLSQ	qbLinAlg/qbLSQ.h	/^int qbLSQ(const qbMatrix2<T> &Xin, const qbVector<T> &yin, qbVector<T> &result)$/;"	f
+qbLinSolve	qbLinAlg/qbLinSolve.h	/^int qbLinSolve(const qbMatrix2<T> &aMatrix, const qbVector<T> &bVector, qbVector<T> &resultVec)$/;"	f
+qbMatrix2	qbLinAlg/qbMatrix.h	/^class qbMatrix2$/;"	c
+qbMatrix2	qbLinAlg/qbMatrix.h	/^qbMatrix2<T>::qbMatrix2()$/;"	f	class:qbMatrix2
+qbMatrix2	qbLinAlg/qbMatrix.h	/^qbMatrix2<T>::qbMatrix2(const qbMatrix2<T> &inputMatrix)$/;"	f	class:qbMatrix2
+qbMatrix2	qbLinAlg/qbMatrix.h	/^qbMatrix2<T>::qbMatrix2(int nRows, int nCols)$/;"	f	class:qbMatrix2
+qbMatrix2	qbLinAlg/qbMatrix.h	/^qbMatrix2<T>::qbMatrix2(int nRows, int nCols, const T *inputData)$/;"	f	class:qbMatrix2
+qbMatrix2	qbLinAlg/qbMatrix.h	/^qbMatrix2<T>::qbMatrix2(int nRows, int nCols, const std::vector<T> &inputData)$/;"	f	class:qbMatrix2
+qbMatrix33	qbLinAlg/qbMatrix33.hpp	/^class qbMatrix33$/;"	c
+qbMatrix33	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T>::qbMatrix33()$/;"	f	class:qbMatrix33
+qbMatrix33	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T>::qbMatrix33(const qbMatrix33<T> &inputMatrix)$/;"	f	class:qbMatrix33
+qbMatrix33	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T>::qbMatrix33(const std::vector<T> &inputData)$/;"	f	class:qbMatrix33
+qbMatrix33_H	qbLinAlg/qbMatrix33.hpp	/^#define qbMatrix33_H$/;"	d
+qbMatrix44	qbLinAlg/qbMatrix44.hpp	/^class qbMatrix44$/;"	c
+qbMatrix44	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T>::qbMatrix44()$/;"	f	class:qbMatrix44
+qbMatrix44	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T>::qbMatrix44(const qbMatrix44<T> &inputMatrix)$/;"	f	class:qbMatrix44
+qbMatrix44	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T>::qbMatrix44(const std::vector<T> &inputData)$/;"	f	class:qbMatrix44
+qbMatrix44_H	qbLinAlg/qbMatrix44.hpp	/^#define qbMatrix44_H$/;"	d
+qbPCA	qbLinAlg/qbPCA.h	/^int qbPCA(const qbMatrix2<T> &inputData, qbMatrix2<T> &outputComponents)$/;"	f	namespace:qbPCA
+qbPCA	qbLinAlg/qbPCA.h	/^namespace qbPCA$/;"	n
+qbQR	qbLinAlg/qbQR.h	/^int qbQR(const qbMatrix2<T> &A, qbMatrix2<T> &Q, qbMatrix2<T> &R)$/;"	f
+qbVector	qbLinAlg/qbVector.h	/^class qbVector$/;"	c
+qbVector	qbLinAlg/qbVector.h	/^qbVector<T>::qbVector()$/;"	f	class:qbVector
+qbVector	qbLinAlg/qbVector.h	/^qbVector<T>::qbVector(int numDims)$/;"	f	class:qbVector
+qbVector	qbLinAlg/qbVector.h	/^qbVector<T>::qbVector(std::vector<T> inputData)$/;"	f	class:qbVector
+qbVector2	qbLinAlg/qbVector2.hpp	/^class qbVector2$/;"	c
+qbVector2	qbLinAlg/qbVector2.hpp	/^qbVector2<T>::qbVector2()$/;"	f	class:qbVector2
+qbVector2	qbLinAlg/qbVector2.hpp	/^qbVector2<T>::qbVector2(const T x, const T y)$/;"	f	class:qbVector2
+qbVector2	qbLinAlg/qbVector2.hpp	/^qbVector2<T>::qbVector2(const qbVector2<T> &inputData)$/;"	f	class:qbVector2
+qbVector2	qbLinAlg/qbVector2.hpp	/^qbVector2<T>::qbVector2(const qbVector<T> &inputData)$/;"	f	class:qbVector2
+qbVector2	qbLinAlg/qbVector2.hpp	/^qbVector2<T>::qbVector2(const std::vector<T> &inputData)$/;"	f	class:qbVector2
+qbVector3	qbLinAlg/qbVector3.hpp	/^class qbVector3$/;"	c
+qbVector3	qbLinAlg/qbVector3.hpp	/^qbVector3<T>::qbVector3()$/;"	f	class:qbVector3
+qbVector3	qbLinAlg/qbVector3.hpp	/^qbVector3<T>::qbVector3(const T x, const T y, const T z)$/;"	f	class:qbVector3
+qbVector3	qbLinAlg/qbVector3.hpp	/^qbVector3<T>::qbVector3(const qbVector3<T> &inputData)$/;"	f	class:qbVector3
+qbVector3	qbLinAlg/qbVector3.hpp	/^qbVector3<T>::qbVector3(const qbVector<T> &inputData)$/;"	f	class:qbVector3
+qbVector3	qbLinAlg/qbVector3.hpp	/^qbVector3<T>::qbVector3(const std::vector<T> &inputData)$/;"	f	class:qbVector3
+qbVector4	qbLinAlg/qbVector4.hpp	/^class qbVector4$/;"	c
+qbVector4	qbLinAlg/qbVector4.hpp	/^qbVector4<T>::qbVector4()$/;"	f	class:qbVector4
+qbVector4	qbLinAlg/qbVector4.hpp	/^qbVector4<T>::qbVector4(const T v1, const T v2, const T v3, const T v4)$/;"	f	class:qbVector4
+qbVector4	qbLinAlg/qbVector4.hpp	/^qbVector4<T>::qbVector4(const qbVector4<T> &inputData)$/;"	f	class:qbVector4
+qbVector4	qbLinAlg/qbVector4.hpp	/^qbVector4<T>::qbVector4(const qbVector<T> &inputData)$/;"	f	class:qbVector4
+qbVector4	qbLinAlg/qbVector4.hpp	/^qbVector4<T>::qbVector4(const std::vector<T> &inputData)$/;"	f	class:qbVector4
+qbVector4_H	qbLinAlg/qbVector4.hpp	/^#define qbVector4_H$/;"	d
+~Gtform	raytracer/gtfm.cpp	/^RT::Gtform::~Gtform()$/;"	f	class:RT::Gtform
+~Image	raytracer/image.cpp	/^Image::~Image()$/;"	f	class:Image
+~LightBase	raytracer/lightbase.cpp	/^RT::LightBase::~LightBase()$/;"	f	class:RT::LightBase
+~ObjSphere	raytracer/Objsphere.cpp	/^RT::ObjSphere::~ObjSphere()$/;"	f	class:RT::ObjSphere
+~ObjectBase	raytracer/ObjectBase.cpp	/^RT::ObjectBase::~ObjectBase()$/;"	f	class:RT::ObjectBase
+~PointLight	raytracer/pointlight.cpp	/^RT::PointLight::~PointLight()$/;"	f	class:RT::PointLight
+~qbMatrix2	qbLinAlg/qbMatrix.h	/^qbMatrix2<T>::~qbMatrix2()$/;"	f	class:qbMatrix2
+~qbMatrix33	qbLinAlg/qbMatrix33.hpp	/^qbMatrix33<T>::~qbMatrix33()$/;"	f	class:qbMatrix33
+~qbMatrix44	qbLinAlg/qbMatrix44.hpp	/^qbMatrix44<T>::~qbMatrix44()$/;"	f	class:qbMatrix44
+~qbVector	qbLinAlg/qbVector.h	/^qbVector<T>::~qbVector()$/;"	f	class:qbVector
+~qbVector2	qbLinAlg/qbVector2.hpp	/^qbVector2<T>::~qbVector2()$/;"	f	class:qbVector2
+~qbVector3	qbLinAlg/qbVector3.hpp	/^qbVector3<T>::~qbVector3()$/;"	f	class:qbVector3
+~qbVector4	qbLinAlg/qbVector4.hpp	/^qbVector4<T>::~qbVector4()$/;"	f	class:qbVector4
