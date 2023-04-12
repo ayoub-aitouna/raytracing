@@ -23,17 +23,17 @@ RT::Scene::Scene()
 
 	//Modify Shpeheres
 	RT::Gtform testMatrix1, testMatrix2, testMatrix3;
-	testMatrix1.SetTransform(qbVector<double> {std::vector<double>{-1.5, 0.0, 0.0}},
+	testMatrix1.SetTransform(qbVector<double> {std::vector<double>{-1.5, 0.0, .5}},
 			qbVector<double>{std::vector<double>{.0, .0, .0}},
-			qbVector<double>{std::vector<double>{.5,.5,.75}});
+			qbVector<double>{std::vector<double>{1,.5,.5}});
 
 	testMatrix2.SetTransform(qbVector<double> {std::vector<double>{0, 0.0, 0.0}},
 			qbVector<double>{std::vector<double>{.0, .0, .0}},
-			qbVector<double>{std::vector<double>{.75,.5,.5}});
+			qbVector<double>{std::vector<double>{.5,.5,.5}});
 
 	testMatrix3.SetTransform(qbVector<double> {std::vector<double>{1.5, 0.0, 0.0}},
 			qbVector<double>{std::vector<double>{.0, .0, .0}},
-			qbVector<double>{std::vector<double>{.75,.75,.75}});
+			qbVector<double>{std::vector<double>{1,1,1}});
 
 	m_objectList.at(0)->SetTransformMatrix(testMatrix1);
 	m_objectList.at(1)->SetTransformMatrix(testMatrix2);
@@ -47,7 +47,7 @@ RT::Scene::Scene()
 
 	//Cunstroct a teset Light
 	m_lightList.push_back(std::make_shared<RT::PointLight>(RT::PointLight()));
-	m_lightList.at(0)->m_location = qbVector<double>{std::vector<double>{5,-10, -10}};
+	m_lightList.at(0)->m_location = qbVector<double>{std::vector<double>{5,-10, 0}};
 	m_lightList.at(0)->m_color = qbVector<double>{std::vector<double>{255.0,255.0,255.0,255.0}};
 }
 
