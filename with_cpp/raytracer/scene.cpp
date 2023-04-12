@@ -18,10 +18,36 @@ RT::Scene::Scene()
 
 	//Cunstroct a test sphere
 	m_objectList.push_back(std::make_shared<RT::ObjSphere> (RT::ObjSphere()));
+	m_objectList.push_back(std::make_shared<RT::ObjSphere> (RT::ObjSphere()));
+	m_objectList.push_back(std::make_shared<RT::ObjSphere> (RT::ObjSphere()));
+
+	//Modify Shpeheres
+	RT::Gtform testMatrix1, testMatrix2, testMatrix3;
+	testMatrix1.SetTransform(qbVector<double> {std::vector<double>{-1.5, 0.0, 0.0}},
+			qbVector<double>{std::vector<double>{.0, .0, .0}},
+			qbVector<double>{std::vector<double>{.5,.5,.75}});
+
+	testMatrix2.SetTransform(qbVector<double> {std::vector<double>{0, 0.0, 0.0}},
+			qbVector<double>{std::vector<double>{.0, .0, .0}},
+			qbVector<double>{std::vector<double>{.75,.5,.5}});
+
+	testMatrix3.SetTransform(qbVector<double> {std::vector<double>{1.5, 0.0, 0.0}},
+			qbVector<double>{std::vector<double>{.0, .0, .0}},
+			qbVector<double>{std::vector<double>{.75,.75,.75}});
+
+	m_objectList.at(0)->SetTransformMatrix(testMatrix1);
+	m_objectList.at(1)->SetTransformMatrix(testMatrix2);
+	m_objectList.at(2)->SetTransformMatrix(testMatrix3);
+
+	m_objectList.at(0) -> m_baseColor = qbVector<double>{std::vector<double>{64.0,128,200}};
+	m_objectList.at(1) -> m_baseColor = qbVector<double>{std::vector<double>{255, 128, 0.0}};
+	m_objectList.at(2) -> m_baseColor = qbVector<double>{std::vector<double>{255.0,200,255}};
+
+	qbVector<double>{std::vector<double>{.5,.5,.75}};
 
 	//Cunstroct a teset Light
 	m_lightList.push_back(std::make_shared<RT::PointLight>(RT::PointLight()));
-	m_lightList.at(0)->m_location = qbVector<double>{std::vector<double>{5,-10,5}};
+	m_lightList.at(0)->m_location = qbVector<double>{std::vector<double>{5,-10, -10}};
 	m_lightList.at(0)->m_color = qbVector<double>{std::vector<double>{255.0,255.0,255.0,255.0}};
 }
 
@@ -67,7 +93,6 @@ bool RT::Scene::Render(Image &image)
 						valideIlum = currentlight->ComputeIllumination(intPoint, localNormal, m_objectList, currentObject, color, intensity);
 					}
 					// Comput the distance between camera ana point of interstaction
-
 					double dist = (intPoint - cameraRay.m_point1).norm();
 					if(dist > maxDist)
 						maxDist = dist;
@@ -76,13 +101,19 @@ bool RT::Scene::Render(Image &image)
 
 					//image.SetPixel(x, y, 255.0 - ((dist - 9.0) / 0.94605) * 255.0, 0.0, 0.0);
 					if(valideIlum)
-						image.SetPixel(x,y,255.0 * intensity,0.0,0.0);
-					else
-						image.SetPixel(x,y,0,0,0);
+					{
+						image.SetPixel(x,y,localColor.GetElement(0) * intensity,
+								localColor.GetElement(1) * intensity,
+								localColor.GetElement(2) * intensity);
+						//image.SetPixel(x,y,255.0 * intensity,0.0,0.0);
+					}
+					//else
+					//	image.SetPixel(x,y,0,0,0);
 				}
 				else
 				{
-					image.SetPixel(x, y, 0.0, 0.0, 0.0);
+					//leave pixel unchanged
+					//image.SetPixel(x, y, 0.0, 0.0, 0.0);
 				}
 			}
 		}

@@ -20,7 +20,6 @@ bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> 
 	//appliyng from word to local
 	RT::Ray bckRay = m_trasformMatrix.Apply(castRay, RT::BCKTFORM);
 
-
 	// t^2(v.v) + 2t(p1.v)+(p1.p1) -r^2 = 0;
 	// at^2 + bt + c = 0
 	// a = (v.v);
@@ -28,7 +27,7 @@ bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> 
 	// c = (p1 . p1) - r^2
 	// comput the values of a,b,c.
 
-	qbVector<double> vhat = castRay.m_lab;
+	qbVector<double> vhat = bckRay.m_lab;
 	vhat.Normalize();
 
 	//Note that a is equal to thr squared magnitude of the direction of thr cast ras . As this will be a unit vector,
@@ -37,15 +36,10 @@ bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> 
 
 	//calculate b.
 	double b = 2 * qbVector<double>::dot(bckRay.GetPoint1(), vhat);
-
 	double raduis = 1.0;
-
 	double c = qbVector<double>::dot(bckRay.GetPoint1(), bckRay.GetPoint1()) - std::sqrt(raduis);
-
 	// test if there is interstaction dela = b^2 - 4ac; and a = 1.0 so delta - b^2 -4c;
 	double intTest = (b * b) - 4.0 * c;
-
-
 	// intersection in the local world
 	qbVector<double> poi;
 
@@ -76,7 +70,6 @@ bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> 
 		// normal = intPoint - center
 		localNormal = intPoint - newObjOrigin;
 		localNormal.Normalized();
-
 		// return the base color 
 		localColor = m_baseColor;
 		return true;
