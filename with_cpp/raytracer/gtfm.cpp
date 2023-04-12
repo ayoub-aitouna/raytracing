@@ -124,9 +124,11 @@ qbVector<double> RT::Gtform::Apply(const qbVector<double> &inputVector, bool dir
 		resultVector = m_bcktfm * tempVector;
 	}
 	// Reform the output as a 4-elemt vector
-	qbVector<double> result = { std::vector<double>{resultVector.GetElement(0),
+	qbVector<double> result = {
+		std::vector<double>{resultVector.GetElement(0),
 		resultVector.GetElement(1),
-		resultVector.GetElement(2)}};
+		resultVector.GetElement(2)}
+		};
 	return (result);
 }
 
