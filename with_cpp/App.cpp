@@ -21,7 +21,6 @@ App::App()
 
 bool App::Oninit()
 {
-	print_scene();
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 		return false;
 	pWindow = SDL_CreateWindow("raytracer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);

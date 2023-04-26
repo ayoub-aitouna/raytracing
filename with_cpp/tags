@@ -74,7 +74,7 @@ Gtform	raytracer/gtfm.cpp	/^RT::Gtform::Gtform()$/;"	f	class:RT::Gtform
 Gtform	raytracer/gtfm.cpp	/^RT::Gtform::Gtform(const qbMatrix2<double> &fwd, const qbMatrix2<double> &bck)$/;"	f	class:RT::Gtform
 Gtform	raytracer/includes/gtfm.hpp	/^	class Gtform$/;"	c	namespace:RT
 IMAGE_H	raytracer/includes/image.hpp	/^#define IMAGE_H$/;"	d
-INCLUDES	Makefile	/^INCLUDES		:= $(shell brew --prefix)\/include$/;"	m
+INCLUDES	Makefile	/^INCLUDES		:= -I$(shell brew --prefix)\/include $/;"	m
 Image	raytracer/image.cpp	/^Image::Image()$/;"	f	class:Image
 Image	raytracer/includes/image.hpp	/^class Image$/;"	c
 InitTexture	raytracer/image.cpp	/^void Image::InitTexture()$/;"	f	class:Image
@@ -88,7 +88,7 @@ IsSquare	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::IsSquare()$/;"	f	class:qbMatri
 IsSymmetric	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::IsSymmetric()$/;"	f	class:qbMatrix2
 Join	qbLinAlg/qbMatrix.h	/^bool qbMatrix2<T>::Join (const qbMatrix2<T>& matrix2)$/;"	f	class:qbMatrix2
 LIB	Makefile	/^LIB				:= -lSDL2$/;"	m
-LIB_SDL	Makefile	/^LIB_SDL			:= $(shell brew --prefix sdl2)\/lib$/;"	m
+LIB_SDL	Makefile	/^LIB_SDL			:= -L$(shell brew --prefix sdl2)\/lib$/;"	m
 LIGHTBASE_H	raytracer/includes/lightbase.hpp	/^#define LIGHTBASE_H$/;"	d
 LightBase	raytracer/includes/lightbase.hpp	/^	class LightBase$/;"	c	namespace:RT
 LightBase	raytracer/lightbase.cpp	/^RT::LightBase::LightBase()$/;"	f	class:RT::LightBase
