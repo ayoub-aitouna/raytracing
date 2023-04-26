@@ -1,6 +1,6 @@
-#include "includes/objectbase.hpp"
-#include "includes/objsphere.hpp"
-#include "includes/ray.h"
+#include "../includes/objectbase.hpp"
+#include "../includes/objsphere.hpp"
+#include "../includes/ray.h"
 #include <cmath>
 #include <math.h>
 #include <sys/types.h>
@@ -52,6 +52,7 @@ bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> 
 		//if either t1 || t2 are negative , then at least part of the object is behind the camera and so we ignore it.
 		if(t1 < 0.0 || t2 < 0.0)
 			return false;
+
 		// Determine which point of interstaction was closest to the camera
 		if(t1 < t2)
 			poi = bckRay.m_point1 + (vhat * t1);

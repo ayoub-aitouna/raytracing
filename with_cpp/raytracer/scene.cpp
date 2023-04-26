@@ -1,54 +1,30 @@
 #include "includes/scene.hpp"
 #include "includes/camera.hpp"
 #include "includes/objectbase.hpp"
+#include "includes/objectplan.hpp"
 #include "includes/objsphere.hpp"
 #include "includes/pointlight.hpp"
 #include "includes/ray.h"
+#include <cstdio>
+#include <iostream>
+#include <iterator>
 #include <memory>
 #include <vector>
-
+#include "../parser/parcer.hpp"
 RT::Scene::Scene()
 {
-	m_camera.SetPosition(qbVector<double>{std::vector<double>{0, -10, 0}});
+	m_camera.SetPosition(qbVector<double>{std::vector<double>{0, -10, -1}});
 	m_camera.SetLookAt(qbVector<double>{std::vector<double>{0, 0, 0}});
 	m_camera.SetUp(qbVector<double>{std::vector<double>{0, 0, 0.1}});
 	m_camera.SetHorzSize(0.25);
 	m_camera.SetAspect(16.0 / 9.0);
 	m_camera.UpdateCameraGeometry();
-
-	//Cunstroct a test sphere
-	m_objectList.push_back(std::make_shared<RT::ObjSphere> (RT::ObjSphere()));
-	m_objectList.push_back(std::make_shared<RT::ObjSphere> (RT::ObjSphere()));
-	m_objectList.push_back(std::make_shared<RT::ObjSphere> (RT::ObjSphere()));
-
-	//Modify Shpeheres
-	RT::Gtform testMatrix1, testMatrix2, testMatrix3;
-	testMatrix1.SetTransform(qbVector<double> {std::vector<double>{-1.5, 0.0, 0.0}},
-			qbVector<double>{std::vector<double>{.0, .0, .0}},
-			qbVector<double>{std::vector<double>{.5,.5,.75}});
-
-	testMatrix2.SetTransform(qbVector<double> {std::vector<double>{0, 0.0, 0.0}},
-			qbVector<double>{std::vector<double>{.0, .0, .0}},
-			qbVector<double>{std::vector<double>{.75,.5,.5}});
-
-	testMatrix3.SetTransform(qbVector<double> {std::vector<double>{1.5, 0.0, 0.0}},
-			qbVector<double>{std::vector<double>{.0, .0, .0}},
-			qbVector<double>{std::vector<double>{.75,.75,.75}});
-
-	m_objectList.at(0)->SetTransformMatrix(testMatrix1);
-	m_objectList.at(1)->SetTransformMatrix(testMatrix2);
-	m_objectList.at(2)->SetTransformMatrix(testMatrix3);
-
-	m_objectList.at(0) -> m_baseColor = qbVector<double>{std::vector<double>{64.0,128,200}};
-	m_objectList.at(1) -> m_baseColor = qbVector<double>{std::vector<double>{255, 128, 0.0}};
-	m_objectList.at(2) -> m_baseColor = qbVector<double>{std::vector<double>{255.0,200,255}};
-
-	qbVector<double>{std::vector<double>{.5,.5,.75}};
-
-	//Cunstroct a teset Light
-	m_lightList.push_back(std::make_shared<RT::PointLight>(RT::PointLight()));
-	m_lightList.at(0)->m_location = qbVector<double>{std::vector<double>{5,-10, -10}};
-	m_lightList.at(0)->m_color = qbVector<double>{std::vector<double>{255.0,255.0,255.0,255.0}};
+	RT::parcer p;
+	RT::SceneInstance m_scene = p.parsemap(NULL);
+	for (auto obj : m_scene.getobjects())
+		m_objectList.push_back(obj);
+	for (auto light : m_scene.getLIghts())
+		m_lightList.push_back(light);
 }
 
 bool RT::Scene::Render(Image &image)
@@ -67,59 +43,87 @@ bool RT::Scene::Render(Image &image)
 	double yFact = 1.0 / (static_cast<double>(ySize) / 2.0);
 	double minDist = 1e6;
 	double maxDist = 0.0;
+
 	for (int x = 0; x < xSize; ++x)
 	{
+		int progress = (((float)(x) / (float)xSize) * 100) + 1;
+		if (progress < 100)
+			printf("\033[A\33[2K\r %d%%\n", progress);
+		else
+			printf("\033[A\33[2K\r DONE.\n");
 		for (int y = 0; y < ySize; ++y)
 		{
-			// normlize X and y coordinates
-			double normX = (static_cast<double>(x) * xFact) - 1.0;
-			double normY = (static_cast<double>(y) * yFact) - 1.0;
-			// generate the ray for this pixel.
+			qbVector<double> intPoint{3};
+			qbVector<double> localNormal{3};
+			qbVector<double> localColor{3};
+			std::shared_ptr<ObjectBase> closest_obj;
+			qbVector<double> closest_int{3};
+			qbVector<double> closest_color{3};
+			qbVector<double> closest_norm{3};
+
+			double normX = (static_cast<double>(x) * xFact) - 1;
+			double normY = (static_cast<double>(y) * yFact) - 1;
+			bool found_int = false;
+			double minDist = 1e6;
+
 			m_camera.GenerateRay(normX, normY, cameraRay);
 
-			// test for interstaction with all objects in the Scene
-			for (auto currentObject : m_objectList)
+			for (auto obj : m_objectList)
 			{
-				bool validInt = currentObject->TestIntersectioons(cameraRay, intPoint, localNormal, localColor);
-				// if we have valide intersection , change pixel to red
-				if (validInt)
-				{
-					//Comput the intensity of illumination
-					double intensity;
-					qbVector<double> color {3};
-					bool valideIlum = false;
-					for(auto currentlight : m_lightList)
-					{
-						valideIlum = currentlight->ComputeIllumination(intPoint, localNormal, m_objectList, currentObject, color, intensity);
-					}
-					// Comput the distance between camera ana point of interstaction
-					double dist = (intPoint - cameraRay.m_point1).norm();
-					if(dist > maxDist)
-						maxDist = dist;
-					if(dist < minDist)
-						minDist = dist;
+				bool valid_int = obj->TestIntersectioons(cameraRay, intPoint, localNormal, localColor);
 
-					//image.SetPixel(x, y, 255.0 - ((dist - 9.0) / 0.94605) * 255.0, 0.0, 0.0);
-					if(valideIlum)
-					{
-						image.SetPixel(x,y,localColor.GetElement(0) * intensity,
-								localColor.GetElement(1) * intensity,
-								localColor.GetElement(2) * intensity);
-						//image.SetPixel(x,y,255.0 * intensity,0.0,0.0);
-					}
-					//else
-					//	image.SetPixel(x,y,0,0,0);
-				}
-				else
+				if (valid_int)
 				{
-					//leave pixel unchanged
-					//image.SetPixel(x, y, 0.0, 0.0, 0.0);
+					found_int = true;
+					double dist = (intPoint - cameraRay.m_point1).norm();
+
+					if (dist < minDist)
+					{
+						minDist = dist;
+						closest_obj = obj;
+						closest_int = intPoint;
+						closest_color = localColor;
+						closest_norm = localNormal;
+					}
+				}
+			}
+			// calculat the illumination
+			if (found_int)
+			{
+				double red = 0, blue = 0, green = 0;
+
+				bool validIIlumination = false;
+				bool illuminationFound = false;
+				double Intisity;
+
+				qbVector<double> color{3};
+
+				for (auto curr_light : m_lightList)
+				{
+
+					validIIlumination = curr_light->ComputeIllumination(closest_int, closest_norm,
+																		m_objectList, closest_obj, color, Intisity);
+
+					if (validIIlumination)
+					{
+						illuminationFound = true;
+						red += color.GetElement(0) * Intisity;
+						green += color.GetElement(1) * Intisity;
+						blue += color.GetElement(2) * Intisity;
+						// RT::Gtform::PrintVector(color);
+					}
+				}
+
+				if (illuminationFound)
+				{
+					red *= closest_color.GetElement(0);
+					green *= closest_color.GetElement(1);
+					blue *= closest_color.GetElement(2);
+
+					image.SetPixel(x, y, red, green, blue);
 				}
 			}
 		}
 	}
-	std::cout << "Minimum distanst : " << minDist<<std::endl;
-	std::cout << "Maximum distanst : " << maxDist<<std::endl;
-
 	return true;
 }

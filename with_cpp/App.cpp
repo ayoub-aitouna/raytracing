@@ -1,6 +1,7 @@
 #include "includes/App.h"
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_scancode.h>
 #include <SDL2/SDL_video.h>
 #include <cstdio>
 #include <iomanip>
@@ -9,6 +10,7 @@
 #include <iterator>
 #include <vector>
 #include "./qbLinAlg/qbVector.h"
+#include "./parser/parse.h"
 
 App::App()
 {
@@ -19,6 +21,7 @@ App::App()
 
 bool App::Oninit()
 {
+	print_scene();
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 		return false;
 	pWindow = SDL_CreateWindow("raytracer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
@@ -54,7 +57,7 @@ int App::OnExecute()
 
 void App::OnEvent(SDL_Event *event)
 {
-	if(event->type == SDL_QUIT)
+	if(event->type == SDL_QUIT || event->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 		isRunning = false;
 }
 

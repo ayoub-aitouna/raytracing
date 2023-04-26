@@ -23,6 +23,7 @@ class Image
 	private:
 		Uint32 ConvertColor(const double red, const double green , const double blue);
 		void InitTexture();
+		void ComputeMaxValues();
 
 	private:
 		//Arrays to store image
@@ -37,6 +38,7 @@ class Image
 		//SDL2 Stuff.
 		SDL_Renderer *m_pRenderer;
 		SDL_Texture *m_pTexture;
+		double m_max_red, m_max_green, m_max_blue, m_overall_max;
 };
 
 #endif

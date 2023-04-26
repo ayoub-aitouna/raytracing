@@ -67,6 +67,8 @@ int Image::GetYSize()
 
 void Image::Display()
 {
+	// Comput the maxumam values
+	ComputeMaxValues();
 	// Allocato memory for a pixeel buffer.
 	Uint32 *tempPixels = new Uint32[m_xSize * m_ySize];
 	//clear the pixel buffer;
@@ -84,7 +86,7 @@ void Image::Display()
 	delete [] tempPixels;
 
 	// Copy the texture to the renderre
-	
+
 	SDL_Rect srcRect, bounds;
 	srcRect.x = 0;
 	srcRect.y = 0;
@@ -98,18 +100,18 @@ void Image::Display()
 void Image::InitTexture()
 {
 	Uint32 rmask, gmask, bmask, amask;
-	
-	#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-    rmask = 0xff000000;
-    gmask = 0x00ff0000;
-    bmask = 0x0000ff00;
-    amask = 0x000000ff;
-	#else
-    rmask = 0x000000ff;
-    gmask = 0x0000ff00;
-    bmask = 0x00ff0000;
-    amask = 0xff000000;
-	#endif
+
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+	rmask = 0xff000000;
+	gmask = 0x00ff0000;
+	bmask = 0x0000ff00;
+	amask = 0x000000ff;
+#else
+	rmask = 0x000000ff;
+	gmask = 0x0000ff00;
+	bmask = 0x00ff0000;
+	amask = 0xff000000;
+#endif
 	if(m_pTexture)
 		SDL_DestroyTexture(m_pTexture);
 	SDL_Surface *tempSurface = SDL_CreateRGBSurface(0, m_xSize, m_ySize, 32, rmask, gmask, bmask, amask);
@@ -119,16 +121,48 @@ void Image::InitTexture()
 
 Uint32 Image::ConvertColor(const double red, const double green , const double blue)
 {
-	
-	unsigned char r = static_cast<unsigned char>(red);
-	unsigned char g = static_cast<unsigned char>(green);
-	unsigned char b = static_cast<unsigned char>(blue);
 
-	#if SDL_BYTEORDER == SDL_BIG_ENDIAN
-		Uint32 pixelColor = (b << 24) + (g << 16) + (r << 8) + 255;
-	#else
-		Uint32 pixelColor = (255 << 24) + (b << 16) + (g << 8) + r;
-	#endif
-	
+	unsigned char r = static_cast<unsigned char>((red / m_overall_max ) * 255);
+	unsigned char g = static_cast<unsigned char>((green / m_overall_max) * 255);
+	unsigned char b = static_cast<unsigned char>((blue / m_overall_max) * 255);
+
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+	Uint32 pixelColor = (b << 24) + (g << 16) + (r << 8) + 255;
+#else
+	Uint32 pixelColor = (255 << 24) + (b << 16) + (g << 8) + r;
+#endif
+
 	return pixelColor;
+}
+
+void Image::ComputeMaxValues()
+{
+	m_max_red = 0.0;
+	m_max_green = 0.0;
+	m_max_blue = 0.0;
+	m_overall_max = 0.0;
+	for(int x = 0; x < m_xSize; x++)
+	{
+
+		for(int y = 0; y < m_ySize; y++)
+		{
+			double redValue = m_rChannel.at(x).at(y);
+			double greenValue = m_gChannel.at(x).at(y);
+			double blueValue = m_bChannel.at(x).at(y);
+
+			if(redValue > m_max_red)
+				m_max_red = redValue;
+			if(blueValue > m_max_blue)
+				m_max_blue = blueValue;
+			if(greenValue > m_max_green)
+				m_max_green = greenValue;
+
+			if(m_max_red > m_overall_max)
+				m_overall_max = m_max_red;
+			if(m_max_green > m_overall_max)
+				m_overall_max = m_max_green;
+			if(m_max_blue > m_overall_max)
+				m_overall_max = m_max_blue;
+		}
+	}
 }

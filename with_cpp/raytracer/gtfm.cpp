@@ -1,5 +1,6 @@
 #include "includes/gtfm.hpp"
 #include <cmath>
+#include <cstdio>
 #include <iomanip>
 #include <ios>
 #include <iterator>
@@ -184,6 +185,7 @@ void RT::Gtform::PrintVector(const qbVector<double> &vector)
 	int nRows = vector.GetNumDims();
 	int i = 0;
 	while (i < nRows)
-		std::cout << std::fixed << std::setprecision(3) << vector.GetElement(i++);
+		std::cout << " " << std::fixed << std::setprecision(3) << vector.GetElement(i++);
+	printf("\n");
 }
 
