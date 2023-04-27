@@ -13,22 +13,24 @@ Math_lib		:=	qbLinAlg
 all: $(NAME)
 
 $(Math_lib) :
-	@git clone https://github.com/QuantitativeBytes/qbLinAlg.git
+	@ git clone https://github.com/QuantitativeBytes/qbLinAlg.git
 
 $(OBJ_DIR)/%.o : %.cpp
 	@ echo "compiling cpp file $< ..."
 	@ mkdir -p $(dir $@)
-	${CC} $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@ ${CC} $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME) : $(Math_lib) $(OBJECTS_FILES)
 	@echo "Creating $@"
-	$(CC) $(CFLAGS) $(OBJECTS_FILES) -o $@  ${LIB} 
+	@$(CC) $(CFLAGS) $(OBJECTS_FILES) -o $@  ${LIB} 
 
 clean :
-	@rm -rf $(OBJECTS_FILES)
+	@ echo "deleting object OBJECTS_FILES"
+	@ rm -rf $(OBJ_DIR)/*
 
 fclean : clean
-	@rm -rf $(NAME)
+	@ echo "deleting $(NAME)"
+	@ rm -rf $(NAME)
 
 re: fclean all
 
