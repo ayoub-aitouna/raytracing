@@ -58,6 +58,7 @@ bool RT::Scene::Render(Image &image)
 			qbVector<double> closestIntPoint{3};
 			qbVector<double> closestLocalNormal{3};
 			qbVector<double> closestLocalColor{3};
+			qbVector<double> color;
 			double normX = (static_cast<double>(x) * xFact) - 1;
 			double normY = (static_cast<double>(y) * yFact) - 1;
 
@@ -66,30 +67,15 @@ bool RT::Scene::Render(Image &image)
 			// calculat the illumination
 			if (found_int)
 			{
-				double red = 0, blue = 0, green = 0;
-				bool validIIlumination = false;
-				bool illuminationFound = false;
-				double Intisity;
-				qbVector<double> color{3};
-				for (auto curr_light : m_lightList)
-				{
-					validIIlumination = curr_light->ComputeIllumination(closestIntPoint, closestLocalNormal,
-																		m_objectList, closest_obj, color, Intisity);
-					if (validIIlumination)
-					{
-						illuminationFound = true;
-						red += color.GetElement(0) * Intisity;
-						green += color.GetElement(1) * Intisity;
-						blue += color.GetElement(2) * Intisity;
-					}
-				}
-				if (illuminationFound)
-				{
-					red *= closestLocalColor.GetElement(0);
-					green *= closestLocalColor.GetElement(1);
-					blue *= closestLocalColor.GetElement(2);
-					image.SetPixel(x, y, red, green, blue);
-				}
+				// check if object has material
+				if (closest_obj->has_material)
+					// use material to compute the color
+					color = closest_obj->m_pmaterial->ComputeColor(m_objectList, m_lightList,
+							closest_obj, closestIntPoint, closestLocalNormal, cameraRay);
+				else
+					color = RT::MaterialBase::ComputeDiffuseColoe(m_objectList, m_lightList,
+							closest_obj, closestIntPoint, closestLocalNormal, closest_obj->m_baseColor);
+				image.SetPixel(x, y,color.GetElement(0), color.GetElement(1), color.GetElement(2));
 			}
 		}
 	}
@@ -97,8 +83,8 @@ bool RT::Scene::Render(Image &image)
 }
 
 bool RT::Scene::castRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_obj,
-						qbVector<double> &closest_int, qbVector<double> &closest_norm,
-						qbVector<double> &closest_color)
+		qbVector<double> &closest_int, qbVector<double> &closest_norm,
+		qbVector<double> &closest_color)
 {
 	qbVector<double> intPoint{3};
 	qbVector<double> localNormal{3};
@@ -126,3 +112,32 @@ bool RT::Scene::castRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_
 	}
 	return (found_int);
 }
+/*
+void defuseIntensity()
+{
+	double red = 0, blue = 0, green = 0;
+	bool validIIlumination = false;
+	bool illuminationFound = false;
+	double Intisity;
+	qbVector<double> color{3};
+	for (auto curr_light : m_lightList)
+	{
+		validIIlumination = curr_light->ComputeIllumination(closestIntPoint, closestLocalNormal,
+				m_objectList, closest_obj, color, Intisity);
+		if (validIIlumination)
+		{
+			illuminationFound = true;
+			red += color.GetElement(0) * Intisity;
+			green += color.GetElement(1) * Intisity;
+			blue += color.GetElement(2) * Intisity;
+		}
+	}
+	if (illuminationFound)
+	{
+		red *= closestLocalColor.GetElement(0);
+		green *= closestLocalColor.GetElement(1);
+		blue *= closestLocalColor.GetElement(2);
+		image.SetPixel(x, y, red, green, blue);
+	}
+}
+*/

@@ -1,7 +1,10 @@
 #include "parcer.hpp"
 #include "parse.h"
 #include <cstring>
+#include <memory>
+#include <tuple>
 #include <vector>
+#include "../raytracer/Materials/headers/SimpleMaterial.hpp"
 
 char *str_append(char *str, char c)
 {
@@ -71,6 +74,11 @@ RT::SceneInstance RT::parcer::parsemap(char **map)
 	int fd = open("scene.rt", O_RDONLY);
 	SceneInstance m_scene_instance;
 	RT::Gtform tm;
+	auto testMaterial = std::make_shared<RT::SimpleMaterial>(RT::SimpleMaterial());
+	testMaterial->m_baseColor = qbVector<double>{std::vector<double>{0.25, 0.5, 0.8}};
+	testMaterial->m_reflectivity = 0.5;
+	testMaterial->m_shininess = 10.0;
+	int f = 1;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -88,10 +96,17 @@ RT::SceneInstance RT::parcer::parsemap(char **map)
 			if (strcmp(name, "pl") == 0)
 				m_scene_instance.addObject(std::make_shared<ObjectPlan>(RT::ObjectPlan()));
 			tm.SetTransform(qbVector<double>{std::vector<double>{pos->x, pos->y, pos->z}},
-							qbVector<double>{std::vector<double>{.0, .0, .0}},
-							qbVector<double>{std::vector<double>{st->x, st->y, st->z}});
+					qbVector<double>{std::vector<double>{.0, .0, .0}},
+					qbVector<double>{std::vector<double>{st->x, st->y, st->z}});
 			m_scene_instance.getobjects().at(o_index)->SetTransformMatrix(tm);
-			m_scene_instance.getobjects().at(o_index++)->m_baseColor = qbVector<double>{std::vector<double>{color->x, color->y, color->z}};
+			m_scene_instance.getobjects().at(o_index)->m_baseColor = qbVector<double>{std::vector<double>{color->x, color->y, color->z}};
+			if(strcmp(name, "sp") == 0 && f == 1)
+			{
+				f = 0;
+				m_scene_instance.getobjects().at(o_index)->AssingMAterial(testMaterial);
+				printf("set material %d\n\n", o_index);
+			}
+			o_index++;
 		}
 		else if (strcmp(name, "L") == 0)
 		{

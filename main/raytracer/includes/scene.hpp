@@ -8,6 +8,7 @@
 #include "camera.hpp"
 #include "../Lights/headers/lightbase.hpp"
 #include "../Objects/headers/objectbase.hpp"
+#include "../Materials/headers/MaterialBase.hpp"
 #include "../Objects/headers/objsphere.hpp"
 #include "../Objects/headers/objectplan.hpp"
 #include "../Lights/headers/pointlight.hpp"

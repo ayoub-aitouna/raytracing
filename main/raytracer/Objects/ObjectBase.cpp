@@ -26,7 +26,7 @@ bool RT::ObjectBase::AssingMAterial(const std::shared_ptr<RT::MaterialBase> &obj
 {
 	m_pmaterial = objMaterial;
 	has_material = true;
-	return (false);
+	return (has_material);
 }
 bool RT::ObjectBase::CloseEnough(const double f1, const double f2)
 {

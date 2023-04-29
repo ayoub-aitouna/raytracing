@@ -34,4 +34,5 @@ namespace RT {
 			bool has_material = false;
 	};
 }
+
 #endif
