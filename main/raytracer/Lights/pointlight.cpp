@@ -1,5 +1,5 @@
-#include "includes/pointlight.hpp"
-#include "includes/ray.h"
+#include "headers/pointlight.hpp"
+#include "../includes/ray.h"
 #include <vector>
 
 RT::PointLight::PointLight()

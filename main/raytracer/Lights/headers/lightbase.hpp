@@ -2,9 +2,9 @@
 #define LIGHTBASE_H
 #include <memory>
 #include <vector>
-#include "../../qbLinAlg/qbVector.h"
-#include "ray.h"
-#include "objectbase.hpp"
+#include "../../../qbLinAlg/qbVector.h"
+#include "../../includes/ray.h"
+#include "../../Objects/headers/objectbase.hpp"
 namespace RT 
 {
 	class LightBase

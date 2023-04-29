@@ -6,11 +6,11 @@
 #include <SDL2/SDL.h>
 #include "image.hpp"
 #include "camera.hpp"
-#include "lightbase.hpp"
-#include "objectbase.hpp"
-#include "objsphere.hpp"
-#include "objectplan.hpp"
-#include "pointlight.hpp"
+#include "../Lights/headers/lightbase.hpp"
+#include "../Objects/headers/objectbase.hpp"
+#include "../Objects/headers/objsphere.hpp"
+#include "../Objects/headers/objectplan.hpp"
+#include "../Lights/headers/pointlight.hpp"
 #include "../../qbLinAlg/qbVector.h"
 
 namespace RT {
@@ -19,7 +19,7 @@ namespace RT {
 		public:
 			Scene();
 			bool Render(Image &image);
-			bool castRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> closest_obj,
+			bool castRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_obj,
 					qbVector<double> &closest_int, qbVector<double> &closest_norm,
 					qbVector<double> &closest_color);
 			//Private function

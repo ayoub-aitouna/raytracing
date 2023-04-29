@@ -4,11 +4,11 @@
 #include <vector>
 #include <memory>
 #include <vector>
-#include "../raytracer/includes/objectbase.hpp"
-#include "../raytracer/includes/objsphere.hpp"
-#include "../raytracer/includes/objectplan.hpp"
-#include "../raytracer/includes/lightbase.hpp"
-#include "../raytracer/includes/pointlight.hpp"
+#include "../raytracer/Objects/headers/objectbase.hpp"
+#include "../raytracer/Objects/headers/objsphere.hpp"
+#include "../raytracer/Objects/headers/objectplan.hpp"
+#include "../raytracer/Lights/headers/lightbase.hpp"
+#include "../raytracer/Lights/headers/pointlight.hpp"
 #include "../raytracer/includes/camera.hpp"
 
 namespace RT {

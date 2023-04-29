@@ -1,5 +1,5 @@
-#include "../includes/objectbase.hpp"
-#include "../includes/objsphere.hpp"
+#include "headers/objectbase.hpp"
+#include "headers/objsphere.hpp"
 #include "../includes/ray.h"
 #include <cmath>
 #include <math.h>

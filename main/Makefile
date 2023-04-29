@@ -3,7 +3,7 @@ LIB				:= -lSDL2
 OBJ_DIR			:= OBJECT_FILES
 CFLAGS			:= -std=c++17 -Ofast -g
 CC				:= g++
-SRC_FILES		:= $(wildcard *.cpp) $(wildcard **/*.cpp) $(wildcard **/*.c) $(wildcard raytracer/objects/*.cpp) 
+SRC_FILES		:= $(wildcard *.cpp) $(wildcard **/*.cpp) $(wildcard **/*.c) $(wildcard raytracer/*/*.cpp) 
 OBJECTS_FILES	:= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 # LIB_SDL			:= -L$(shell brew --prefix sdl2)/lib
 # INCLUDES		:= -I$(shell brew --prefix)/include 

@@ -1,9 +1,9 @@
 #include "includes/scene.hpp"
 #include "includes/camera.hpp"
-#include "includes/objectbase.hpp"
-#include "includes/objectplan.hpp"
-#include "includes/objsphere.hpp"
-#include "includes/pointlight.hpp"
+#include "Objects/headers/objectbase.hpp"
+#include "Objects/headers/objectplan.hpp"
+#include "Objects/headers/objsphere.hpp"
+#include "Lights/headers/pointlight.hpp"
 #include "includes/ray.h"
 #include <cstdio>
 #include <iostream>
@@ -11,6 +11,7 @@
 #include <memory>
 #include <vector>
 #include "../parser/parcer.hpp"
+
 RT::Scene::Scene()
 {
 	m_camera.SetPosition(qbVector<double>{std::vector<double>{0, -10, -1}});
@@ -53,77 +54,75 @@ bool RT::Scene::Render(Image &image)
 			printf("\033[A\33[2K\r DONE.\n");
 		for (int y = 0; y < ySize; ++y)
 		{
-			qbVector<double> intPoint{3};
-			qbVector<double> localNormal{3};
-			qbVector<double> localColor{3};
 			std::shared_ptr<ObjectBase> closest_obj;
-			qbVector<double> closest_int{3};
-			qbVector<double> closest_color{3};
-			qbVector<double> closest_norm{3};
-
+			qbVector<double> closestIntPoint{3};
+			qbVector<double> closestLocalNormal{3};
+			qbVector<double> closestLocalColor{3};
 			double normX = (static_cast<double>(x) * xFact) - 1;
 			double normY = (static_cast<double>(y) * yFact) - 1;
-			bool found_int = false;
-			double minDist = 1e6;
 
 			m_camera.GenerateRay(normX, normY, cameraRay);
-
-			for (auto obj : m_objectList)
-			{
-				bool valid_int = obj->TestIntersectioons(cameraRay, intPoint, localNormal, localColor);
-
-				if (valid_int)
-				{
-					found_int = true;
-					double dist = (intPoint - cameraRay.m_point1).norm();
-
-					if (dist < minDist)
-					{
-						minDist = dist;
-						closest_obj = obj;
-						closest_int = intPoint;
-						closest_color = localColor;
-						closest_norm = localNormal;
-					}
-				}
-			}
+			bool found_int = castRay(cameraRay, closest_obj, closestIntPoint, closestLocalNormal, closestLocalColor);
 			// calculat the illumination
 			if (found_int)
 			{
 				double red = 0, blue = 0, green = 0;
-
 				bool validIIlumination = false;
 				bool illuminationFound = false;
 				double Intisity;
-
 				qbVector<double> color{3};
-
 				for (auto curr_light : m_lightList)
 				{
-
-					validIIlumination = curr_light->ComputeIllumination(closest_int, closest_norm,
+					validIIlumination = curr_light->ComputeIllumination(closestIntPoint, closestLocalNormal,
 																		m_objectList, closest_obj, color, Intisity);
-
 					if (validIIlumination)
 					{
 						illuminationFound = true;
 						red += color.GetElement(0) * Intisity;
 						green += color.GetElement(1) * Intisity;
 						blue += color.GetElement(2) * Intisity;
-						// RT::Gtform::PrintVector(color);
 					}
 				}
-
 				if (illuminationFound)
 				{
-					red *= closest_color.GetElement(0);
-					green *= closest_color.GetElement(1);
-					blue *= closest_color.GetElement(2);
-
+					red *= closestLocalColor.GetElement(0);
+					green *= closestLocalColor.GetElement(1);
+					blue *= closestLocalColor.GetElement(2);
 					image.SetPixel(x, y, red, green, blue);
 				}
 			}
 		}
 	}
 	return true;
+}
+
+bool RT::Scene::castRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_obj,
+						qbVector<double> &closest_int, qbVector<double> &closest_norm,
+						qbVector<double> &closest_color)
+{
+	qbVector<double> intPoint{3};
+	qbVector<double> localNormal{3};
+	qbVector<double> localColor{3};
+	bool found_int = false;
+	double minDist = 1e6;
+
+	for (auto obj : m_objectList)
+	{
+		bool valid_int = obj->TestIntersectioons(cats_ray, intPoint, localNormal, localColor);
+		if (valid_int)
+		{
+			found_int = true;
+			double dist = (intPoint - cats_ray.m_point1).norm();
+
+			if (dist < minDist)
+			{
+				minDist = dist;
+				closest_obj = obj;
+				closest_int = intPoint;
+				closest_color = localColor;
+				closest_norm = localNormal;
+			}
+		}
+	}
+	return (found_int);
 }

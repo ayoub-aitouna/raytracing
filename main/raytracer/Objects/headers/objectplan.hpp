@@ -1,9 +1,6 @@
 #ifndef PLAN_H
 # define PLAN_H
 #include "objectbase.hpp"
-#include "gtfm.hpp"
-#include "ray.h"
-#include <cmath>
 
 namespace RT {
 	class ObjectPlan : public RT::ObjectBase

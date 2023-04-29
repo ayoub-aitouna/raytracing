@@ -1,11 +1,7 @@
 #ifndef OBJSPHERE_H
 #define OBJSPHERE_H
 
-#include <math.h>
-#include "../../qbLinAlg/qbVector.h"
 #include "objectbase.hpp"
-#include "ray.h"
-#include "gtfm.hpp"
 
 namespace RT {
 class ObjSphere : public ObjectBase
