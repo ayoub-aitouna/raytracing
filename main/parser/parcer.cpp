@@ -29,23 +29,24 @@ post_t *getposition(char *line, int *index)
 	post_t *position = (post_t *)malloc(sizeof(post_t));
 
 	int i = 0;
-	char **positions = NULL;
+	float positions[3];
 	char *cur_pos = NULL;
+	int p_i = 0;
 	while (line[i] && line[i] == ' ')
 		i++;
 	while (line[i] && line[i] != ' ')
 	{
 		while (line[i] && line[i] != ' ' && line[i] != ',')
 			cur_pos = str_append(cur_pos, line[i++]);
-		positions = Append(positions, cur_pos);
+		positions[p_i++] = atof(cur_pos);
 		if (line[i] == ',')
 			i++;
 		free(cur_pos);
 		cur_pos = NULL;
 	}
-	position->x = atof(positions[0]);
-	position->y = atof(positions[1]);
-	position->z = atof(positions[2]);
+	position->x = positions[0];
+	position->y = positions[1];
+	position->z = positions[2];
 	*index += (i);
 	return (position);
 }
@@ -74,11 +75,6 @@ RT::SceneInstance RT::parcer::parsemap(char **map)
 	int fd = open("scene.rt", O_RDONLY);
 	SceneInstance m_scene_instance;
 	RT::Gtform tm;
-	auto testMaterial = std::make_shared<RT::SimpleMaterial>(RT::SimpleMaterial());
-	testMaterial->m_baseColor = qbVector<double>{std::vector<double>{0.25, 0.5, 0.8}};
-	testMaterial->m_reflectivity = 0.5;
-	testMaterial->m_shininess = 10.0;
-	int f = 1;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -100,12 +96,6 @@ RT::SceneInstance RT::parcer::parsemap(char **map)
 					qbVector<double>{std::vector<double>{st->x, st->y, st->z}});
 			m_scene_instance.getobjects().at(o_index)->SetTransformMatrix(tm);
 			m_scene_instance.getobjects().at(o_index)->m_baseColor = qbVector<double>{std::vector<double>{color->x, color->y, color->z}};
-			if(strcmp(name, "sp") == 0 && f == 1)
-			{
-				f = 0;
-				m_scene_instance.getobjects().at(o_index)->AssingMAterial(testMaterial);
-				printf("set material %d\n\n", o_index);
-			}
 			o_index++;
 		}
 		else if (strcmp(name, "L") == 0)

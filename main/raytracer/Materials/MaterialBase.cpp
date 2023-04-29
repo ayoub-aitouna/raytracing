@@ -37,7 +37,6 @@ qbVector<double> RT::MaterialBase::ComputeDiffuseColoe(const std::vector<std::sh
 
 	for(auto curLight : lightList)
 	{
-
 		validIllum = curLight->ComputeIllumination(intPoint, localNormal, objectList, currentObject, color, intensity);
 		if(validIllum)
 		{

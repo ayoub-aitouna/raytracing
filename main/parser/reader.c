@@ -23,7 +23,6 @@ char **Append(char **dst, char *str)
         return dst;
     len = l_size(dst);
     result = (char **)malloc((len + 2) * sizeof(char *));
-
     while (dst && dst[i])
     {
         result[i] = dst[i];

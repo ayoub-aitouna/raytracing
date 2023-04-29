@@ -5,11 +5,10 @@ CFLAGS			:= -std=c++17 -Ofast -g
 CC				:= g++
 SRC_FILES		:= $(wildcard *.cpp) $(wildcard **/*.cpp) $(wildcard **/*.c) $(wildcard raytracer/*/*.cpp) 
 OBJECTS_FILES	:= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
-# LIB_SDL			:= -L$(shell brew --prefix sdl2)/lib
-# INCLUDES		:= -I$(shell brew --prefix)/include 
+LIB_SDL			:= -L$(shell brew --prefix sdl2)/lib 
+INCLUDES		:= -I$(shell brew --prefix)/include 
 Math_lib		:=	qbLinAlg 
 	
-
 all: $(NAME)
 
 $(Math_lib) :
@@ -22,7 +21,7 @@ $(OBJ_DIR)/%.o : %.cpp
 
 $(NAME) : $(Math_lib) $(OBJECTS_FILES)
 	@echo "Creating $@"
-	@$(CC) $(CFLAGS) $(OBJECTS_FILES) -o $@  ${LIB} 
+	@$(CC) $(CFLAGS) $(OBJECTS_FILES) $(LIB_SDL) $(INCLUDES) -o $@  ${LIB} 
 
 clean :
 	@ echo "deleting object OBJECTS_FILES"

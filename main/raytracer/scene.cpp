@@ -3,6 +3,7 @@
 #include "Objects/headers/objectbase.hpp"
 #include "Objects/headers/objectplan.hpp"
 #include "Objects/headers/objsphere.hpp"
+#include "Materials/headers/SimpleMaterial.hpp"
 #include "Lights/headers/pointlight.hpp"
 #include "includes/ray.h"
 #include <cstdio>
@@ -20,14 +21,22 @@ RT::Scene::Scene()
 	m_camera.SetHorzSize(0.25);
 	m_camera.SetAspect(16.0 / 9.0);
 	m_camera.UpdateCameraGeometry();
+	auto testMaterial = std::make_shared<RT::SimpleMaterial>(RT::SimpleMaterial());
+	testMaterial->m_baseColor = qbVector<double>{std::vector<double>{0.25, 0.5, 0.8}};
+	testMaterial->m_reflectivity = 0.5;
+	testMaterial->m_shininess = 10.0;
+
 	RT::parcer p;
 	RT::SceneInstance m_scene = p.parsemap(NULL);
 	for (auto obj : m_scene.getobjects())
 		m_objectList.push_back(obj);
 	for (auto light : m_scene.getLIghts())
 		m_lightList.push_back(light);
-}
+	m_objectList.at(0) -> AssingMAterial(testMaterial);
+	m_objectList.at(1) -> AssingMAterial(testMaterial);
+	m_objectList.at(2) -> AssingMAterial(testMaterial);
 
+}
 bool RT::Scene::Render(Image &image)
 {
 	// configure the camera
@@ -69,13 +78,18 @@ bool RT::Scene::Render(Image &image)
 			{
 				// check if object has material
 				if (closest_obj->has_material)
+				{
 					// use material to compute the color
-					color = closest_obj->m_pmaterial->ComputeColor(m_objectList, m_lightList,
+					qbVector<double> color = closest_obj->m_pmaterial->ComputeColor(m_objectList, m_lightList,
 							closest_obj, closestIntPoint, closestLocalNormal, cameraRay);
+					image.SetPixel(x, y,color.GetElement(0), color.GetElement(1), color.GetElement(2));
+				}
 				else
-					color = RT::MaterialBase::ComputeDiffuseColoe(m_objectList, m_lightList,
+				{
+					qbVector<double> diffuseColor = RT::MaterialBase::ComputeDiffuseColoe(m_objectList, m_lightList,
 							closest_obj, closestIntPoint, closestLocalNormal, closest_obj->m_baseColor);
-				image.SetPixel(x, y,color.GetElement(0), color.GetElement(1), color.GetElement(2));
+					image.SetPixel(x, y,diffuseColor.GetElement(0), diffuseColor.GetElement(1), diffuseColor.GetElement(2));
+				}
 			}
 		}
 	}
@@ -112,32 +126,4 @@ bool RT::Scene::castRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_
 	}
 	return (found_int);
 }
-/*
-void defuseIntensity()
-{
-	double red = 0, blue = 0, green = 0;
-	bool validIIlumination = false;
-	bool illuminationFound = false;
-	double Intisity;
-	qbVector<double> color{3};
-	for (auto curr_light : m_lightList)
-	{
-		validIIlumination = curr_light->ComputeIllumination(closestIntPoint, closestLocalNormal,
-				m_objectList, closest_obj, color, Intisity);
-		if (validIIlumination)
-		{
-			illuminationFound = true;
-			red += color.GetElement(0) * Intisity;
-			green += color.GetElement(1) * Intisity;
-			blue += color.GetElement(2) * Intisity;
-		}
-	}
-	if (illuminationFound)
-	{
-		red *= closestLocalColor.GetElement(0);
-		green *= closestLocalColor.GetElement(1);
-		blue *= closestLocalColor.GetElement(2);
-		image.SetPixel(x, y, red, green, blue);
-	}
-}
-*/
+
