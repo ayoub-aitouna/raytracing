@@ -33,6 +33,7 @@ ComputeEigenvectors	main/qbLinAlg/qbPCA.h	/^int ComputeEigenvectors(const qbMatr
 ComputeIllumination	main/raytracer/Lights/lightbase.cpp	/^bool RT::LightBase::ComputeIllumination(const qbVector<double> &intPoint, const qbVector<double> &localNormal, const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList, const std::shared_ptr<RT::ObjectBase> &currentObject, qbVector<double> &Color, double &intensity)$/;"	f	class:RT::LightBase
 ComputeIllumination	main/raytracer/Lights/pointlight.cpp	/^bool RT::PointLight::ComputeIllumination(const qbVector<double> &intPoint, const qbVector<double> &localNormal, const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList, const std::shared_ptr<RT::ObjectBase> &currentObject, qbVector<double> &Color, double &intensity)$/;"	f	class:RT::PointLight
 ComputeMaxValues	main/raytracer/image.cpp	/^void Image::ComputeMaxValues()$/;"	f	class:Image
+ComputeReflectionColor	main/raytracer/Materials/MaterialBase.cpp	/^qbVector<double> RT::MaterialBase::ComputeReflectionColor(const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,$/;"	f	class:RT::MaterialBase
 ComputeSpectular	main/raytracer/Materials/SimpleMaterial.cpp	/^qbVector<double> RT::SimpleMaterial::ComputeSpectular(const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,$/;"	f	class:RT::SimpleMaterial
 ConvertColor	main/raytracer/image.cpp	/^Uint32 Image::ConvertColor(const double red, const double green , const double blue)$/;"	f	class:Image
 Determinant	main/qbLinAlg/qbMatrix.h	/^T qbMatrix2<T>::Determinant()$/;"	f	class:qbMatrix2
@@ -246,6 +247,7 @@ UpdateCameraGeometry	main/raytracer/camera.cpp	/^void RT::Camera::UpdateCameraGe
 addLight	main/parser/scene_instance.cpp	/^void RT::SceneInstance::addLight(std::shared_ptr<RT::LightBase> light)$/;"	f	class:RT::SceneInstance
 addObject	main/parser/scene_instance.cpp	/^void RT::SceneInstance::addObject(std::shared_ptr<RT::ObjectBase> object)$/;"	f	class:RT::SceneInstance
 app_h	main/includes/App.h	/^#define app_h$/;"	d
+castRay	main/raytracer/Materials/MaterialBase.cpp	/^bool RT::MaterialBase::castRay(const RT::Ray &castRay, const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,$/;"	f	class:RT::MaterialBase
 castRay	main/raytracer/scene.cpp	/^bool RT::Scene::castRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_obj,$/;"	f	class:RT::Scene
 cc	c/Makefile	/^cc		:= gcc$/;"	m
 cofactorDeterminant	main/qbLinAlg/qbMatrix33.hpp	/^T qbMatrix33<T>::cofactorDeterminant(T e1, T e2, T e3, T e4)$/;"	f	class:qbMatrix33
@@ -293,6 +295,7 @@ m_matrixData	main/qbLinAlg/qbMatrix44.hpp	/^		T m_matrixData[16];$/;"	m	class:qb
 m_max_blue	main/raytracer/includes/image.hpp	/^		double m_max_red, m_max_green, m_max_blue, m_overall_max;$/;"	m	class:Image
 m_max_green	main/raytracer/includes/image.hpp	/^		double m_max_red, m_max_green, m_max_blue, m_overall_max;$/;"	m	class:Image
 m_max_red	main/raytracer/includes/image.hpp	/^		double m_max_red, m_max_green, m_max_blue, m_overall_max;$/;"	m	class:Image
+m_max_reflectionsRays	main/raytracer/Materials/headers/MaterialBase.hpp	/^			inline static int m_max_reflectionsRays;$/;"	m	class:RT::MaterialBase
 m_nCols	main/qbLinAlg/qbMatrix.h	/^    int m_nRows, m_nCols, m_nElements;$/;"	m	class:qbMatrix2
 m_nCols	main/qbLinAlg/qbMatrix33.hpp	/^    int m_nCols = 3;$/;"	m	class:qbMatrix33
 m_nCols	main/qbLinAlg/qbMatrix44.hpp	/^    int m_nCols = 4;$/;"	m	class:qbMatrix44
@@ -310,6 +313,7 @@ m_pRenderer	main/raytracer/includes/image.hpp	/^		SDL_Renderer *m_pRenderer;$/;"
 m_pTexture	main/raytracer/includes/image.hpp	/^		SDL_Texture *m_pTexture;$/;"	m	class:Image
 m_pmaterial	main/raytracer/Objects/headers/objectbase.hpp	/^			std::shared_ptr<RT::MaterialBase> m_pmaterial;$/;"	m	class:RT::ObjectBase
 m_rChannel	main/raytracer/includes/image.hpp	/^		std::vector<std::vector<double>> m_rChannel;$/;"	m	class:Image
+m_reflectionRayCount	main/raytracer/Materials/headers/MaterialBase.hpp	/^			inline static int m_reflectionRayCount;$/;"	m	class:RT::MaterialBase
 m_reflectivity	main/raytracer/Materials/headers/SimpleMaterial.hpp	/^			double m_reflectivity = 0;$/;"	m	class:RT::SimpleMaterial
 m_scene	main/includes/App.h	/^		RT::Scene m_scene;$/;"	m	class:App
 m_shininess	main/raytracer/Materials/headers/SimpleMaterial.hpp	/^			double m_shininess = 0;$/;"	m	class:RT::SimpleMaterial

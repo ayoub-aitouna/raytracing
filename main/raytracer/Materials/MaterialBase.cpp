@@ -55,8 +55,82 @@ qbVector<double> RT::MaterialBase::ComputeDiffuseColoe(const std::vector<std::sh
 	return  diffuseColor;
 }
 
+qbVector<double> RT::MaterialBase::ComputeReflectionColor(const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,
+		const std::vector<std::shared_ptr<RT::LightBase>> &lightList,
+		const std::shared_ptr<RT::ObjectBase> &currentObject,
+		const qbVector<double> &intPoint, const qbVector<double> &localNormal,
+		const RT::Ray &incidentRay)
+{
+	qbVector<double> reflectionColor {3};
 
+	qbVector<double> d = incidentRay.m_lab;
+	qbVector<double> reflectionVector  = d - ( 2 * qbVector<double>::dot(d, localNormal) * localNormal);
+	RT::Ray reflectionRay (intPoint, intPoint + reflectionVector);
+	// cast to scene and find cloeset objct that intertract with it
+	std::shared_ptr<RT::ObjectBase> closestObj;
+	qbVector<double> closestLocalNormal {3};
+	qbVector<double> closestLocalColor {3};
+	qbVector<double> closestIntPoint {3};
 
+	bool intFound = castRay(reflectionRay, objectList, currentObject, closestObj,
+			closestIntPoint, closestLocalNormal, closestLocalColor);
+	// calc the illumination for the closestObj assuming that therer awas a valid int
+	qbVector<double> mtColor {3};
+	if (intFound && m_reflectionRayCount < m_max_reflectionsRays)
+	{
+		//increment refRayCount 
+		m_reflectionRayCount++;
+		//check if obj has matreial
+		if(closestObj->has_material)
+			// use the material to calc the color 
+			matColor = closestObj->m_pmaterial->ComputeColor(objectList, lightList, closestObj,
+					closestIntPoint, closestLocalNormal, closestLocalColor);
+		else
+			mtColor = RT::MaterialBase::ComputeDiffuseColoe(objectList, lightList, closestObj,
+					closestIntPoint, closestLocalNormal, closestObj->m_baseColor);
+	}
+	reflectionColor = mtColor;
+	return (reflectionColor);
+}
 
+// function to cast ray to the scene 
+bool RT::MaterialBase::castRay(const RT::Ray &castRay, const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,
+		const std::shared_ptr<RT::ObjectBase> &thisObj,
+		std::shared_ptr<RT::LightBase> &closestObj,
+		qbVector<double> &closestIntPoint, qbVector<double> &closestLocalNormal,
+		qbVector<double> &closestLocalColor)
+{
+
+	qbVector<double> intPoint {3};
+	qbVector<double> localNormal {3};
+	qbVector<double> localColor {3};
+
+	double minDist  = 1e6;
+	bool intfound = false;
+
+	for(auto curobj : objectList)
+	{
+		if(curobj != thisObj)
+		{
+
+			bool valid_int = curobj->TestIntersectioons(castRay, intPoint, localNormal, localColor);
+			if(valid_int)
+			{
+				intfound = true;
+				double dist = (intPoint - castRay.m_point1).norm();
+
+				if(dist < minDist)
+				{
+					minDist = dist;
+					closestObj = curobj;
+					closestIntPoint = intPoint;
+					closestLocalNormal = localNormal;
+					closestLocalColor = localColor;
+				}
+			}
+		}
+	}
+	return (intfound);
+}
 
 

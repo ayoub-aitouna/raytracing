@@ -28,6 +28,11 @@ namespace RT
 					const qbVector<double> &intPoint, const qbVector<double> &localNormal,
 					const qbVector<double>	&baseColor);
 
+			qbVector<double> ComputeReflectionColor(const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,
+					const std::vector<std::shared_ptr<RT::LightBase>> &lightList,
+					const std::shared_ptr<RT::ObjectBase> &currentObject,
+					const qbVector<double> &intPoint, const qbVector<double> &localNormal,
+					const RT::Ray &incidentRay);
 			// Function to cast a ray into the scene.
 			bool castRay(const RT::Ray &castRay, const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,
 					const std::shared_ptr<RT::ObjectBase> &thisObj,
@@ -36,6 +41,8 @@ namespace RT
 					qbVector<double> &closestLocalColor);
 
 		public:
+			inline static int m_max_reflectionsRays;
+			inline static int m_reflectionRayCount;
 
 		private:
 	};
