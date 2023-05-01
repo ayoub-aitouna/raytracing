@@ -81,6 +81,7 @@ GetYSize	main/raytracer/image.cpp	/^int Image::GetYSize()$/;"	f	class:Image
 Gtform	main/raytracer/gtfm.cpp	/^RT::Gtform::Gtform()$/;"	f	class:RT::Gtform
 Gtform	main/raytracer/gtfm.cpp	/^RT::Gtform::Gtform(const qbMatrix2<double> &fwd, const qbMatrix2<double> &bck)$/;"	f	class:RT::Gtform
 Gtform	main/raytracer/includes/gtfm.hpp	/^	class Gtform$/;"	c	namespace:RT
+HALFPI	c/math_lib/types.h	/^#define HALFPI /;"	d
 IMAGE_H	main/raytracer/includes/image.hpp	/^#define IMAGE_H$/;"	d
 INCLUDES	main/Makefile	/^INCLUDES		:= -I$(shell brew --prefix)\/include $/;"	m
 I_SDL	c/Makefile	/^I_SDL	:= -I$(shell brew --prefix)\/include$/;"	m
@@ -104,6 +105,7 @@ LightBase	main/raytracer/Lights/headers/lightbase.hpp	/^	class LightBase$/;"	c	n
 LightBase	main/raytracer/Lights/lightbase.cpp	/^RT::LightBase::LightBase()$/;"	f	class:RT::LightBase
 MATERIALBASE_H	main/raytracer/Materials/headers/MaterialBase.hpp	/^#define MATERIALBASE_H$/;"	d
 MATH_H	c/math_lib/vectormath.h	/^#define MATH_H$/;"	d
+MATREX_H	c/math_lib/matrex.h	/^#define MATREX_H$/;"	d
 MaterialBase	main/raytracer/Materials/MaterialBase.cpp	/^RT::MaterialBase::MaterialBase()$/;"	f	class:RT::MaterialBase
 MaterialBase	main/raytracer/Materials/headers/MaterialBase.hpp	/^	class MaterialBase$/;"	c	namespace:RT
 Math_lib	main/Makefile	/^Math_lib		:=	qbLinAlg $/;"	m
@@ -139,7 +141,7 @@ OnRender	main/App.cpp	/^void App::OnRender()$/;"	f	class:App
 Oninit	main/App.cpp	/^bool App::Oninit()$/;"	f	class:App
 PARCE_H	main/parser/parse.h	/^#define PARCE_H$/;"	d
 PARSER_H	main/parser/parcer.hpp	/^#define PARSER_H$/;"	d
-PI	c/math_lib/vectormath.h	/^#define PI /;"	d
+PI	c/math_lib/types.h	/^#define PI /;"	d
 PLAN_H	main/raytracer/Objects/headers/objectplan.hpp	/^# define PLAN_H$/;"	d
 POINTLIGHT_H	main/raytracer/Lights/headers/pointlight.hpp	/^#define POINTLIGHT_H$/;"	d
 PointLight	main/raytracer/Lights/headers/pointlight.hpp	/^class PointLight : public LightBase$/;"	c	namespace:RT
@@ -233,6 +235,7 @@ Sub2Ind	main/qbLinAlg/qbMatrix33.hpp	/^int qbMatrix33<T>::Sub2Ind(int row, int c
 Sub2Ind	main/qbLinAlg/qbMatrix44.hpp	/^int qbMatrix44<T>::Sub2Ind(int row, int col) const$/;"	f	class:qbMatrix44
 SubtractColumnMeans	main/qbLinAlg/qbPCA.h	/^void SubtractColumnMeans(qbMatrix2<T> &inputData, std::vector<T> &columnMeans)$/;"	f	namespace:qbPCA
 SwapRow	main/qbLinAlg/qbMatrix.h	/^void qbMatrix2<T>::SwapRow(int i, int j)$/;"	f	class:qbMatrix2
+TYPES_H	c/math_lib/types.h	/^#define TYPES_H$/;"	d
 TestIntersectioons	main/raytracer/Objects/ObjectBase.cpp	/^bool RT::ObjectBase::TestIntersectioons(const Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)$/;"	f	class:RT::ObjectBase
 TestIntersectioons	main/raytracer/Objects/Objplan.cpp	/^bool RT::ObjectPlan::TestIntersectioons(const RT::Ray &castRay,$/;"	f	class:RT::ObjectPlan
 TestIntersectioons	main/raytracer/Objects/Objsphere.cpp	/^bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)$/;"	f	class:RT::ObjSphere
@@ -246,7 +249,10 @@ app_h	main/includes/App.h	/^#define app_h$/;"	d
 castRay	main/raytracer/scene.cpp	/^bool RT::Scene::castRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_obj,$/;"	f	class:RT::Scene
 cc	c/Makefile	/^cc		:= gcc$/;"	m
 cofactorDeterminant	main/qbLinAlg/qbMatrix33.hpp	/^T qbMatrix33<T>::cofactorDeterminant(T e1, T e2, T e3, T e4)$/;"	f	class:qbMatrix33
+cols	c/math_lib/types.h	/^	int cols;$/;"	m	struct:matrex
 copy_vector	c/math_lib/vectormath.c	/^vector_t *copy_vector(vector_t v)$/;"	f
+creat_matrex	c/math_lib/matrex.c	/^matrex_t *creat_matrex(int rows, int cols)$/;"	f
+create_cols	c/math_lib/matrex.c	/^double *create_cols(int c)$/;"	f
 cross	c/math_lib/vectormath.c	/^vector_t *cross(vector_t v, vector_t u)$/;"	f
 cross	main/qbLinAlg/qbVector.h	/^qbVector<T> qbVector<T>::cross(const qbVector<T> &a, const qbVector<T> &b)$/;"	f	class:qbVector
 cross	main/qbLinAlg/qbVector3.hpp	/^qbVector3<T> qbVector3<T>::cross(const qbVector3<T> &a, const qbVector3<T> &b)$/;"	f	class:qbVector3
@@ -257,6 +263,9 @@ dot	main/qbLinAlg/qbVector2.hpp	/^T qbVector2<T>::dot(const qbVector2<T> &a, con
 dot	main/qbLinAlg/qbVector3.hpp	/^T qbVector3<T>::dot(const qbVector3<T> &a, const qbVector3<T> &b)$/;"	f	class:qbVector3
 dot	main/qbLinAlg/qbVector4.hpp	/^T qbVector4<T>::dot(const qbVector4<T> &a, const qbVector4<T> &b)$/;"	f	class:qbVector4
 equal	c/math_lib/vectormath.c	/^vector_t *equal(vector_t *target, vector_t *v)$/;"	f
+fill_mt	c/math_lib/matrex.c	/^void fill_mt(matrex_t *mt, double* values)$/;"	f
+from_mt_to_vt	c/math_lib/vectormath.c	/^vector_t *from_mt_to_vt(matrex_t mt)$/;"	f
+from_vector_to_matrex	c/math_lib/matrex.c	/^matrex_t *from_vector_to_matrex(vector_t vt, matrex_t mt)$/;"	f
 getCamera	main/parser/scene_instance.cpp	/^RT::Camera RT::SceneInstance::getCamera(void)$/;"	f	class:RT::SceneInstance
 getLIghts	main/parser/scene_instance.cpp	/^std::vector<std::shared_ptr<RT::LightBase>> RT::SceneInstance::getLIghts(void)$/;"	f	class:RT::SceneInstance
 get_next_line	main/parser/gt.c	/^char *get_next_line(int fd)$/;"	f
@@ -266,6 +275,7 @@ getposition	main/parser/parcer.cpp	/^post_t *getposition(char *line, int *index)
 has_material	main/raytracer/Objects/headers/objectbase.hpp	/^			bool has_material = false;$/;"	m	class:RT::ObjectBase
 isRunning	main/includes/App.h	/^		bool isRunning;$/;"	m	class:App
 l_size	main/parser/reader.c	/^size_t l_size(char **dst)$/;"	f
+lib	c/math_lib/Makefile	/^lib	= math_lib$/;"	m
 m_bChannel	main/raytracer/includes/image.hpp	/^		std::vector<std::vector<double>> m_bChannel;$/;"	m	class:Image
 m_camera	main/parser/scene_instance.hpp	/^				RT::Camera m_camera;$/;"	m	class:RT::SceneInstance
 m_camera	main/raytracer/includes/scene.hpp	/^			RT::Camera m_camera;$/;"	m	class:RT::Scene
@@ -316,7 +326,7 @@ m_y	main/qbLinAlg/qbVector2.hpp	/^		T m_y;$/;"	m	class:qbVector2
 m_y	main/qbLinAlg/qbVector3.hpp	/^		T m_y;$/;"	m	class:qbVector3
 m_ySize	main/raytracer/includes/image.hpp	/^		int m_ySize;$/;"	m	class:Image
 m_z	main/qbLinAlg/qbVector3.hpp	/^		T m_z;$/;"	m	class:qbVector3
-main	c/math_lib/main.c	/^int main()$/;"	f
+main	c/math_lib/main.c	/^int main(int ac, char **av)$/;"	f
 main	main/main.cpp	/^int main(int ac, char **av)$/;"	f
 main	main/qbLinAlg/TestCode/TestCode_qbEIG.cpp	/^int main()$/;"	f
 main	main/qbLinAlg/TestCode/TestCode_qbLSQ.cpp	/^int main()$/;"	f
@@ -325,7 +335,11 @@ main	main/qbLinAlg/TestCode/TestCode_qbPCA.cpp	/^int main()$/;"	f
 main	main/qbLinAlg/TestCode/TestCode_qbQR.cpp	/^int main()$/;"	f
 main	main/qbLinAlg/TestCode/qbMatrixTest.cpp	/^int main()$/;"	f
 main	main/qbLinAlg/TestCode/qbMatrix_DeterminantTest.cpp	/^int main()$/;"	f
+matrex	c/math_lib/types.h	/^	double **matrex;$/;"	m	struct:matrex
+matrex	c/math_lib/types.h	/^typedef struct matrex{$/;"	s
+matrex_t	c/math_lib/types.h	/^} matrex_t;$/;"	t	typeref:struct:matrex
 minus	c/math_lib/vectormath.c	/^vector_t *minus(vector_t *target, vector_t *v)$/;"	f
+mt_multiplication	c/math_lib/matrex.c	/^matrex_t	*mt_multiplication(matrex_t *mt1, matrex_t * mt2)$/;"	f
 muliplication	c/math_lib/vectormath.c	/^vector_t *muliplication(vector_t *target, vector_t *v)$/;"	f
 norm	main/qbLinAlg/qbVector.h	/^T qbVector<T>::norm()$/;"	f	class:qbVector
 norm	main/qbLinAlg/qbVector2.hpp	/^T qbVector2<T>::norm()$/;"	f	class:qbVector2
@@ -335,6 +349,7 @@ normalize	c/math_lib/vectormath.c	/^float normalize(vector_t *v)$/;"	f
 normalized	c/math_lib/vectormath.c	/^vector_t *normalized(vector_t *v)$/;"	f
 num_division	c/math_lib/vectormath.c	/^vector_t *num_division(vector_t *target, float num)$/;"	f
 num_muliplication	c/math_lib/vectormath.c	/^vector_t *num_muliplication(vector_t *target, float num)$/;"	f
+obj	c/math_lib/Makefile	/^obj = $(src:.c=.o)$/;"	m
 operator *	main/qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator* (const T& lhs, const qbMatrix2<T>& rhs)$/;"	f
 operator *	main/qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator* (const qbMatrix2<T>& lhs, const T& rhs)$/;"	f
 operator *	main/qbLinAlg/qbMatrix.h	/^qbMatrix2<T> operator* (const qbMatrix2<T>& lhs, const qbMatrix2<T>& rhs)$/;"	f
@@ -412,9 +427,10 @@ pWindow	main/includes/App.h	/^		SDL_Window *pWindow;$/;"	m	class:App
 parcer	main/parser/parcer.hpp	/^	class parcer{$/;"	c	namespace:RT
 parsemap	main/parser/parcer.cpp	/^RT::SceneInstance RT::parcer::parsemap(char **map)$/;"	f	class:RT::parcer
 pluse	c/math_lib/vectormath.c	/^vector_t *pluse(vector_t *target, vector_t *v)$/;"	f
-point_t	c/math_lib/vectormath.h	/^typedef vector_t point_t;$/;"	t
+point_t	c/math_lib/types.h	/^typedef		vector_t point_t;$/;"	t
 pos	main/parser/parse.h	/^typedef struct pos$/;"	s
 post_t	main/parser/parse.h	/^} post_t;$/;"	t	typeref:struct:pos
+print_matrex	c/math_lib/matrex.c	/^void print_matrex(matrex_t *matrex)$/;"	f
 print_scene	main/parser/reader.c	/^void print_scene()$/;"	f
 print_vector	main/raytracer/camera.cpp	/^void print_vector(qbVector<double> &inputVector, std::string msg)$/;"	f
 printv	c/math_lib/main.c	/^void printv(vector_t vector)$/;"	f
@@ -466,21 +482,23 @@ qbVector4	main/qbLinAlg/qbVector4.hpp	/^qbVector4<T>::qbVector4(const qbVector<T
 qbVector4	main/qbLinAlg/qbVector4.hpp	/^qbVector4<T>::qbVector4(const std::vector<T> &inputData)$/;"	f	class:qbVector4
 qbVector4_H	main/qbLinAlg/qbVector4.hpp	/^#define qbVector4_H$/;"	d
 read_sence	main/parser/reader.c	/^char **read_sence(const char *file_name)$/;"	f
+rows	c/math_lib/types.h	/^	int rows;$/;"	m	struct:matrex
+src	c/math_lib/Makefile	/^src = $(wildcard *.c)$/;"	m
 str_append	main/parser/parcer.cpp	/^char *str_append(char *str, char c)$/;"	f
+vector	c/math_lib/types.h	/^typedef struct vector$/;"	s
 vector	c/math_lib/vectormath.c	/^vector_t *vector(float x, float y, float z)$/;"	f
-vector	c/math_lib/vectormath.h	/^typedef struct vector$/;"	s
-vector2	c/math_lib/vectormath.h	/^typedef struct vector2{$/;"	s
-vector2_t	c/math_lib/vectormath.h	/^} vector2_t;$/;"	t	typeref:struct:vector2
+vector2	c/math_lib/types.h	/^typedef struct vector2{$/;"	s
+vector2_t	c/math_lib/types.h	/^} vector2_t;$/;"	t	typeref:struct:vector2
 vector_lenght	c/math_lib/vectormath.c	/^float vector_lenght(vector_t v)$/;"	f
 vector_lenght2	c/math_lib/vectormath.c	/^float vector_lenght2(vector_t v)$/;"	f
-vector_t	c/math_lib/vectormath.h	/^} vector_t;$/;"	t	typeref:struct:vector
-x	c/math_lib/vectormath.h	/^	float x, y, z;$/;"	m	struct:vector
-x	c/math_lib/vectormath.h	/^	float x,y;$/;"	m	struct:vector2
+vector_t	c/math_lib/types.h	/^} vector_t;$/;"	t	typeref:struct:vector
+x	c/math_lib/types.h	/^	float x, y, z;$/;"	m	struct:vector
+x	c/math_lib/types.h	/^	float x,y;$/;"	m	struct:vector2
 x	main/parser/parse.h	/^    double x;$/;"	m	struct:pos
-y	c/math_lib/vectormath.h	/^	float x, y, z;$/;"	m	struct:vector
-y	c/math_lib/vectormath.h	/^	float x,y;$/;"	m	struct:vector2
+y	c/math_lib/types.h	/^	float x, y, z;$/;"	m	struct:vector
+y	c/math_lib/types.h	/^	float x,y;$/;"	m	struct:vector2
 y	main/parser/parse.h	/^    double y;$/;"	m	struct:pos
-z	c/math_lib/vectormath.h	/^	float x, y, z;$/;"	m	struct:vector
+z	c/math_lib/types.h	/^	float x, y, z;$/;"	m	struct:vector
 z	main/parser/parse.h	/^    double z;$/;"	m	struct:pos
 ~Gtform	main/raytracer/gtfm.cpp	/^RT::Gtform::~Gtform()$/;"	f	class:RT::Gtform
 ~Image	main/raytracer/image.cpp	/^Image::~Image()$/;"	f	class:Image

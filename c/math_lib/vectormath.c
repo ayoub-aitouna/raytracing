@@ -105,5 +105,11 @@ vector_t *cross(vector_t v, vector_t u)
 	return vector(v.y * u.z - v.z * u.y, v.z * u.x - v.x * u.z,  v.x * u.y - v.y * u.x);
 }
 
+vector_t *from_mt_to_vt(matrex_t mt)
+{
+	if(mt.cols != 3 || mt.rows != 1)
+		return (NULL);
+	return (vector(mt.matrex[0][0], mt.matrex[0][1],mt.matrex[0][2])); 
+}
 
 
