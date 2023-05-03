@@ -14,26 +14,27 @@
 #include "../Lights/headers/pointlight.hpp"
 #include "../../qbLinAlg/qbVector.h"
 
-namespace RT {
+namespace RT
+{
 	class Scene
 	{
-		public:
-			Scene();
-			bool Render(Image &image);
-			bool castRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_obj,
-					qbVector<double> &closest_int, qbVector<double> &closest_norm,
-					qbVector<double> &closest_color);
-			//Private function
-		private:
+	public:
+		Scene();
+		bool Render(Image &image);
+		bool CastRay(
+			RT::Ray &castRay, std::shared_ptr<RT::ObjectBase> &closestObject,
+			qbVector<double> &closestIntPoint, qbVector<double> &closestLocalNormal,
+			qbVector<double> &closestLocalColor);
+		// Private function
+	private:
+		// private members
+	private:
+		RT::Camera m_camera;
+		// the list of objects in the scene
+		std::vector<std::shared_ptr<RT::ObjectBase>> m_objectList;
 
-			// private members
-		private:
-			RT::Camera m_camera;
-			// the list of objects in the scene
-			std::vector<std::shared_ptr<RT::ObjectBase>> m_objectList;
-
-			// the List of light in the scene
-			std::vector<std::shared_ptr<RT::LightBase>> m_lightList;
+		// the List of light in the scene
+		std::vector<std::shared_ptr<RT::LightBase>> m_lightList;
 	};
 
 }
