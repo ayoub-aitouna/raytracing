@@ -4,7 +4,7 @@
 
 RT::PointLight::PointLight()
 {
-	m_color = qbVector<double> {std::vector<double>{0.0, 0.0, 0.0}};
+	m_color = qbVector<double> {std::vector<double> {1.0, 1.0, 1.0}};
 	m_intensity = 1.0;
 }
 
@@ -35,7 +35,6 @@ bool RT::PointLight::ComputeIllumination(const qbVector<double> &intPoint, const
 		if(valid_int)
 			break;
 	}
-
 	if(valid_int)
 		return false;
 	//Compute the angle between local normal and the light ray

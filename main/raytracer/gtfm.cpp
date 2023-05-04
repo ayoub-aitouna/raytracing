@@ -52,25 +52,48 @@ void RT::Gtform::SetTransform(const qbVector<double> &translation, const qbVecto
 	scalMatrix.SetToIdentity();
 	// populate these with probpriate values
 	// first translation matri
+	
+	// [1,0,0,0]
+	// [0,1,0,0]
+	// [0,0,1,0]
+	// [0,0,0,1]
 	translation_matrix.SetElement(0, 3, translation.GetElement(0));
 	translation_matrix.SetElement(1, 3, translation.GetElement(1));
 	translation_matrix.SetElement(2, 3, translation.GetElement(2));
 
+	// [cos()	,-sin()	,0		,0]
+	// [sin()	,cos()	,0		,0]
+	// [0,		,0		,1		,0]
+	// [0,		0,		0		,1]
 	rotationMatriZ.SetElement(0, 0, std::cos(rotation.GetElement(2)));
 	rotationMatriZ.SetElement(0, 1, -std::sin(rotation.GetElement(2)));
 	rotationMatriZ.SetElement(1, 0, std::sin(rotation.GetElement(2)));
 	rotationMatriZ.SetElement(1, 1, std::cos(rotation.GetElement(2)));
 
+	// [cos()	,0		,sin()	,0]
+	// [0		,1		,0		,0]
+	// [-sin()	,0		,cos()	,0]
+	// [0,		,0		,0		,1]
 	rotationMatriY.SetElement(0, 0, std::cos(rotation.GetElement(1)));
 	rotationMatriY.SetElement(0, 2, std::sin(rotation.GetElement(1)));
 	rotationMatriY.SetElement(2, 0, -std::sin(rotation.GetElement(1)));
 	rotationMatriY.SetElement(2, 2, std::cos(rotation.GetElement(1)));
 
+
+	// [1		,0		,0		,0]
+	// [0		,cos()	,-sin()	,0]
+	// [0,		,sin()	,cos()	,0]
+	// [0,		,0		,0		,1]
 	rotationMatriX.SetElement(1, 1, std::cos(rotation.GetElement(0)));
 	rotationMatriX.SetElement(1, 2, -std::sin(rotation.GetElement(0)));
 	rotationMatriX.SetElement(2, 1, std::sin(rotation.GetElement(0)));
 	rotationMatriX.SetElement(2, 2, std::cos(rotation.GetElement(0)));
+
 	//And the scal matrex
+	// [S,0,0,0]
+	// [0,S,0,0]
+	// [0,0,S,0]
+	// [0,0,0,1]
 	scalMatrix.SetElement(0, 0, scal.GetElement(0));
 	scalMatrix.SetElement(1, 1, scal.GetElement(1));
 	scalMatrix.SetElement(2, 2, scal.GetElement(2));
@@ -150,10 +173,11 @@ namespace RT {
 RT::Gtform RT::Gtform::operator=(const Gtform &rhs)
 {
 	// Make sure that we're not assigning to ourself 
-	if(this == &rhs)
-		return *this;
-	this->m_fwdtfm = rhs.m_fwdtfm;
-	this->m_bcktfm = rhs.m_bcktfm;
+	if (this != &rhs)
+	{
+		m_fwdtfm = rhs.m_fwdtfm;
+		m_bcktfm = rhs.m_bcktfm;
+	}	
 	return *this;
 }
 

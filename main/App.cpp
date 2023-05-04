@@ -51,6 +51,7 @@ int App::OnExecute()
 		OnLoop();
 		OnRender();
 	}
+	OnExit();
 	return (0);
 }
 
@@ -81,7 +82,7 @@ void App::OnExit()
 	SDL_DestroyRenderer(pRenderer);
 	SDL_DestroyWindow(pWindow);
 	pWindow = NULL;
-	SDL_QUIT;
-}
+	SDL_Quit();
+	}
 
 

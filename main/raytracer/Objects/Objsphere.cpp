@@ -35,8 +35,10 @@ bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> 
 	//a = 1.0
 
 	//calculate b.
-	double b = 2 * qbVector<double>::dot(bckRay.GetPoint1(), vhat);
+	double b = 2 * qbVector<double>::dot(bckRay.m_point1, vhat);
+	
 	double raduis = 1.0;
+	
 	double c = qbVector<double>::dot(bckRay.GetPoint1(), bckRay.GetPoint1()) - std::sqrt(raduis);
 	// test if there is interstaction dela = b^2 - 4ac; and a = 1.0 so delta - b^2 -4c;
 	double intTest = (b * b) - 4.0 * c;

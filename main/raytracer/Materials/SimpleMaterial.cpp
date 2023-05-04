@@ -41,7 +41,6 @@ qbVector<double> RT::SimpleMaterial::ComputeColor(const std::vector<std::shared_
 	mtColor = mtColor + specColor;
 	return (mtColor);
 }
-/*
 
 qbVector<double> RT::SimpleMaterial::ComputeSpectular(
 		const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,
@@ -78,7 +77,6 @@ qbVector<double> RT::SimpleMaterial::ComputeSpectular(
 			if(validInt)
 				break;
 		}
-
 		// if no interstaction with any object found then there is no shadows
 		// and proceed with calculating the the I(s,v)
 
@@ -87,9 +85,7 @@ qbVector<double> RT::SimpleMaterial::ComputeSpectular(
 
 			qbVector<double> d = lightRay.m_lab;
 
-			qbVector<double> r;
-
-			r = d - (2 * qbVector<double>::dot(d, localNormal) * localNormal);
+			qbVector<double> r = d - (2 * qbVector<double>::dot(d, localNormal) * localNormal);
 			r.Normalized();
 
 			qbVector<double> v = cameraRay.m_lab;
@@ -98,10 +94,7 @@ qbVector<double> RT::SimpleMaterial::ComputeSpectular(
 			double dotProduct = qbVector<double>::dot(r, v);
 
 			if(dotProduct > 0.0)
-			{
-				SpectacularIntisity = 0.5 * std::pow(dotProduct, m_shininess);
-				printf("{RGB :: SpectacularIntisity %f}\n", SpectacularIntisity);
-			}
+				SpectacularIntisity = m_reflectivity * pow(dotProduct, m_shininess);
 		}
 		red += curLight->m_color.GetElement(0) * SpectacularIntisity;
 		green += curLight->m_color.GetElement(1) * SpectacularIntisity;
@@ -113,79 +106,4 @@ qbVector<double> RT::SimpleMaterial::ComputeSpectular(
 	specColor.SetElement(2, blue);
 	return specColor;
 }
-*/
 
-// Function to compute the specular highlights.
-qbVector<double> RT::SimpleMaterial::ComputeSpectular(
-		const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,
-		const std::vector<std::shared_ptr<RT::LightBase>> &lightList,
-		const qbVector<double> &intPoint, const qbVector<double> &localNormal,
-		const RT::Ray &cameraRay)
-{
-	qbVector<double> spcColor	{3};
-	double red = 0.0;
-	double green = 0.0;
-	double blue = 0.0;
-	
-	// Loop through all of the lights in the scene.
-	for (auto currentLight : lightList)
-	{
-		/* Check for intersections with all objects in the scene. */
-		double intensity = 0.0;
-		
-		// Construct a vector pointing from the intersection point to the light.
-		qbVector<double> lightDir = (currentLight->m_location - intPoint).Normalized();
-		
-		// Compute a start point.
-		qbVector<double> startPoint = intPoint + (lightDir * 0.001);
-		
-		// Construct a ray from the point of intersection to the light.
-		RT::Ray lightRay (startPoint, startPoint + lightDir);
-		
-		/* Loop through all objects in the scene to check if any
-			obstruct light from this source. */
-		qbVector<double> poi				{3};
-		qbVector<double> poiNormal	{3};
-		qbVector<double> poiColor		{3};
-		bool validInt = false;
-		for (auto sceneObject : objectList)
-		{
-			validInt = sceneObject -> TestIntersectioons(lightRay, poi, poiNormal, poiColor);
-			if (validInt)
-				break;
-		}
-		
-		/* If no intersections were found, then proceed with
-			computing the specular component. */
-		if (!validInt)
-		{
-			// Compute the reflection vector.
-			qbVector<double> d = lightRay.m_lab;
-			qbVector<double> r = d - (2 * qbVector<double>::dot(d, localNormal) * localNormal);
-			r.Normalize();
-			
-			// Compute the dot product.
-			qbVector<double> v = cameraRay.m_lab;
-			v.Normalize();
-
-			double dotProduct = qbVector<double>::dot(r, v);
-			
-			// Only proceed if the dot product is positive.
-			if (dotProduct > 0.0)
-			{
-				printf("{RGB :: dotProduct %f}\n", dotProduct);
-				intensity = m_reflectivity * std::pow(dotProduct, m_shininess);
-				printf("{RGB :: intensity %f}\n", intensity);
-			}
-		}
-		
-		red += currentLight->m_color.GetElement(0) * intensity;
-		green += currentLight->m_color.GetElement(1) * intensity;
-		blue += currentLight->m_color.GetElement(2) * intensity;
-	}
-	
-	spcColor.SetElement(0, red);
-	spcColor.SetElement(1, green);
-	spcColor.SetElement(2, blue);
-	return spcColor;
-}

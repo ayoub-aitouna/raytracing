@@ -37,7 +37,7 @@ bool RT::ObjectPlan::TestIntersectioons(const RT::Ray &castRay,
 
 	// if t is negative means the plan is behind the camera 
 	if(t < 0)
-		return false;	
+		return false;
 
 	double u = bckRay.m_point1.GetElement(0) + ( k.GetElement(0) * t);
 	double v = bckRay.m_point1.GetElement(1) + ( k.GetElement(1) * t);
@@ -45,8 +45,8 @@ bool RT::ObjectPlan::TestIntersectioons(const RT::Ray &castRay,
 	// if magnatude of u & v is less or equal 1 means we on the plan 
 	// we do this to have limited plan
 	// we can ignore this step and get an infinite plan
-	//if(std::abs(u) >= 1  || abs(v) >= 1 )
-	//	return  (false);
+	if(std::abs(u) >= 1  || abs(v) >= 1 )
+		return  (false);
 
 	// compute the point of intersection
 	qbVector<double> pointofInter = bckRay.m_point1 + t * k;
