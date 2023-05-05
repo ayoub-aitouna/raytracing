@@ -1,4 +1,5 @@
 #include "includes/scene.hpp"
+#include "Materials/headers/MaterialBase.hpp"
 #include "includes/camera.hpp"
 #include "Objects/headers/objectbase.hpp"
 #include "Objects/headers/objectplan.hpp"
@@ -13,6 +14,15 @@
 #include <vector>
 #include "../parser/parcer.hpp"
 
+std::shared_ptr<RT::SimpleMaterial> RT::Scene::createMaterial(qbVector<double> color, double reflectivity, double shininess)
+{
+	std::shared_ptr<RT::SimpleMaterial> material = std::make_shared<RT::SimpleMaterial>(RT::SimpleMaterial());
+	material->m_baseColor =  color;
+	material->m_reflectivity = reflectivity;
+	material->m_shininess = shininess;
+	return  material;
+}
+
 RT::Scene::Scene()
 {
 	m_camera.SetPosition(qbVector<double>{std::vector<double>{0, -10, -1}});
@@ -21,24 +31,36 @@ RT::Scene::Scene()
 	m_camera.SetHorzSize(0.25);
 	m_camera.SetAspect(16.0 / 9.0);
 	m_camera.UpdateCameraGeometry();
-	auto testMaterial = std::make_shared<RT::SimpleMaterial>(RT::SimpleMaterial());
-	testMaterial->m_baseColor = qbVector<double>{std::vector<double>{0.25, 0.5, 0.8}};
-	testMaterial->m_reflectivity = 0.5;
-	testMaterial->m_shininess = 10.0;
-	auto ground = std::make_shared<RT::SimpleMaterial>(RT::SimpleMaterial());
-	ground->m_baseColor = qbVector<double>{std::vector<double>{0.56, 0.58, 0.74}};
-	ground->m_reflectivity = 0.5;
-	ground->m_shininess = 0.0;
+
+	//create materials 
+	auto sp1 = RT::Scene::createMaterial(qbVector<double>{std::vector<double>{0.56, .98, .1}},.1, 10);
+	auto sp2 = RT::Scene::createMaterial(qbVector<double>{std::vector<double>{0.6, .58, 1}},.3, 5 );
+	auto sp3 = RT::Scene::createMaterial(qbVector<double>{std::vector<double>{0.9, .58, .7}},.8, 7 );
+	auto flour = RT::Scene::createMaterial(qbVector<double>{std::vector<double>{0.56, .58, 1}},.3, 0 );
+
+	// read .rt file and render scene
 	RT::parcer p;
 	RT::SceneInstance m_scene = p.parsemap(NULL);
+
 	for (auto obj : m_scene.getobjects())
 		m_objectList.push_back(obj);
 	for (auto light : m_scene.getLIghts())
 		m_lightList.push_back(light);
-	m_objectList.at(0)->AssingMAterial(testMaterial);
-	m_objectList.at(1)->AssingMAterial(testMaterial);
-	m_objectList.at(2)->AssingMAterial(testMaterial);
-	m_objectList.at(3)->AssingMAterial(ground);
+
+//	m_objectList.push_back(std::make_shared<RT::ObjectPlan>(RT::ObjectPlan()));
+	RT::Gtform wallgtfm;
+	wallgtfm.SetTransform(qbVector<double>{std::vector<double>{0.0,8,.0}},
+			qbVector<double>{std::vector<double>{-1.57, 0, 0}},
+			qbVector<double>{std::vector<double>{8,1,4}});
+	//m_objectList.at(4)->SetTransformMatrix(wallgtfm);
+	//m_objectList.at(4)->m_baseColor = qbVector<double>{std::vector<double>{1,1,1}};
+	auto wall = createMaterial(qbVector<double>{std::vector<double>{1,1,1}}, 0, 0);
+
+	m_objectList.at(0)->AssingMAterial(sp1);
+	m_objectList.at(1)->AssingMAterial(sp2);
+	m_objectList.at(2)->AssingMAterial(sp3);
+	m_objectList.at(3)->AssingMAterial(flour);
+	//m_objectList.at(4)->AssingMAterial(wall);
 }
 
 bool RT::Scene::Render(Image &image)
@@ -90,13 +112,13 @@ bool RT::Scene::Render(Image &image)
 					// use material to compute the color
 					// print_V(closestIntPoint);
 					qbVector<double> color = closest_obj->m_pmaterial->ComputeColor(m_objectList, m_lightList,
-																					closest_obj, closestIntPoint, closestLocalNormal, cameraRay);
+							closest_obj, closestIntPoint, closestLocalNormal, cameraRay);
 					image.SetPixel(x, y, color.GetElement(0), color.GetElement(1), color.GetElement(2));
 				}
 				else
 				{
 					qbVector<double> diffuseColor = RT::MaterialBase::ComputeDiffuseColoe(m_objectList, m_lightList,
-																						  closest_obj, closestIntPoint, closestLocalNormal, closest_obj->m_baseColor);
+							closest_obj, closestIntPoint, closestLocalNormal, closest_obj->m_baseColor);
 					image.SetPixel(x, y, diffuseColor.GetElement(0), diffuseColor.GetElement(1), diffuseColor.GetElement(2));
 				}
 			}
@@ -106,8 +128,8 @@ bool RT::Scene::Render(Image &image)
 }
 
 bool RT::Scene::CastRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_obj,
-						qbVector<double> &closest_int, qbVector<double> &closest_norm,
-						qbVector<double> &closest_color)
+		qbVector<double> &closest_int, qbVector<double> &closest_norm,
+		qbVector<double> &closest_color)
 {
 	qbVector<double> intPoint{3};
 	qbVector<double> localNormal{3};
