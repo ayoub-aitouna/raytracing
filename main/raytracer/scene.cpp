@@ -25,7 +25,10 @@ RT::Scene::Scene()
 	testMaterial->m_baseColor = qbVector<double>{std::vector<double>{0.25, 0.5, 0.8}};
 	testMaterial->m_reflectivity = 0.5;
 	testMaterial->m_shininess = 10.0;
-
+	auto ground = std::make_shared<RT::SimpleMaterial>(RT::SimpleMaterial());
+	ground->m_baseColor = qbVector<double>{std::vector<double>{0.56, 0.58, 0.74}};
+	ground->m_reflectivity = 0.5;
+	ground->m_shininess = 0.0;
 	RT::parcer p;
 	RT::SceneInstance m_scene = p.parsemap(NULL);
 	for (auto obj : m_scene.getobjects())
@@ -35,6 +38,7 @@ RT::Scene::Scene()
 	m_objectList.at(0)->AssingMAterial(testMaterial);
 	m_objectList.at(1)->AssingMAterial(testMaterial);
 	m_objectList.at(2)->AssingMAterial(testMaterial);
+	m_objectList.at(3)->AssingMAterial(ground);
 }
 
 bool RT::Scene::Render(Image &image)

@@ -72,7 +72,7 @@ bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> 
 		// the normal is form the center to the interstaction point 
 		// normal = intPoint - center
 		localNormal = intPoint - newObjOrigin;
-		localNormal.Normalized();
+		localNormal.Normalize();
 		// return the base color 
 		localColor = m_baseColor;
 		return true;
