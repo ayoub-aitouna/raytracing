@@ -16,27 +16,35 @@ bool RT::PointLight::ComputeIllumination(const qbVector<double> &intPoint, const
 {
 	Color = m_color;
 	intensity = 0.0;
-
 	// Construct a vector pointing from the intersection point to the light.
-	qbVector<double> lightDir = (m_location - intPoint).Normalized();
-
+	qbVector<double>	lightDir = (m_location - intPoint).Normalized();
 	// Compute a starting point.
-	qbVector<double> startPoint = intPoint;
+	qbVector<double>	startPoint = intPoint;
+	double				lightDist = (m_location - startPoint).norm();
+	RT::Ray lightRay	(startPoint, startPoint + lightDir);
+	qbVector<double>	poi {3};
+	qbVector<double>	poicolor {3};
+	qbVector<double>	poinormal {3};
+	bool				valid_int = false;
 
-	RT::Ray lightRay (startPoint, startPoint + lightDir);
-	qbVector<double> poi {3};
-	qbVector<double> poicolor {3};
-	qbVector<double> poinormal {3};
-
-	bool valid_int = false;
 	for (auto obj : objectList) {
 		if(obj != currentObject)
+		{
 			valid_int = obj->TestIntersectioons(lightRay, poi, poinormal, poicolor);
+			if(valid_int)
+			{
+				double dist = (poi - startPoint).norm();
+				if(dist > lightDist)
+					valid_int = false;
+
+			}
+		}
 		if(valid_int)
 			break;
 	}
 	if(valid_int)
 		return false;
+
 	//Compute the angle between local normal and the light ray
 	//Note that we asume that localNormal is a unit vector.
 	//unit vector is vector with lenght 1

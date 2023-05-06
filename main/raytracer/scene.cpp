@@ -4,6 +4,7 @@
 #include "Objects/headers/objectbase.hpp"
 #include "Objects/headers/objectplan.hpp"
 #include "Objects/headers/objsphere.hpp"
+#include "Objects/headers/Cylinder.hpp"
 #include "Materials/headers/SimpleMaterial.hpp"
 #include "Lights/headers/pointlight.hpp"
 #include "includes/ray.h"
@@ -47,13 +48,17 @@ RT::Scene::Scene()
 	for (auto light : m_scene.getLIghts())
 		m_lightList.push_back(light);
 
-//	m_objectList.push_back(std::make_shared<RT::ObjectPlan>(RT::ObjectPlan()));
+	m_objectList.push_back(std::make_shared<RT::ObjCylinder>(RT::ObjCylinder()));
+
 	RT::Gtform wallgtfm;
-	wallgtfm.SetTransform(qbVector<double>{std::vector<double>{0.0,8,.0}},
-			qbVector<double>{std::vector<double>{-1.57, 0, 0}},
-			qbVector<double>{std::vector<double>{8,1,4}});
-	//m_objectList.at(4)->SetTransformMatrix(wallgtfm);
-	//m_objectList.at(4)->m_baseColor = qbVector<double>{std::vector<double>{1,1,1}};
+
+	wallgtfm.SetTransform(qbVector<double>{std::vector<double>{1.0,.0,.0}},
+			qbVector<double>{std::vector<double>{1.5, 0, 0}},
+			qbVector<double>{std::vector<double>{.5,.5,.5}});
+
+	m_objectList.at(4)->SetTransformMatrix(wallgtfm);
+	m_objectList.at(4)->m_baseColor = qbVector<double>{std::vector<double>{1,1,1}};
+
 	auto wall = createMaterial(qbVector<double>{std::vector<double>{1,1,1}}, 0, 0);
 
 	m_objectList.at(0)->AssingMAterial(sp1);

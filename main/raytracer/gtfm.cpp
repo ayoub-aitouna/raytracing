@@ -98,7 +98,7 @@ void RT::Gtform::SetTransform(const qbVector<double> &translation, const qbVecto
 	scalMatrix.SetElement(1, 1, scal.GetElement(1));
 	scalMatrix.SetElement(2, 2, scal.GetElement(2));
 	// combine to give the  final transform matrix
-	m_fwdtfm = translation_matrix * scalMatrix * rotationMatriX * rotationMatriY * rotationMatriZ;
+	m_fwdtfm = translation_matrix * rotationMatriX * rotationMatriY * rotationMatriZ * scalMatrix ;
 	// compute the backward transform
 	m_bcktfm = m_fwdtfm;
 	m_bcktfm.Inverse();

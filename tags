@@ -15,6 +15,7 @@ BUFFER_SIZE	main/parser/gt.c	5;"	d	file:
 CAMERA_H	main/raytracer/includes/camera.hpp	2;"	d
 CC	main/Makefile	/^CC				:= g++$/;"	m
 CFLAGS	main/Makefile	/^CFLAGS			:= -std=c++17 -Ofast -g$/;"	m
+CYLINDER	main/raytracer/Objects/headers/Cylinder.hpp	2;"	d
 Camera	main/raytracer/camera.cpp	/^RT::Camera::Camera()$/;"	f	class:RT::Camera
 Camera	main/raytracer/includes/camera.hpp	/^	class Camera{$/;"	c	namespace:RT
 CastRay	main/raytracer/scene.cpp	/^bool RT::Scene::CastRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_obj,$/;"	f	class:RT::Scene
@@ -129,6 +130,8 @@ OBJECTS_FILES	main/Makefile	/^OBJECTS_FILES	:= $(patsubst %.cpp, $(OBJ_DIR)\/%.o
 OBJSPHERE_H	main/raytracer/Objects/headers/objsphere.hpp	2;"	d
 OBJ_DIR	c/Makefile	/^OBJ_DIR	:= OBJECT_FILES$/;"	m
 OBJ_DIR	main/Makefile	/^OBJ_DIR			:= OBJECT_FILES$/;"	m
+ObjCylinder	main/raytracer/Objects/Cylinder.cpp	/^RT::ObjCylinder::ObjCylinder()$/;"	f	class:RT::ObjCylinder
+ObjCylinder	main/raytracer/Objects/headers/Cylinder.hpp	/^	class ObjCylinder : public RT::ObjectBase$/;"	c	namespace:RT
 ObjSphere	main/raytracer/Objects/Objsphere.cpp	/^RT::ObjSphere::ObjSphere()$/;"	f	class:RT::ObjSphere
 ObjSphere	main/raytracer/Objects/headers/objsphere.hpp	/^class ObjSphere : public ObjectBase$/;"	c	namespace:RT
 ObjectBase	main/raytracer/Objects/ObjectBase.cpp	/^RT::ObjectBase::ObjectBase()$/;"	f	class:RT::ObjectBase
@@ -186,6 +189,7 @@ RT	main/raytracer/Lights/headers/lightbase.hpp	/^namespace RT $/;"	n
 RT	main/raytracer/Lights/headers/pointlight.hpp	/^namespace RT {$/;"	n
 RT	main/raytracer/Materials/headers/MaterialBase.hpp	/^namespace RT$/;"	n
 RT	main/raytracer/Materials/headers/SimpleMaterial.hpp	/^namespace RT {$/;"	n
+RT	main/raytracer/Objects/headers/Cylinder.hpp	/^namespace RT {$/;"	n
 RT	main/raytracer/Objects/headers/objectbase.hpp	/^namespace RT {$/;"	n
 RT	main/raytracer/Objects/headers/objectplan.hpp	/^namespace RT {$/;"	n
 RT	main/raytracer/Objects/headers/objsphere.hpp	/^namespace RT {$/;"	n
@@ -238,6 +242,7 @@ Sub2Ind	main/qbLinAlg/qbMatrix44.hpp	/^int qbMatrix44<T>::Sub2Ind(int row, int c
 SubtractColumnMeans	main/qbLinAlg/qbPCA.h	/^void SubtractColumnMeans(qbMatrix2<T> &inputData, std::vector<T> &columnMeans)$/;"	f	namespace:qbPCA
 SwapRow	main/qbLinAlg/qbMatrix.h	/^void qbMatrix2<T>::SwapRow(int i, int j)$/;"	f	class:qbMatrix2
 TYPES_H	c/math_lib/types.h	2;"	d
+TestIntersectioons	main/raytracer/Objects/Cylinder.cpp	/^bool RT::ObjCylinder::TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)$/;"	f	class:RT::ObjCylinder
 TestIntersectioons	main/raytracer/Objects/ObjectBase.cpp	/^bool RT::ObjectBase::TestIntersectioons(const Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)$/;"	f	class:RT::ObjectBase
 TestIntersectioons	main/raytracer/Objects/Objplan.cpp	/^bool RT::ObjectPlan::TestIntersectioons(const RT::Ray &castRay,$/;"	f	class:RT::ObjectPlan
 TestIntersectioons	main/raytracer/Objects/Objsphere.cpp	/^bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)$/;"	f	class:RT::ObjSphere
@@ -423,6 +428,8 @@ operator ==	main/qbLinAlg/qbMatrix44.hpp	/^bool qbMatrix44<T>::operator== (const
 override	main/raytracer/Lights/headers/pointlight.hpp	/^					qbVector<double> &Color, double &intensity) override;$/;"	m	class:RT::PointLight
 override	main/raytracer/Lights/headers/pointlight.hpp	/^			virtual ~PointLight() override;$/;"	m	class:RT::PointLight
 override	main/raytracer/Materials/headers/SimpleMaterial.hpp	/^					const RT::Ray &cameraRay) override;$/;"	m	class:RT::SimpleMaterial
+override	main/raytracer/Objects/headers/Cylinder.hpp	/^					qbVector<double> &localColor) override;$/;"	m	class:RT::ObjCylinder
+override	main/raytracer/Objects/headers/Cylinder.hpp	/^			~ObjCylinder() override;$/;"	m	class:RT::ObjCylinder
 override	main/raytracer/Objects/headers/objectplan.hpp	/^					qbVector<double> &localColor) override;$/;"	m	class:RT::ObjectPlan
 override	main/raytracer/Objects/headers/objectplan.hpp	/^			~ObjectPlan() override;$/;"	m	class:RT::ObjectPlan
 override	main/raytracer/Objects/headers/objsphere.hpp	/^			 virtual bool TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint , qbVector<double> &localNormal, qbVector<double> &localColor) override;$/;"	m	class:RT::ObjSphere
@@ -509,6 +516,7 @@ z	main/parser/parse.h	/^    double z;$/;"	m	struct:pos
 ~Image	main/raytracer/image.cpp	/^Image::~Image()$/;"	f	class:Image
 ~LightBase	main/raytracer/Lights/lightbase.cpp	/^RT::LightBase::~LightBase()$/;"	f	class:RT::LightBase
 ~MaterialBase	main/raytracer/Materials/MaterialBase.cpp	/^RT::MaterialBase::~MaterialBase()$/;"	f	class:RT::MaterialBase
+~ObjCylinder	main/raytracer/Objects/Cylinder.cpp	/^RT::ObjCylinder::~ObjCylinder()$/;"	f	class:RT::ObjCylinder
 ~ObjSphere	main/raytracer/Objects/Objsphere.cpp	/^RT::ObjSphere::~ObjSphere()$/;"	f	class:RT::ObjSphere
 ~ObjectBase	main/raytracer/Objects/ObjectBase.cpp	/^RT::ObjectBase::~ObjectBase()$/;"	f	class:RT::ObjectBase
 ~ObjectPlan	main/raytracer/Objects/Objplan.cpp	/^RT::ObjectPlan::~ObjectPlan()$/;"	f	class:RT::ObjectPlan
