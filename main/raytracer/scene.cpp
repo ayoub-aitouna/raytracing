@@ -47,10 +47,13 @@ RT::Scene::Scene()
 		m_objectList.push_back(obj);
 	for (auto light : m_scene.getLIghts())
 		m_lightList.push_back(light);
+
 	m_objectList.at(0)->AssingMAterial(sp1);
 	m_objectList.at(1)->AssingMAterial(sp2);
-	m_objectList.at(2)->AssingMAterial(flour);
+	m_objectList.at(2)->AssingMAterial(sp3);
+	m_objectList.at(3)->AssingMAterial(flour);
 
+	/*
 	RT::Gtform wallgtfm;
 	m_objectList.push_back(std::make_shared<RT::ObjCylinder>(RT::ObjCylinder()));
 	wallgtfm.SetTransform(qbVector<double>{std::vector<double>{0.0,.0,.0}},
@@ -59,7 +62,8 @@ RT::Scene::Scene()
 	m_objectList.at(3)->SetTransformMatrix(wallgtfm);
 	m_objectList.at(3)->m_baseColor = qbVector<double>{std::vector<double>{1,1,1}};
 	auto wall = createMaterial(qbVector<double>{std::vector<double>{1,1,1}}, 0, 0);
-	//m_objectList.at(3)->AssingMAterial(wall);
+	m_objectList.at(3)->AssingMAterial(wall);
+	*/
 }
 
 bool RT::Scene::Render(Image &image)
