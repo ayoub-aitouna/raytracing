@@ -20,6 +20,7 @@ bool RT::ObjCylinder::TestIntersectioons(const RT::Ray &castRay, qbVector<double
 	RT::Ray bckRay = m_trasformMatrix.Apply(castRay, RT::BCKTFORM);
 
 	qbVector<double> v = bckRay.m_lab;
+	v.Normalize();
 	qbVector<double> p = bckRay.m_point1;
 	qbVector<double> poi;
 
@@ -38,16 +39,21 @@ bool RT::ObjCylinder::TestIntersectioons(const RT::Ray &castRay, qbVector<double
 
 	double t = t1 < t2 ? t1 : t2;
 	poi = p + t * v;
-	if(std::fabs(poi.GetElement(0) >= 1))
+
+	if(std::fabs(poi.GetElement(2) >= 1))
 		return false;
 
 	intPoint = m_trasformMatrix.Apply(intPoint, RT::FWDTFORM);
 	//calculat the local normal 
 	qbVector<double> localOrijin  = qbVector<double>{std::vector<double>{0,0,0}};
 	qbVector<double> GbOrigin = m_trasformMatrix.Apply(localOrijin, RT::FWDTFORM);
-	localNormal = intPoint - GbOrigin;
+
+	qbVector<double> ORGnormal = qbVector<double>{std::vector<double>{intPoint.GetElement(0), intPoint.GetElement(1), 0}};
+
+	localColor = m_trasformMatrix.Apply(ORGnormal, RT::BCKTFORM) - GbOrigin;
 	localNormal.Normalize();
 
 	localColor = m_baseColor;
+
 	return (true);
 }
