@@ -2,7 +2,7 @@
 
 RT::MaterialBase::MaterialBase()
 {
-	m_max_reflectionsRays = 6;
+	m_max_reflectionsRays = 3;
 	m_reflectionRayCount = 0;
 
 }

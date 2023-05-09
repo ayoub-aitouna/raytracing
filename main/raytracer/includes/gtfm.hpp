@@ -16,6 +16,9 @@ namespace RT {
 		public:
 			Gtform();
 			~Gtform();
+			Gtform(const qbVector<double> &translation,
+				   const qbVector<double> &rotation,
+				   const qbVector<double> &scal);
 			Gtform(const qbMatrix2<double> &fwd, const qbMatrix2<double> &bck);
 			// function to set translation and scal component 
 			void SetTransform(const qbVector<double> &translation,

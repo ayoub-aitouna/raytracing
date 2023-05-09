@@ -17,6 +17,12 @@ RT::Gtform::Gtform()
 RT::Gtform::~Gtform()
 {
 }
+RT::Gtform::Gtform(const qbVector<double> &translation,
+					const qbVector<double> &rotation,
+					const qbVector<double> &scal)
+{
+	this->SetTransform(translation, rotation, scal);
+}
 
 //construct from a pair of matrices
 RT::Gtform::Gtform(const qbMatrix2<double> &fwd, const qbMatrix2<double> &bck)

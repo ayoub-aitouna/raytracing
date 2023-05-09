@@ -1,92 +1,146 @@
 #include "headers/Cylinder.hpp"
+#include <algorithm>
 #include <cmath>
+#include <math.h>
 #include <vector>
 #include <stdlib.h>
 
 RT::ObjCylinder::ObjCylinder()
-{}
+{
+}
 
 RT::ObjCylinder::~ObjCylinder()
-{}
-
-double *init_solutions()
 {
-
-	double *solutions = malloc(sizeof(double) * 4);
-	int i = 0;
-	while(i < 4)
-		solutions[i++] = 100e6;
-	return solutions;
 }
 
 bool RT::ObjCylinder::TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)
 {
 	// to find the interstaction point we need to solve equatoin at^2 + b +c = 0
 	// in the giveen a = (vx^2 + vy^2) &&  b = 2 * ( VxPx + VyPy) && c = Px^2 + Py^2 - r^2
-	// in local coords and unit CYLINDER we have r = 1; 
-	// c = px^2 + py^2
+	// in local coords and unit CYLINDER we have r = 1;
+	// c = px^2 + py^2 - 1
 	// smallest t is the distance between camera and point of intersection
 
 	RT::Ray bckRay = m_trasformMatrix.Apply(castRay, RT::BCKTFORM);
 
 	qbVector<double> v = bckRay.m_lab;
 	v.Normalize();
+
 	qbVector<double> p = bckRay.m_point1;
 	qbVector<double> poi;
 
-	double *solution = init_solutions();
-	int *is_valide =  (int *)calloc(4, sizeof(int));
+	double solution[4] = {100e6, 100e6, 100e6, 100e6};
+	bool is_valide1 = false, is_valide2 = false, is_valide3 = false, is_valide4 = false;
+	double a = std::pow(v.GetElement(0), 2.0) + std::pow(v.GetElement(1), 2.0);
+	double b = 2.0 * ((p.GetElement(0) * v.GetElement(0)) + (p.GetElement(1) * v.GetElement(1)));
+	double c = std::pow(p.GetElement(0), 2.0) + std::pow(p.GetElement(1), 2.0) - 1.0;
 
-	double a = std::pow(v.GetElement(0), 2)  + std::pow(v.GetElement(1), 2);
-	double b = 2 * ((v.GetElement(0) * p.GetElement(0)) + (v.GetElement(1) * p.GetElement(1)));
-	double c = std::pow(p.GetElement(0), 2) + std::pow(p.GetElement(1), 2);
-	double intTest = std::pow(b, 2) - 4.0 * a * c;
-
+	double numSQRT = sqrtf(std::pow(b, 2) - 4.0 * a * c);
 	std::array<qbVector<double>, 4> intpoints;
 
-	//if intTest is negative then the ray those not intersecte with the object
-	if(intTest >= 0)
+	// if numSQRT is negative then the ray those not intersecte with the object
+	if (numSQRT > 0)
 	{
-		double numSQRT = std::sqrt(intTest);
+		solution[0] = (-b + numSQRT) / (2 * a);
+		solution[1] = (-b - numSQRT) / (2 * a);
 
-		solution[0] = (-b - numSQRT) / 2 * a;
-		solution[1] = (-b + numSQRT) / 2 * a;
+		intpoints.at(0) = p + (solution[0] * v);
+		intpoints.at(1) = p + (solution[1] * v);
 
-		intpoints.at(0) = p + solution[0] * v;
-		intpoints.at(1) = p + solution[1] * v;
-		if(solution[0] > 0 && std::fabs(intpoints.at(0).GetElement(2)) <= 1)
-			is_valide[0] = 1;
-		if(solution[1] > 0 && std::fabs(intpoints.at(1).GetElement(2)) <= 1)
-			is_valide[1] = 1;
+		if (solution[0] > 0 && fabs(intpoints.at(0).GetElement(2)) < 1)
+			is_valide1 = true;
+		else
+			solution[0] = 100e6;
+		if (solution[1] > 0 && fabs(intpoints.at(1).GetElement(2)) < 1)
+			is_valide2 = true;
+		else
+			solution[1] = 100e6;
 	}
 
 	// if vector hase no z values of very close to 0 no need to test for interstaction
-	// with caps cus the vector is near the middle of Cylinder
-	if(!CloseEnough(v.GetElement(2), 0.0))
+	// with caps cus the vector is paraller to the plan
+	if (!CloseEnough(v.GetElement(2), 0.0))
 	{
-		// calculat the intersection with the caps as a plan 
-		solution[2] = (bckRay.m_point1.GetElement(2) - 1) / -v.GetElement(2);
-		solution[3] = (bckRay.m_point1.GetElement(2) + 1) / -v.GetElement(2);
+		// calculat the intersection with the caps as a plan
+		solution[2] = (p.GetElement(2) - 1) / -v.GetElement(2);
+		solution[3] = (p.GetElement(2) + 1) / -v.GetElement(2);
 
-		intpoints.at(2) = p + solution[2] * v;
-		intpoints.at(3) = p + solution[3] * v;
-		if(solution[2] > 0.0 && (std::sqrtf(std::pow(intpoints.at(2).GetElement(0)) + std::pow(intpoints.at(2).GetElement(1)) < 1.0)))
-			is_valide[2] = 1;
-		if(solution[3] > 0.0 && (std::sqrtf(std::pow(intpoints.at(3).GetElement(0)) + std::pow(intpoints.at(3).GetElement(1)) < 1.0)))
-			is_valide[2] = 1;
+		intpoints.at(2) = p + (solution[2] * v);
+		intpoints.at(3) = p + (solution[3] * v);
+
+		if (solution[2] > 0.0 && (sqrtf(std::pow(intpoints.at(2).GetElement(0), 2) + std::pow(intpoints.at(2).GetElement(1), 2)) < 1.0))
+			is_valide3 = true;
+		else
+			solution[2] = 100e6;
+		if (solution[3] > 0.0 && (sqrtf(std::pow(intpoints.at(3).GetElement(0), 2) + std::pow(intpoints.at(3).GetElement(1), 2)) < 1.0))
+			is_valide4 = true;
+		else
+			solution[3] = 100e6;
 	}
-	if(!is_valide[0] && !is_valide[1] && !is_valide[2] && !is_valide[3])
+
+	if (!is_valide1 && !is_valide2 && !is_valide3 && !is_valide4)
 		return false;
-	intPoint = m_trasformMatrix.Apply(intPoint, RT::FWDTFORM);
-	//calculat the local normal 
-	qbVector<double> localOrijin  = qbVector<double>{std::vector<double>{0,0,0}};
-	qbVector<double> GbOrigin = m_trasformMatrix.Apply(localOrijin, RT::FWDTFORM);
 
-	qbVector<double> ORGnormal = qbVector<double>{std::vector<double>{intPoint.GetElement(0), intPoint.GetElement(1), 0}};
+	// find nearst intersection point
+	int i = 0;
+	int minIndex = 0;
+	double min = 10e6;
 
-	localColor = m_trasformMatrix.Apply(ORGnormal, RT::BCKTFORM) - GbOrigin;
-	localNormal.Normalize();
+	while (i < 4)
+	{
+		if (solution[i] < min)
+		{
+			min = solution[i];
+			minIndex = i;
+		}
+		i++;
+	}
+	poi = intpoints.at(minIndex);
+	// check if ther intersaction with a Cylinder or cap
+	if (minIndex < 2)
+	{
+		// int with Cylinder
+		intPoint = m_trasformMatrix.Apply(poi, RT::FWDTFORM);
+		// calculat the local normal
+		qbVector<double> localOrijin = qbVector<double>{std::vector<double>{0, 0, 0}};
+		qbVector<double> GbOrigin = m_trasformMatrix.Apply(localOrijin, RT::FWDTFORM);
 
-	localColor = m_baseColor;
-	return (true);
+		qbVector<double> ORGnormal = qbVector<double>{
+			std::vector<double>{
+				poi.GetElement(0), poi.GetElement(1), 0}};
+
+		localNormal = m_trasformMatrix.Apply(ORGnormal, RT::FWDTFORM) - GbOrigin;
+		localNormal.Normalize();
+
+		localColor = m_baseColor;
+
+		return true;
+	}
+	else
+	{
+		// int with caps
+
+		if (CloseEnough(v.GetElement(2), 0.0))
+			return false;
+
+		// check if int inside the disk
+		if (sqrtf(std::pow(poi.GetElement(0), 2) + std::pow(poi.GetElement(1), 2)) >= 1.0)
+			return false;
+
+		intPoint = m_trasformMatrix.Apply(poi, RT::FWDTFORM);
+
+		// localnormal;
+		qbVector<double> localOrigin{std::vector<double>{0, 0, 0}};
+		qbVector<double> normalVector{std::vector<double>{0, 0, 0 + poi.GetElement(2)}};
+
+		qbVector<double> GBO = m_trasformMatrix.Apply(localOrigin, RT::FWDTFORM);
+		localNormal = m_trasformMatrix.Apply(normalVector, RT::FWDTFORM) - GBO;
+		localNormal.Normalize();
+
+		localColor = m_baseColor;
+
+		return true;
+	}
+
+	return (false);
 }

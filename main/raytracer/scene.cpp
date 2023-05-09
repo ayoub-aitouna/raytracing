@@ -5,6 +5,7 @@
 #include "Objects/headers/objectplan.hpp"
 #include "Objects/headers/objsphere.hpp"
 #include "Objects/headers/Cylinder.hpp"
+#include "Objects/headers/Cone.hpp"
 #include "Materials/headers/SimpleMaterial.hpp"
 #include "Lights/headers/pointlight.hpp"
 #include "includes/ray.h"
@@ -33,12 +34,6 @@ RT::Scene::Scene()
 	m_camera.SetAspect(16.0 / 9.0);
 	m_camera.UpdateCameraGeometry();
 
-	//create materials 
-	auto sp1 = RT::Scene::createMaterial(qbVector<double>{std::vector<double>{0.56, .98, .1}},.1, 10);
-	auto sp2 = RT::Scene::createMaterial(qbVector<double>{std::vector<double>{0.6, .58, 1}},.3, 5 );
-	auto sp3 = RT::Scene::createMaterial(qbVector<double>{std::vector<double>{0.9, .58, .7}},.8, 7 );
-	auto flour = RT::Scene::createMaterial(qbVector<double>{std::vector<double>{0.56, .58, 1}},.3, 0 );
-
 	// read .rt file and render scene
 	RT::parcer p;
 	RT::SceneInstance m_scene = p.parsemap(NULL);
@@ -48,22 +43,6 @@ RT::Scene::Scene()
 	for (auto light : m_scene.getLIghts())
 		m_lightList.push_back(light);
 
-	m_objectList.at(0)->AssingMAterial(sp1);
-	m_objectList.at(1)->AssingMAterial(sp2);
-	m_objectList.at(2)->AssingMAterial(sp3);
-	m_objectList.at(3)->AssingMAterial(flour);
-
-	/*
-	RT::Gtform wallgtfm;
-	m_objectList.push_back(std::make_shared<RT::ObjCylinder>(RT::ObjCylinder()));
-	wallgtfm.SetTransform(qbVector<double>{std::vector<double>{0.0,.0,.0}},
-			qbVector<double>{std::vector<double>{0, 0, 0}},
-			qbVector<double>{std::vector<double>{.5,.5,.5}});
-	m_objectList.at(3)->SetTransformMatrix(wallgtfm);
-	m_objectList.at(3)->m_baseColor = qbVector<double>{std::vector<double>{1,1,1}};
-	auto wall = createMaterial(qbVector<double>{std::vector<double>{1,1,1}}, 0, 0);
-	m_objectList.at(3)->AssingMAterial(wall);
-	*/
 }
 
 bool RT::Scene::Render(Image &image)
@@ -103,7 +82,6 @@ bool RT::Scene::Render(Image &image)
 			qbVector<double> closestLocalNormal{3};
 			qbVector<double> closestLocalColor{3};
 
-			// bool found_int = castRay(cameraRay, closest_obj, closestIntPoint, closestLocalNormal, closestLocalColor);
 			bool found_int = CastRay(cameraRay, closest_obj, closestIntPoint, closestLocalNormal, closestLocalColor);
 			// calculat the illumination
 			if (found_int)
@@ -113,7 +91,6 @@ bool RT::Scene::Render(Image &image)
 				{
 					RT::MaterialBase::m_reflectionRayCount = 0;
 					// use material to compute the color
-					// print_V(closestIntPoint);
 					qbVector<double> color = closest_obj->m_pmaterial->ComputeColor(m_objectList, m_lightList,
 							closest_obj, closestIntPoint, closestLocalNormal, cameraRay);
 					image.SetPixel(x, y, color.GetElement(0), color.GetElement(1), color.GetElement(2));
@@ -125,6 +102,7 @@ bool RT::Scene::Render(Image &image)
 					image.SetPixel(x, y, diffuseColor.GetElement(0), diffuseColor.GetElement(1), diffuseColor.GetElement(2));
 				}
 			}
+			
 		}
 	}
 	return true;

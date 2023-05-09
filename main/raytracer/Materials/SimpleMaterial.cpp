@@ -4,6 +4,15 @@
 RT::SimpleMaterial::SimpleMaterial()
 {}
 
+RT::SimpleMaterial::SimpleMaterial(qbVector<double> m_baseColor,
+					   double m_reflectivity,
+					   double m_shininess)
+{
+	this->m_baseColor = m_baseColor;
+	this->m_reflectivity = m_reflectivity;
+	this->m_shininess = m_shininess;
+}
+
 RT::SimpleMaterial::~SimpleMaterial()
 {}
 
