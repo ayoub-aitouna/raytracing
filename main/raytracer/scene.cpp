@@ -28,10 +28,16 @@ std::shared_ptr<RT::SimpleMaterial> RT::Scene::createMaterial(qbVector<double> c
 
 RT::Scene::Scene()
 {
-	std::shared_ptr<RT::Texture::Checker> checkerTexture = std::make_shared<RT::Texture::Checker>(RT::Texture::Checker());
+	auto checkerTexture = std::make_shared<RT::Texture::Checker>(RT::Texture::Checker());
 	checkerTexture->SetTransform(qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 								0.0,
 								qbVector<double>{std::vector<double>{16, 16}});
+	auto Cylinder = std::make_shared<RT::Texture::Checker>(RT::Texture::Checker());
+	
+	Cylinder->SetColor(qbVector<double>{std::vector<double>{.5,.5,.9}}, qbVector<double>{std::vector<double>{1,0.1,0.1}});
+	Cylinder->SetTransform(qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+								0.0,
+								qbVector<double>{std::vector<double>{M_PI * 4, 4}});
 	// read .rt file and render scene
 	RT::parcer p;
 	RT::SceneInstance m_scene;
@@ -43,6 +49,8 @@ RT::Scene::Scene()
 		m_objectList.push_back(obj);
 	for (auto light : m_scene.getLIghts())
 		m_lightList.push_back(light);
+	m_objectList.at(1)->m_pmaterial->AssingTexture(Cylinder);
+	m_objectList.at(2)->m_pmaterial->AssingTexture(Cylinder);
 	m_objectList.at(4)->m_pmaterial->AssingTexture(checkerTexture);
 }
 

@@ -213,7 +213,7 @@ RT	main/raytracer/Objects/headers/objectbase.hpp	/^namespace RT {$/;"	n
 RT	main/raytracer/Objects/headers/objectplan.hpp	/^namespace RT {$/;"	n
 RT	main/raytracer/Objects/headers/objsphere.hpp	/^namespace RT {$/;"	n
 RT	main/raytracer/Textures/headers/TextureBase.hpp	/^namespace RT$/;"	n
-RT	main/raytracer/Textures/headers/checker.hpp	/^namespace RT {$/;"	n
+RT	main/raytracer/Textures/headers/checker.hpp	/^namespace RT$/;"	n
 RT	main/raytracer/Textures/headers/flat.hpp	/^namespace RT {$/;"	n
 RT	main/raytracer/gtfm.cpp	/^namespace RT {$/;"	n	file:
 RT	main/raytracer/includes/camera.hpp	/^namespace RT {$/;"	n
@@ -275,7 +275,7 @@ TestIntersectioons	main/raytracer/Objects/Objplan.cpp	/^bool RT::ObjectPlan::Tes
 TestIntersectioons	main/raytracer/Objects/Objsphere.cpp	/^bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)$/;"	f	class:RT::ObjSphere
 TestIntersectioons	main/raytracer/Objects/cone.cpp	/^bool RT::Cone::TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)$/;"	f	class:RT::Cone
 Texture	main/raytracer/Textures/headers/TextureBase.hpp	/^    namespace Texture$/;"	n	namespace:RT
-Texture	main/raytracer/Textures/headers/checker.hpp	/^	namespace Texture {$/;"	n	namespace:RT
+Texture	main/raytracer/Textures/headers/checker.hpp	/^	namespace Texture$/;"	n	namespace:RT
 Texture	main/raytracer/Textures/headers/flat.hpp	/^	namespace Texture {$/;"	n	namespace:RT
 TextureBase	main/raytracer/Textures/TextureBase.cpp	/^RT::Texture::TextureBase::TextureBase()$/;"	f	class:RT::Texture::TextureBase
 TextureBase	main/raytracer/Textures/headers/TextureBase.hpp	/^        class TextureBase$/;"	c	namespace:RT::Texture
@@ -291,8 +291,8 @@ bits_per_pixel	c/inludes/types.h	/^	int		bits_per_pixel;$/;"	m	struct:s_data
 castRay	main/raytracer/Materials/MaterialBase.cpp	/^bool RT::MaterialBase::castRay(const RT::Ray &castRay, const std::vector<std::shared_ptr<RT::ObjectBase>> &objectList,$/;"	f	class:RT::MaterialBase
 cc	c/Makefile	/^cc		:= gcc$/;"	m
 cofactorDeterminant	main/qbLinAlg/qbMatrix33.hpp	/^T qbMatrix33<T>::cofactorDeterminant(T e1, T e2, T e3, T e4)$/;"	f	class:qbMatrix33
-color1	main/raytracer/Textures/headers/checker.hpp	/^				qbVector<double> color1;$/;"	m	class:RT::Texture::Checker
-color2	main/raytracer/Textures/headers/checker.hpp	/^				qbVector<double> color2;$/;"	m	class:RT::Texture::Checker
+color1	main/raytracer/Textures/headers/checker.hpp	/^			qbVector<double> color1;$/;"	m	class:RT::Texture::Checker
+color2	main/raytracer/Textures/headers/checker.hpp	/^			qbVector<double> color2;$/;"	m	class:RT::Texture::Checker
 cols	c/math_lib/types.h	/^	int cols;$/;"	m	struct:matrex
 copy_vector	c/math_lib/vectormath.c	/^vector_t *copy_vector(vector_t v)$/;"	f
 creat_matrex	c/math_lib/matrex.c	/^matrex_t *creat_matrex(int rows, int cols)$/;"	f
@@ -320,7 +320,7 @@ get_type	main/parser/parcer.cpp	/^char *get_type(char *line, int *index)$/;"	f
 get_values	main/parser/parcer.cpp	/^post_t *get_values(char *line, int *index)$/;"	f
 getobjects	main/parser/scene_instance.cpp	/^std::vector<std::shared_ptr<RT::ObjectBase>> RT::SceneInstance::getobjects(void)$/;"	f	class:RT::SceneInstance
 has_material	main/raytracer/Objects/headers/objectbase.hpp	/^			bool has_material = false;$/;"	m	class:RT::ObjectBase
-has_texture	main/raytracer/Materials/headers/MaterialBase.hpp	/^			bool has_texture = false;$/;"	m	class:RT::MaterialBase
+has_texture	main/raytracer/Materials/headers/MaterialBase.hpp	/^		bool has_texture = false;$/;"	m	class:RT::MaterialBase
 img	c/inludes/types.h	/^	void	*img;$/;"	m	struct:s_data
 isRunning	main/includes/App.h	/^		bool isRunning;$/;"	m	class:App
 l_size	main/parser/reader.c	/^size_t l_size(char **dst)$/;"	f
@@ -343,7 +343,7 @@ m_matrixData	main/qbLinAlg/qbMatrix44.hpp	/^		T m_matrixData[16];$/;"	m	class:qb
 m_max_blue	main/raytracer/includes/image.hpp	/^		double m_max_red, m_max_green, m_max_blue, m_overall_max;$/;"	m	class:Image
 m_max_green	main/raytracer/includes/image.hpp	/^		double m_max_red, m_max_green, m_max_blue, m_overall_max;$/;"	m	class:Image
 m_max_red	main/raytracer/includes/image.hpp	/^		double m_max_red, m_max_green, m_max_blue, m_overall_max;$/;"	m	class:Image
-m_max_reflectionsRays	main/raytracer/Materials/headers/MaterialBase.hpp	/^			inline static int m_max_reflectionsRays;$/;"	m	class:RT::MaterialBase
+m_max_reflectionsRays	main/raytracer/Materials/headers/MaterialBase.hpp	/^		inline static int m_max_reflectionsRays;$/;"	m	class:RT::MaterialBase
 m_nCols	main/qbLinAlg/qbMatrix.h	/^    int m_nRows, m_nCols, m_nElements;$/;"	m	class:qbMatrix2
 m_nCols	main/qbLinAlg/qbMatrix33.hpp	/^    int m_nCols = 3;$/;"	m	class:qbMatrix33
 m_nCols	main/qbLinAlg/qbMatrix44.hpp	/^    int m_nCols = 4;$/;"	m	class:qbMatrix44
@@ -361,11 +361,11 @@ m_pRenderer	main/raytracer/includes/image.hpp	/^		SDL_Renderer *m_pRenderer;$/;"
 m_pTexture	main/raytracer/includes/image.hpp	/^		SDL_Texture *m_pTexture;$/;"	m	class:Image
 m_pmaterial	main/raytracer/Objects/headers/objectbase.hpp	/^			std::shared_ptr<RT::MaterialBase> m_pmaterial;$/;"	m	class:RT::ObjectBase
 m_rChannel	main/raytracer/includes/image.hpp	/^		std::vector<std::vector<double>> m_rChannel;$/;"	m	class:Image
-m_reflectionRayCount	main/raytracer/Materials/headers/MaterialBase.hpp	/^			inline static int m_reflectionRayCount;$/;"	m	class:RT::MaterialBase
+m_reflectionRayCount	main/raytracer/Materials/headers/MaterialBase.hpp	/^		inline static int m_reflectionRayCount;$/;"	m	class:RT::MaterialBase
 m_reflectivity	main/raytracer/Materials/headers/SimpleMaterial.hpp	/^		double m_reflectivity = 0.0;$/;"	m	class:RT::SimpleMaterial
 m_scene	main/includes/App.h	/^		RT::Scene m_scene;$/;"	m	class:App
 m_shininess	main/raytracer/Materials/headers/SimpleMaterial.hpp	/^		double m_shininess = 0.0;$/;"	m	class:RT::SimpleMaterial
-m_texttures	main/raytracer/Materials/headers/MaterialBase.hpp	/^			std::vector<std::shared_ptr<RT::Texture::TextureBase>> m_texttures;$/;"	m	class:RT::MaterialBase
+m_texttures	main/raytracer/Materials/headers/MaterialBase.hpp	/^		std::vector<std::shared_ptr<RT::Texture::TextureBase>> m_texttures;$/;"	m	class:RT::MaterialBase
 m_trasformMatrix	main/raytracer/Objects/headers/objectbase.hpp	/^			RT::Gtform m_trasformMatrix;$/;"	m	class:RT::ObjectBase
 m_v1	main/qbLinAlg/qbVector4.hpp	/^		T m_v1;$/;"	m	class:qbVector4
 m_v2	main/qbLinAlg/qbVector4.hpp	/^		T m_v2;$/;"	m	class:qbVector4
