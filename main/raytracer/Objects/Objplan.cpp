@@ -61,6 +61,9 @@ bool RT::ObjectPlan::TestIntersectioons(const RT::Ray &castRay,
 	// return the base color
 	localColor = m_baseColor;
 
+	u_v_cords.SetElement(0, u);
+	u_v_cords.SetElement(1, v);
+
 	return (true);
 }
 

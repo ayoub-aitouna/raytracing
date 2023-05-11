@@ -113,6 +113,16 @@ bool RT::ObjCylinder::TestIntersectioons(const RT::Ray &castRay, qbVector<double
 		localNormal.Normalize();
 
 		localColor = m_baseColor;
+		// calculating u,v cords for cylinder
+		double x = poi.GetElement(0);
+		double y = poi.GetElement(1);
+
+		double u = atan2(y, x);
+		double v = (2.0 * poi.GetElement(2)) + 1;
+
+		// calculating u,v cords for end caps
+		u_v_cords.SetElement(0, u / M_PI);
+		u_v_cords.SetElement(1, v);
 
 		return true;
 	}
@@ -138,6 +148,10 @@ bool RT::ObjCylinder::TestIntersectioons(const RT::Ray &castRay, qbVector<double
 		localNormal.Normalize();
 
 		localColor = m_baseColor;
+
+		// calculating u,v cords for end caps
+		u_v_cords.SetElement(0, poi.GetElement(0));
+		u_v_cords.SetElement(1, poi.GetElement(1));
 
 		return true;
 	}

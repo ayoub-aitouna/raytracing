@@ -3,10 +3,12 @@
 #include <ios>
 
 RT::SceneInstance::SceneInstance()
-{}
+{
+}
 
 RT::SceneInstance::~SceneInstance()
-{}
+{
+}
 
 void RT::SceneInstance::addObject(std::shared_ptr<RT::ObjectBase> object)
 {
@@ -28,7 +30,12 @@ std::vector<std::shared_ptr<RT::LightBase>> RT::SceneInstance::getLIghts(void)
 	return (m_lightList);
 }
 
-RT::Camera RT::SceneInstance::getCamera(void)
+RT::Camera &RT::SceneInstance::getCamera(void)
 {
 	return (m_camera);
+}
+
+void RT::SceneInstance::setCamera(RT::Camera &camera)
+{
+	m_camera = camera;
 }

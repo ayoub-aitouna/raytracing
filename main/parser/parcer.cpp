@@ -77,6 +77,12 @@ std::shared_ptr<RT::SimpleMaterial> createMaterial(qbVector<double> color, doubl
 	material->m_shininess = shininess;
 	return material;
 }
+RT::parcer::parcer()
+{
+}
+RT::parcer::~parcer()
+{
+}
 
 RT::SceneInstance RT::parcer::parsemap(char **map)
 {
@@ -126,6 +132,20 @@ RT::SceneInstance RT::parcer::parsemap(char **map)
 			m_scene_instance.addLight(std::make_shared<PointLight>(RT::PointLight()));
 			m_scene_instance.getLIghts().at(l_index)->m_location = qbVector<double>{std::vector<double>{pos->x, pos->y, pos->z}};
 			m_scene_instance.getLIghts().at(l_index++)->m_color = qbVector<double>{std::vector<double>{color->x, color->y, color->z}};
+		}
+		else if (strcmp(name, "c") == 0)
+		{
+			post_t *pos = get_values(line + i, &i);
+			post_t *lockAt = get_values(line + i, &i);
+			post_t *up = get_values(line + i, &i);
+			post_t *ratio = get_values(line + i, &i);
+			RT::Camera m_camera;
+			m_camera.SetPosition(qbVector<double>{std::vector<double>{pos->x, pos->y, pos->z}});
+			m_camera.SetLookAt(qbVector<double>{std::vector<double>{lockAt->x, lockAt->y, lockAt->z}});
+			m_camera.SetUp(qbVector<double>{std::vector<double>{up->x, up->y, up->z}});
+			m_camera.SetHorzSize(ratio->x);
+			m_camera.SetAspect(ratio->y / ratio->z);
+			m_scene_instance.setCamera(m_camera);
 		}
 	}
 	return (m_scene_instance);

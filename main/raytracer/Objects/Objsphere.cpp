@@ -7,7 +7,8 @@
 #include <vector>
 
 RT::ObjSphere::ObjSphere()
-{}
+{
+}
 
 RT::ObjSphere::~ObjSphere()
 {
@@ -16,8 +17,8 @@ RT::ObjSphere::~ObjSphere()
 // F to test for intersection
 bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)
 {
-	//Copy the ray and apply the backword transform
-	//appliyng from word to local
+	// Copy the ray and apply the backword transform
+	// appliyng from word to local
 	RT::Ray bckRay = m_trasformMatrix.Apply(castRay, RT::BCKTFORM);
 
 	// t^2(v.v) + 2t(p1.v)+(p1.p1) -r^2 = 0;
@@ -30,33 +31,33 @@ bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> 
 	qbVector<double> vhat = bckRay.m_lab;
 	vhat.Normalize();
 
-	//Note that a is equal to thr squared magnitude of the direction of thr cast ras . As this will be a unit vector,
-	//we cam canclude that the value of 'a' willl always be 1.
-	//a = 1.0
+	// Note that a is equal to thr squared magnitude of the direction of thr cast ras . As this will be a unit vector,
+	// we cam canclude that the value of 'a' willl always be 1.
+	// a = 1.0
 
-	//calculate b.
+	// calculate b.
 	double b = 2 * qbVector<double>::dot(bckRay.m_point1, vhat);
-	
+
 	double raduis = 1.0;
-	
+
 	double c = qbVector<double>::dot(bckRay.GetPoint1(), bckRay.GetPoint1()) - std::sqrt(raduis);
 	// test if there is interstaction dela = b^2 - 4ac; and a = 1.0 so delta - b^2 -4c;
 	double intTest = (b * b) - 4.0 * c;
 	// intersection in the local world
 	qbVector<double> poi;
 
-	if(intTest > 0.0)
+	if (intTest > 0.0)
 	{
 		// we have intersection
 		double numSQRT = sqrtf(intTest);
 		double t1 = (-b + numSQRT) / 2.0;
 		double t2 = (-b - numSQRT) / 2.0;
-		//if either t1 || t2 are negative , then at least part of the object is behind the camera and so we ignore it.
-		if(t1 < 0.0 || t2 < 0.0)
+		// if either t1 || t2 are negative , then at least part of the object is behind the camera and so we ignore it.
+		if (t1 < 0.0 || t2 < 0.0)
 			return false;
 
 		// Determine which point of interstaction was closest to the camera
-		if(t1 < t2)
+		if (t1 < t2)
 			poi = bckRay.m_point1 + (vhat * t1);
 		else
 			poi = bckRay.m_point1 + (vhat * t2);
@@ -66,16 +67,31 @@ bool RT::ObjSphere::TestIntersectioons(const RT::Ray &castRay, qbVector<double> 
 		// we calculate the origin of sphere which is {0.0.0);
 		// and then transform it into the word coordiantes
 		// so we have the localNormal for the sphere in words coordiantes
-		qbVector<double> objOrigin = qbVector<double> {std::vector<double>{.0,.0,.0}};
+		qbVector<double> objOrigin = qbVector<double>{std::vector<double>{.0, .0, .0}};
 		qbVector<double> newObjOrigin = m_trasformMatrix.Apply(objOrigin, RT::FWDTFORM);
 		// compute the local Normal (for sphere at origin)
-		// the normal is form the center to the interstaction point 
+		// the normal is form the center to the interstaction point
 		// normal = intPoint - center
 		localNormal = intPoint - newObjOrigin;
 		localNormal.Normalize();
-		// return the base color 
+		// return the base color
 		localColor = m_baseColor;
+
+		// // see nots for explaining the following
+		// // u = tan ^ -1 ((x^2 + y^2)/ z)
+		// // v = tan ^ -1 (x/y)
+		// // u and v variate between (-PI, PI) we devide by PI to make the values in (-1,1)
+		// double x = intPoint.GetElement(0);
+		// double y = intPoint.GetElement(1);
+		// double z = intPoint.GetElement(2);
+		// double u = atan(sqrtf(pow(x, 2) + pow(y, 2)) / z);
+		// double v = atan(x / y);
+		// if (x < 0)
+		// 	v += M_PI;
+		// u_v_cords.SetElement(0, v / M_PI);
+		// u_v_cords.SetElement(1, u / M_PI);
 		return true;
 	}
+	
 	return false;
-	}
+}

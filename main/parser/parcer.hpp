@@ -7,6 +7,8 @@ namespace RT
 {
 	class parcer{
 		public:
+			parcer();
+			~parcer();
 			RT::SceneInstance parsemap(char **map);
 	};
 }

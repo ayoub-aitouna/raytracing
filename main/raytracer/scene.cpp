@@ -15,34 +15,35 @@
 #include <memory>
 #include <vector>
 #include "../parser/parcer.hpp"
+#include "Textures/headers/checker.hpp"
 
 std::shared_ptr<RT::SimpleMaterial> RT::Scene::createMaterial(qbVector<double> color, double reflectivity, double shininess)
 {
 	std::shared_ptr<RT::SimpleMaterial> material = std::make_shared<RT::SimpleMaterial>(RT::SimpleMaterial());
-	material->m_baseColor =  color;
+	material->m_baseColor = color;
 	material->m_reflectivity = reflectivity;
 	material->m_shininess = shininess;
-	return  material;
+	return material;
 }
 
 RT::Scene::Scene()
 {
-	m_camera.SetPosition(qbVector<double>{std::vector<double>{0, -10, -1}});
-	m_camera.SetLookAt(qbVector<double>{std::vector<double>{0, 0, 0}});
-	m_camera.SetUp(qbVector<double>{std::vector<double>{0, 0, 0.1}});
-	m_camera.SetHorzSize(0.25);
-	m_camera.SetAspect(16.0 / 9.0);
-	m_camera.UpdateCameraGeometry();
-
+	std::shared_ptr<RT::Texture::Checker> checkerTexture = std::make_shared<RT::Texture::Checker>(RT::Texture::Checker());
+	checkerTexture->SetTransform(qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+								0.0,
+								qbVector<double>{std::vector<double>{16, 16}});
 	// read .rt file and render scene
 	RT::parcer p;
-	RT::SceneInstance m_scene = p.parsemap(NULL);
+	RT::SceneInstance m_scene;
+	m_scene = p.parsemap(NULL);
+	m_camera = RT::Camera(m_scene.getCamera());
+	m_camera.UpdateCameraGeometry();
 
 	for (auto obj : m_scene.getobjects())
 		m_objectList.push_back(obj);
 	for (auto light : m_scene.getLIghts())
 		m_lightList.push_back(light);
-
+	m_objectList.at(4)->m_pmaterial->AssingTexture(checkerTexture);
 }
 
 bool RT::Scene::Render(Image &image)
@@ -76,7 +77,6 @@ bool RT::Scene::Render(Image &image)
 
 			m_camera.GenerateRay(normX, normY, cameraRay);
 
-
 			std::shared_ptr<ObjectBase> closest_obj;
 			qbVector<double> closestIntPoint{3};
 			qbVector<double> closestLocalNormal{3};
@@ -92,25 +92,24 @@ bool RT::Scene::Render(Image &image)
 					RT::MaterialBase::m_reflectionRayCount = 0;
 					// use material to compute the color
 					qbVector<double> color = closest_obj->m_pmaterial->ComputeColor(m_objectList, m_lightList,
-							closest_obj, closestIntPoint, closestLocalNormal, cameraRay);
+																					closest_obj, closestIntPoint, closestLocalNormal, cameraRay);
 					image.SetPixel(x, y, color.GetElement(0), color.GetElement(1), color.GetElement(2));
 				}
 				else
 				{
 					qbVector<double> diffuseColor = RT::MaterialBase::ComputeDiffuseColoe(m_objectList, m_lightList,
-							closest_obj, closestIntPoint, closestLocalNormal, closest_obj->m_baseColor);
+																						  closest_obj, closestIntPoint, closestLocalNormal, closest_obj->m_baseColor);
 					image.SetPixel(x, y, diffuseColor.GetElement(0), diffuseColor.GetElement(1), diffuseColor.GetElement(2));
 				}
 			}
-			
 		}
 	}
 	return true;
 }
 
 bool RT::Scene::CastRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_obj,
-		qbVector<double> &closest_int, qbVector<double> &closest_norm,
-		qbVector<double> &closest_color)
+						qbVector<double> &closest_int, qbVector<double> &closest_norm,
+						qbVector<double> &closest_color)
 {
 	qbVector<double> intPoint{3};
 	qbVector<double> localNormal{3};
@@ -138,6 +137,3 @@ bool RT::Scene::CastRay(RT::Ray &cats_ray, std::shared_ptr<ObjectBase> &closest_
 	}
 	return (found_int);
 }
-
-
-

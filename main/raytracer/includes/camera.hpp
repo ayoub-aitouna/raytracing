@@ -7,6 +7,7 @@ namespace RT {
 	class Camera{
 		public:
 			Camera();
+			Camera (Camera& camera);
 			//Function to set camera position
 			void SetPosition	(const qbVector<double> &newPosition);
 			void SetLookAt		(const qbVector<double> &newLookAt);

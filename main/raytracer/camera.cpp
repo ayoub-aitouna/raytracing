@@ -14,6 +14,16 @@ RT::Camera::Camera()
 	m_cameraAspectRation = 1.0;
 }
 
+RT::Camera::Camera(RT::Camera& camera)
+{
+	m_cameraPosition = camera.GetPosition();
+	m_cameraLookAt = camera.GetLookAt();
+	m_upVector = camera.GetUp();
+	m_cameraLenght = camera.GetLenght();
+	m_cameraHorSize = camera.GetHorzSize();
+	m_cameraAspectRation = camera.GetAspect();
+}
+
 void RT::Camera::SetPosition(const qbVector<double> &newPosition)
 {
 	m_cameraPosition = newPosition;

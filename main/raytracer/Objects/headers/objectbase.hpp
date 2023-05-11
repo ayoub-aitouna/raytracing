@@ -7,7 +7,8 @@
 #include <math.h>
 
 namespace RT {
-	/* Forward-declar the material base class . This will overriden later
+	/*
+	 Forward-declar the material base class . This will overriden later
 	*/
 	class MaterialBase;
 	class ObjectBase
@@ -24,7 +25,10 @@ namespace RT {
 			bool AssingMAterial(const std::shared_ptr<RT::MaterialBase> &objMaterial);
 
 		public:
+
 			qbVector<double> m_baseColor {3};
+			qbVector<double> u_v_cords   {2};
+
 			//geometric transform Applied to object
 			RT::Gtform m_trasformMatrix;
 

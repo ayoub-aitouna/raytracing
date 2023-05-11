@@ -23,10 +23,10 @@ namespace RT {
 		public:
 				void addObject(std::shared_ptr<RT::ObjectBase> object);
 				void addLight(std::shared_ptr<RT::LightBase> light);
-				void setCamera(RT::Camera camera);
+				void setCamera(RT::Camera &camera);
 				std::vector<std::shared_ptr<RT::ObjectBase>> getobjects(void);
 				std::vector<std::shared_ptr<RT::LightBase>> getLIghts(void);
-				RT::Camera getCamera(void);
+				RT::Camera &getCamera(void);
 	};
 }
 #endif

@@ -42,9 +42,9 @@ qbVector<double> RT::MaterialBase::ComputeDiffuseColoe(const std::vector<std::sh
 	for(auto curLight : lightList)
 	{
 		validIllum = 
-		curLight -> ComputeIllumination(intPoint, localNormal,
-				objectList, currentObject, color, intensity);
-		
+			curLight -> ComputeIllumination(intPoint, localNormal,
+					objectList, currentObject, color, intensity);
+
 		if(validIllum)
 		{
 			IlumFound = true;
@@ -74,7 +74,7 @@ qbVector<double> RT::MaterialBase::ComputeReflectionColor(
 	//Compute the reflection vectore
 	qbVector<double> d = incidentRay.m_lab;
 	qbVector<double> reflectionVector  = d - (2 * qbVector<double>::dot(d, localNormal) * localNormal);
-	
+
 	// construct the reflection Ray
 	RT::Ray reflectionRay (intPoint, intPoint + reflectionVector);
 
@@ -98,8 +98,8 @@ qbVector<double> RT::MaterialBase::ComputeReflectionColor(
 		if(closestObj->has_material)
 			// use the material to calc the color 
 			mtColor = closestObj->m_pmaterial->
-			ComputeColor(objectList, lightList, closestObj,
-					closestIntPoint, closestLocalNormal, reflectionRay);
+				ComputeColor(objectList, lightList, closestObj,
+						closestIntPoint, closestLocalNormal, reflectionRay);
 		else
 			mtColor = RT::MaterialBase::ComputeDiffuseColoe(objectList, lightList, closestObj,
 					closestIntPoint, closestLocalNormal, closestObj->m_baseColor);
@@ -152,3 +152,8 @@ bool RT::MaterialBase::castRay(const RT::Ray &castRay, const std::vector<std::sh
 }
 
 
+void RT::MaterialBase::AssingTexture(const std::shared_ptr<RT::Texture::TextureBase> &Texture)
+{
+	m_texttures.push_back(Texture);
+	has_texture = true;
+}
